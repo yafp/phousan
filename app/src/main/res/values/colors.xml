@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- ui -->
+    <!-- default font -->
+    <color name="colorGray">#a0a4a1</color>
+    <!-- min -->
+    <color name="colorGreen">#247e30</color>
+    <!-- max -->
+    <color name="colorRed">#cf2115</color>
+
+</resources>

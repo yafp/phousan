@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "723553542146",
+    "firebase_url": "https://phousan-a8d91.firebaseio.com",
+    "project_id": "phousan-a8d91",
+    "storage_bucket": "phousan-a8d91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723553542146:android:a016055fff88b876",
+        "android_client_info": {
+          "package_name": "de.yafp.phousan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723553542146-bdrkq1091uc51odhikkhu9g7bo1s6k7c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "de.yafp.phousan",
+            "certificate_hash": "2fd32650ddaa77ae7a3b5cf21adb072f4ac2ce7b"
+          }
+        },
+        {
+          "client_id": "723553542146-66as444om890ivost0vru2dp093praga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdkqVw6_2mw-HW6rxfZG0Vfd3IYirLaJk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723553542146-66as444om890ivost0vru2dp093praga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

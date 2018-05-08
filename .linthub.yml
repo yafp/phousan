@@ -1,0 +1,15 @@
+go:
+  lint: false
+php:
+  lint: false
+java:
+  lint: true
+  config: # google_checks.xml (default) | sun_checks.xml
+scala:
+  lint: false
+shell:
+  lint: false
+css:
+  lint: false
+js:
+  lint: false

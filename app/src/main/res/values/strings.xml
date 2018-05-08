@@ -1,0 +1,29 @@
+<resources>
+    <!-- app name -->
+    <string name="app_name">phousan</string>
+    <string name="app_name_long">Phone Usage Analyzer</string>
+
+    <!-- function -->
+    <string name="function">Display-On Events</string>
+
+    <!-- recommend -->
+    <string name="recommend_text">I would like to recommend the app PHOUSAN to you.</string>
+
+    <!-- settings toast alert -->
+    <string name="settings_text">Settings aren't implemented yet</string>
+
+    <!-- today -->
+    <string name="today">today:</string>
+    <string name="today_default">0</string>
+
+    <!-- yesterday -->
+    <string name="yesterday">yesterday:</string>
+    <string name="yesterday_default">not available</string>
+
+    <!-- contentDescription for images -->
+    <string name="imageButton_recommend">Recommend app</string>
+    <string name="imageButton_history">Show history</string>
+    <string name="imageButton_settings">Open settings</string>
+    <string name="image_speedomter">Speedometer</string>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">phousan</string>
+    <string name="app_name_long">Phone Usage Analyzer</string>
+    <string name="recommend_text">Ich empfehle dir die App PHOUSAN</string>
+    <string name="today">heute:</string>
+    <string name="today_default">0</string>
+    <string name="yesterday">gestern:</string>
+    <string name="yesterday_default">nicht verfügbar</string>
+    <string name="function">Bildschirm-Aktivierungen</string>
+    <string name="settings_text">Einstellungen sind noch nicht implementiert</string>
+    <string name="imageButton_recommend">Empfehle App</string>
+    <string name="imageButton_history">Zeige Verwendungsprotokoll</string>
+    <string name="imageButton_settings">Öffne Einstellungen</string>
+    <string name="image_speedomter">Speedometer</string>
+</resources>

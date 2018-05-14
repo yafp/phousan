@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/about"
+        android:title="@string/menu_about" />
+
+    <item
+        android:id="@+id/issues"
+        android:title="@string/menu_issues" />
+
+    <item
+        android:id="@+id/history_show"
+        android:title="@string/menu_history_show" />
+
+    <item
+        android:id="@+id/usage_data_delete"
+        android:title="@string/menu_usage_data_delete" />
+
+    <item
+        android:id="@+id/recommend"
+        android:title="@string/menu_recommend" />
+
+</menu>
+

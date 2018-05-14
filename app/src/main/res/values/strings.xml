@@ -6,11 +6,12 @@
     <!-- function -->
     <string name="function">Display-On Events</string>
 
+
     <!-- recommend -->
-    <string name="recommend_text">I would like to recommend the app PHOUSAN to you.</string>
+    <string name="recommend_text">I would like to recommend the app PHOUSAN to you. It is a simple display-on event monitor for your device.</string>
 
     <!-- settings toast alert -->
-    <string name="settings_text">Settings aren't implemented yet</string>
+    <string name="settings_text">Settings are not yet implemented</string>
 
     <!-- today -->
     <string name="today">today:</string>
@@ -20,10 +21,34 @@
     <string name="yesterday">yesterday:</string>
     <string name="yesterday_default">not available</string>
 
+    <!-- min / max -->
+    <string name="min">min</string>
+    <string name="max">max</string>
+
     <!-- contentDescription for images -->
-    <string name="imageButton_recommend">Recommend app</string>
-    <string name="imageButton_history">Show history</string>
     <string name="imageButton_settings">Open settings</string>
     <string name="image_speedomter">Speedometer</string>
+
+    <!-- menu -->
+    <string name="menu_about">About</string>
+    <string name="menu_issues">Issues</string>
+    <string name="menu_history_show">Show Usage History</string>
+    <string name="menu_usage_data_delete">Delete Usage Data ...</string>
+    <string name="menu_recommend">Recommend</string>
+
+    <!-- delete all usage data dialog -->
+    <string name="question_really_delete_all_prefs">Do you really want to delete all usage data?</string>
+    <string name="answer_yes">Yes</string>
+    <string name="answer_no">No</string>
+
+    <!-- show usage data per day -->
+    <string name="dialog_title_show_usage_history_per_day">Usage History Per Day</string>
+
+    <!-- About dialog -->
+    <!-- Function description -->
+    <string name="function_long">A display-on event monitor</string>
+    <!-- license-->
+    <string name="app_license">GPLv3</string>
+
 
 </resources>

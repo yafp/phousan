@@ -9,8 +9,19 @@
     <string name="yesterday_default">nicht verfügbar</string>
     <string name="function">Bildschirm-Aktivierungen</string>
     <string name="settings_text">Einstellungen sind noch nicht implementiert</string>
-    <string name="imageButton_recommend">Empfehle App</string>
-    <string name="imageButton_history">Zeige Verwendungsprotokoll</string>
     <string name="imageButton_settings">Öffne Einstellungen</string>
     <string name="image_speedomter">Speedometer</string>
+    <string name="min">min</string>
+    <string name="max">max</string>
+    <string name="menu_about">Über</string>
+    <string name="menu_recommend">Empfehlung</string>
+    <string name="menu_issues">Rückmeldungen</string>
+    <string name="answer_yes">Ja</string>
+    <string name="answer_no">Nein</string>
+    <string name="question_really_delete_all_prefs">Sollen alle Verwendungs-Daten gelöscht werden?</string>
+    <string name="menu_history_show">Zeige Verwendungsprotokoll</string>
+    <string name="menu_usage_data_delete">Lösche Verwendungsdaten ...</string>
+    <string name="dialog_title_show_usage_history_per_day">Verwendungsprotokoll pro Tag</string>
+    <string name="app_license">GPLv3</string>
+    <string name="function_long">Ein Bildschirm-An Monitoring Dienst</string>
 </resources>

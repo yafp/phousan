@@ -1,5 +1,20 @@
 # phousan Changelog
 
+## phousan 0.2.0 (2018xxyy)
+### ```Added```
+* __About__ window
+* Option to delete all usage data
+
+### ```Changed```
+* Added __popupmenu__ (replacing several image buttons)
+* Output of __Usage History per day__ is now sorted (reverse order)
+* Enhanced code quality (based on Codacy analyze)
+
+### ```Fixed```
+* Fixed unescaped character in string
+
+
+
 ## phousan 0.1.0 (20180508)
 ### ```Added```
 * First release

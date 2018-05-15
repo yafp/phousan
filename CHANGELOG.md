@@ -10,6 +10,7 @@
 * Added __popupmenu__ (replacing several image buttons)
 * Output of __Usage History per day__ is now sorted (reverse order)
 * Enhanced code quality (based on Codacy analyze)
+* New app icon
 
 ### ```Fixed```
 * Fixed unescaped character in string

@@ -145,7 +145,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:contentDescription="@string/image_speedomter"
-        android:src="@drawable/speedometer"
+        android:src="@drawable/app_icon_bw"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

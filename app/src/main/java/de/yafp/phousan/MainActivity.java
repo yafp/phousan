@@ -267,8 +267,12 @@ public class MainActivity extends Activity {
         }
 
         // calc average
-        record_avg = record_sum / record_amount;
-        Log.d(TAG, "Usage History Average: "+Integer.toString(record_avg));
+        if(record_amount != 0)
+        {
+            record_avg = record_sum / record_amount;
+            Log.d(TAG, "Usage History Average: "+Integer.toString(record_avg));
+        }
+
 
         // sort & reverse array-data
         Collections.sort(al); // sort
@@ -325,7 +329,7 @@ public class MainActivity extends Activity {
         PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(R.drawable.app_logo);
+        builder.setIcon(R.drawable.app_icon_bw);
         builder.setTitle(R.string.app_name);
         builder.setView(messageView);
         builder.setMessage("\nPackage:\t\t" + info.packageName + "\nVersion:\t\t\t" + info.versionName + "\nBuild:\t\t\t\t" + info.versionCode);
@@ -393,7 +397,7 @@ public class MainActivity extends Activity {
                         builder.setMessage(getResources().getString(R.string.question_really_delete_all_prefs))
                                 .setPositiveButton(getResources().getString(R.string.answer_yes), dialogClickListener)
                                 .setNegativeButton(getResources().getString(R.string.answer_no), dialogClickListener)
-                                .setIcon(R.drawable.app_logo)
+                                .setIcon(R.drawable.app_icon_color)
                                 .show();
                         return true;
 
@@ -480,7 +484,7 @@ public class MainActivity extends Activity {
             checkForNewHighscore(Integer.toString(newScreenOnCount), lastDate);
 
             // check lowscore
-            checkForNewLowscore(Integer.toString(newScreenOnCount), lastDate);
+            //checkForNewLowscore(Integer.toString(newScreenOnCount), lastDate);
         }
         else {
             Log.d(TAG, "lastDate != curDate");
@@ -686,7 +690,7 @@ public class MainActivity extends Activity {
         Notification noti = new Notification.Builder(this)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setSmallIcon(R.drawable.app_logo)
+                .setSmallIcon(R.drawable.app_icon_color)
                 .setContentIntent(pIntent)
                 //.addAction(R.drawable.app_logo, "Call", pIntent)
                 //.addAction(R.drawable.app_logo, "More", pIntent)

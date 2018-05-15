@@ -2,17 +2,20 @@ package de.yafp.phousan;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
-import android.graphics.Paint;
+//import android.graphics.Paint;
 import android.net.Uri;
+//import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
-import android.telephony.TelephonyManager;
+// import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuInflater;
@@ -24,6 +27,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -31,6 +37,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Objects;
+
 
 // Preferences
 //
@@ -53,6 +61,16 @@ import java.util.Date;
 // To store all day history
 // - date (example: 20180501)
 
+
+// icon:
+// http://free-icon-rainbow.com/car-speedometer-icon-2/
+
+
+
+
+
+
+
 public class MainActivity extends Activity {
 
     private static final String PREFS_NAME = "phousan_settings";
@@ -74,7 +92,7 @@ public class MainActivity extends Activity {
         registerReceiver(receiver, filter);
 
         // get android_id
-        TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        //TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
         Log.d(TAG, "Android ID: " + Secure.getString(getContentResolver(), Secure.ANDROID_ID));
         logFireBaseEvent("p_id_"+Secure.getString(getContentResolver(), Secure.ANDROID_ID));
 
@@ -92,13 +110,12 @@ public class MainActivity extends Activity {
         // Developing - Testdata - STOP
         // -----------------------------------------------------------------------------------------
 
-
         // update data & UI
         updateData();
 
         // Underline app name
-        TextView textview = findViewById(R.id.app_name_short);
-        textview.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        //TextView textview = findViewById(R.id.app_name_short);
+        //textview.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         logFireBaseEvent("p_appLaunch");
     }
@@ -232,7 +249,6 @@ public class MainActivity extends Activity {
 
         record_amount = 0;
         record_sum = 0;
-        record_avg = 0;
 
         // print all settings
         for (String key : settings.getAll().keySet()) {
@@ -296,25 +312,11 @@ public class MainActivity extends Activity {
     }
 
 
-
-    /**
-     * User opens app settings - Dummy so far
-     */
-    private void openSettings() {
-        Log.d(TAG, "F: openSettings");
-        displayToastMessage(getResources().getString(R.string.settings_text)); // show error as toast
-
-        logFireBaseEvent("p_openSettings");
-    }
-
-
-
     /**
      * User opens app about dialog - Dummy so far
      */
     private void openAbout() throws PackageManager.NameNotFoundException {
         Log.d(TAG, "F: openAbout");
-        //displayToastMessage("Not yet implemented");
 
         View messageView = getLayoutInflater().inflate(R.layout.about, null, false);
 
@@ -380,6 +382,9 @@ public class MainActivity extends Activity {
                                     case DialogInterface.BUTTON_POSITIVE:
                                         deleteAllSharedPreferences();
                                         break;
+
+                                    default:
+
                                 }
                             }
                         };
@@ -435,6 +440,11 @@ public class MainActivity extends Activity {
     private void writeUsagePerDayHistory(String date, String usageCount) {
         Log.v(TAG, "F: writeUsagePerDayHistory");
 
+        // debug
+        displayNotification("F: writeUsagePerDayHistory", "Method started");
+        displayNotification("F: writeUsagePerDayHistory", date);
+        displayNotification("F: writeUsagePerDayHistory", usageCount);
+
         writeSetting(date, usageCount);
 
         logFireBaseEvent("p_writeUsagePerDayHistory");
@@ -468,6 +478,9 @@ public class MainActivity extends Activity {
 
             // check highscore max
             checkForNewHighscore(Integer.toString(newScreenOnCount), lastDate);
+
+            // check lowscore
+            checkForNewLowscore(Integer.toString(newScreenOnCount), lastDate);
         }
         else {
             Log.d(TAG, "lastDate != curDate");
@@ -494,6 +507,10 @@ public class MainActivity extends Activity {
      * starts different methods needed on a day change
      */
     private void onNewDay(String currentScreenOnCount, String lastDate){
+
+        // debug
+        displayNotification("F: onNewDay", "Method started");
+
         // Check if new highscore
         checkForNewHighscore(currentScreenOnCount, lastDate);
 
@@ -528,6 +545,8 @@ public class MainActivity extends Activity {
             writeSetting("usage_max_count", usageCount);
             writeSetting("usage_max_date", lastDate);
 
+            displayToastMessage("New highscore");
+
             logFireBaseEvent("p_checkForNewHighscore");
         }
     }
@@ -557,6 +576,8 @@ public class MainActivity extends Activity {
             if(Integer.valueOf(usageCount) < Integer.valueOf(usage_min)){ // new lowscore
                 writeSetting("usage_min_count", usageCount);
                 writeSetting("usage_min_date", lastDate);
+
+                displayToastMessage("New lowscore");
 
                 logFireBaseEvent("p_checkForNewLowscore");
             }
@@ -648,6 +669,39 @@ public class MainActivity extends Activity {
 
 
     /**
+     * display a notification
+     *
+     * @param title the title of the notification
+     * @param message the message text
+     */
+    private void displayNotification(String title, String message) {
+
+        // Prepare intent which is triggered if the
+        // notification is selected
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+
+        // Build notification
+        // Actions are just fake
+        Notification noti = new Notification.Builder(this)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setSmallIcon(R.drawable.app_logo)
+                .setContentIntent(pIntent)
+                //.addAction(R.drawable.app_logo, "Call", pIntent)
+                //.addAction(R.drawable.app_logo, "More", pIntent)
+                //.addAction(R.drawable.app_logo, "And more", pIntent)
+                .build();
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // hide the notification after its selected
+        noti.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        Objects.requireNonNull(notificationManager).notify(0, noti);
+
+    }
+
+
+    /**
      * Update the UI
      *
      * @param newValue new value for UI usage counter to display
@@ -662,15 +716,27 @@ public class MainActivity extends Activity {
         currentCount.setText(newValue);
 
         // yesterdays count
+        //
+        // get yesterday from settings
         String yesterday;
         yesterday = readSetting("usage_yesterday_count");
-
-        if(!yesterday.equals("0"))
+        //
+        // update it if necessary
+        if(!("0").equals(yesterday))   // if yesterday is not 0 - update it
         {
             TextView yesterdays_count;
             yesterdays_count = findViewById(R.id.yesterdays_count);
             yesterdays_count.setText(yesterday);
         }
+
+
+        // percentage diff from cur to yesterday
+        //
+        int yesterday_percent_value;
+        yesterday_percent_value =  Integer.parseInt(yesterday) * 100 /  Integer.parseInt(newValue);
+        TextView yesterdays_percent;
+        yesterdays_percent = findViewById(R.id.yesterdays_percent);
+        yesterdays_percent.setText(Integer.toString(yesterday_percent_value)+"%");
 
 
         // Historic Min value

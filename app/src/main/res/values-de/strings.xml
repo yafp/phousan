@@ -20,7 +20,7 @@
     <string name="answer_no">Nein</string>
     <string name="question_really_delete_all_prefs">Sollen alle Verwendungs-Daten gelöscht werden?</string>
     <string name="menu_history_show">Zeige Verwendungsprotokoll</string>
-    <string name="menu_usage_data_delete">Lösche Verwendungsdaten ...</string>
+    <string name="menu_usage_data_delete">Lösche Verwendungsdaten …</string>
     <string name="dialog_title_show_usage_history_per_day">Verwendungsprotokoll pro Tag</string>
     <string name="app_license">GPLv3</string>
     <string name="function_long">Ein Bildschirm-An Monitoring Dienst</string>

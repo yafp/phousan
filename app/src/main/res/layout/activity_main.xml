@@ -15,7 +15,7 @@
         android:layout_marginTop="16dp"
         android:contentDescription="@string/imageButton_settings"
         android:onClick="showPopup"
-        android:src="@android:drawable/ic_menu_manage"
+        android:src="@drawable/menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -126,6 +126,15 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_yesterday" />
+
+    <TextView
+        android:id="@+id/yesterdays_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/colorGray"
+        app:layout_constraintStart_toEndOf="@+id/yesterdays_count"
         app:layout_constraintTop_toBottomOf="@+id/text_yesterday" />
 
     <ImageView

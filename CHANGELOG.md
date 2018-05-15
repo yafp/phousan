@@ -4,6 +4,7 @@
 ### ```Added```
 * __About__ window
 * Option to delete all usage data
+* Added percentage diff between todays- and yesterdays-usage count
 
 ### ```Changed```
 * Added __popupmenu__ (replacing several image buttons)

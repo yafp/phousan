@@ -3,15 +3,14 @@
     <string name="app_name">phousan</string>
     <string name="app_name_long">Phone Usage Analyzer</string>
 
+    <!-- used in about dialog -->
+    <string name="app_description">Phousan is a simple phone usage analyzer.\n\nIt counts each display-on event and stores your usage history on a daily basis.\n\nGet aware how addicted you are.</string>
+    <string name="app_license">GPLv3</string>
+
+
+    <!-- UI -->
     <!-- function -->
     <string name="function">Display-On Events</string>
-
-
-    <!-- recommend -->
-    <string name="recommend_text">I would like to recommend the app PHOUSAN to you. It is a simple display-on event monitor for your device.</string>
-
-    <!-- settings toast alert -->
-    <string name="settings_text">Settings are not yet implemented</string>
 
     <!-- today -->
     <string name="today">today:</string>
@@ -32,22 +31,35 @@
     <!-- menu -->
     <string name="menu_about">About</string>
     <string name="menu_issues">Issues</string>
-    <string name="menu_history_show">Show Usage History</string>
-    <string name="menu_usage_data_delete">Delete Usage Data …</string>
+    <string name="menu_history_show">Show usage history</string>
+    <string name="menu_history_export">Export usage history</string>
+    <string name="menu_usage_data_delete">Delete usage data</string>
+    <string name="menu_share_todays_score">Share todays score</string>
     <string name="menu_recommend">Recommend</string>
 
-    <!-- delete all usage data dialog -->
-    <string name="question_really_delete_all_prefs">Do you really want to delete all usage data?</string>
-    <string name="answer_yes">Yes</string>
-    <string name="answer_no">No</string>
+    <!-- usage data: show per day -->
+    <string name="dialog_title_show_usage_history_per_day">Usage history per day</string>
+    <string name="show_usage_history_per_day_empty_history">No usage records found.</string>
 
-    <!-- show usage data per day -->
-    <string name="dialog_title_show_usage_history_per_day">Usage History Per Day</string>
+    <!-- usage data: export -->
+    <string name="usage_data_export_title">Phousan usage data export</string>
 
-    <!-- About dialog -->
-    <!-- Function description -->
-    <string name="function_long">A display-on event monitor</string>
-    <!-- license-->
-    <string name="app_license">GPLv3</string>
+    <!-- usage data: delete all -->
+    <string name="really_delete_all_prefs_dialog_title">Delete usage data</string>
+    <string name="really_delete_all_prefs_dialog_text">Do you really want to delete all usage data?</string>
+    <string name="really_delete_all_prefs_dialog_yes">Yes</string>
+    <string name="really_delete_all_prefs_dialog__no">No</string>
+    <string name="really_delete_all_prefs_confirm">Deleted all usage data.</string>
+
+    <!-- share todays score -->
+    <string name="share_todays_score_title">Sharing todays Phousan score</string>
+    <string name="share_todays_score_text">According to Phousan, i activated my phone screen today %1$s times.</string>
+
+    <!-- On new day: tell last days usage count -->
+    <string name="last_days_usage_count_title">Yesterdays usage count</string>
+    <string name="last_days_usage_count_text">You activated your phone screen yesterday %1$s times</string>
+
+    <!-- recommend -->
+    <string name="recommend_text">I would like to recommend the app PHOUSAN to you. It is a simple display-on event monitor for your device.</string>
 
 </resources>

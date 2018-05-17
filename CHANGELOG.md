@@ -5,6 +5,8 @@
 * __About__ window
 * Option to delete all usage data
 * Added percentage diff between todays- and yesterdays-usage count
+* Added export function for usage data
+* Added support for notifications
 
 ### ```Changed```
 * Added __popupmenu__ (replacing several image buttons)
@@ -13,6 +15,9 @@
 * New app icon
 
 ### ```Fixed```
+* History data is now displayed
+* UI is now refreshed after deleting usage data
+* Fixed a wrong +1 on app relaunch without real event in between
 * Fixed unescaped character in string
 
 

@@ -10,19 +10,10 @@
     android:padding="20dip">
 
     <TextView
-        android:id="@+id/about_app_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textAllCaps="true"
-        android:textColor="?android:attr/textColorPrimaryInverse"
-        android:textSize="32sp" />
-
-    <TextView
         android:id="@+id/about_app_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/function_long"
+        android:text="@string/app_description"
         android:textSize="16sp" />
 
     <TextView
@@ -35,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/app_license" />
+        android:text="@string/app_license"
+        android:textSize="12sp" />
 
 </LinearLayout>

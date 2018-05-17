@@ -14,9 +14,15 @@
         android:title="@string/menu_history_show" />
 
     <item
+        android:id="@+id/history_export"
+        android:title="@string/menu_history_export" />
+    <item
         android:id="@+id/usage_data_delete"
         android:title="@string/menu_usage_data_delete" />
 
+    <item
+        android:id="@+id/share_todays_score"
+        android:title="@string/menu_share_todays_score" />
     <item
         android:id="@+id/recommend"
         android:title="@string/menu_recommend" />

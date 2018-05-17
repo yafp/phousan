@@ -14,13 +14,14 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 //import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings.Secure;
-// import android.telephony.TelephonyManager;
+//import android.provider.Settings.Secure;
+//import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+//import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupMenu.OnMenuItemClickListener;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import android.content.pm.PackageInfo;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.provider.Settings;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -62,15 +64,6 @@ import java.util.Objects;
 // - date (example: 20180501)
 
 
-// icon:
-// http://free-icon-rainbow.com/car-speedometer-icon-2/
-
-
-
-
-
-
-
 public class MainActivity extends Activity {
 
     private static final String PREFS_NAME = "phousan_settings";
@@ -86,21 +79,22 @@ public class MainActivity extends Activity {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         setContentView(R.layout.activity_main);
-        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON); // main action
+        filter.addAction(Intent.ACTION_SCREEN_OFF); // Not yet in use
+        filter.addAction(Intent.ACTION_DATE_CHANGED);  // not yet in use -> could be useful for day changeing routine
         PowerOnReceiver receiver = new PowerOnReceiver();
         registerReceiver(receiver, filter);
 
         // get android_id
         //TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
-        Log.d(TAG, "Android ID: " + Secure.getString(getContentResolver(), Secure.ANDROID_ID));
-        logFireBaseEvent("p_id_"+Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+        String androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        Log.d(TAG, "Android ID: " + androidId);
+        logFireBaseEvent("p_id_"+androidId);
 
 
         // -----------------------------------------------------------------------------------------
         // Developing - Testdata - START
         // -----------------------------------------------------------------------------------------
-
         // generate some
         devWritePseudoSharedPrefData();
 
@@ -110,13 +104,10 @@ public class MainActivity extends Activity {
         // Developing - Testdata - STOP
         // -----------------------------------------------------------------------------------------
 
-        // update data & UI
-        updateData();
+        // init App & UI
+        initApp();
 
-        // Underline app name
-        //TextView textview = findViewById(R.id.app_name_short);
-        //textview.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
-
+        // log to Firebase
         logFireBaseEvent("p_appLaunch");
     }
 
@@ -158,65 +149,36 @@ public class MainActivity extends Activity {
      */
     private void devWritePseudoSharedPrefData(){
         Log.d(TAG, "F: tempWritePseudoSharedPrefData");
+        /*
+        writeSetting("usage_min_count", "86");
+        writeSetting("usage_min_date", "20150501");
 
-        //writeSetting("usage_min_count", "86");
-        //writeSetting("usage_min_date", "20150501");
+        writeSetting("usage_max_count", "12");
+        writeSetting("usage_max_date", "20160504");
 
-        //writeSetting("usage_max_count", "12");
-        //writeSetting("usage_max_date", "20160504");
-
-        //writeSetting("usage_yesterday_count", "10");
-        //writeSetting("usage_yesterday_date", "20180503");
+        writeSetting("usage_yesterday_count", "10");
+        writeSetting("usage_yesterday_date", "20180503");
 
         // Usage history:
         //
-        //writeSetting("20180508", "96");
-        //writeSetting("20180507", "67");
-        //writeSetting("20180506", "103");
-        //writeSetting("20180505", "102");
-        //writeSetting("20180504", "100");
-        //writeSetting("20180503", "99");
-        //writeSetting("20180502", "80");
-        //writeSetting("20180501", "70");
-        //writeSetting("20180430", "53");
-        //writeSetting("20180429", "72");
-        //writeSetting("20180428", "10");
-        //writeSetting("20180427", "123");
-        //writeSetting("20180426", "57");
-        //writeSetting("20180425", "78");
-        //writeSetting("20180424", "96");
-        //writeSetting("20180423", "67");
-        //writeSetting("20180422", "103");
-        //writeSetting("20180421", "102");
-        //writeSetting("20180420", "100");
-        //writeSetting("20180419", "99");
-        //writeSetting("20180418", "80");
-        //writeSetting("20180417", "70");
-        //writeSetting("20180416", "53");
-        //writeSetting("20180415", "72");
-        //writeSetting("20180414", "10");
-        //writeSetting("20180413", "123");
-        //writeSetting("20180412", "57");
-        //writeSetting("20180411", "78");
-        //writeSetting("20180410", "96");
-        //writeSetting("20180409", "67");
-        //writeSetting("20180408", "103");
-        //writeSetting("20180407", "102");
-        //writeSetting("20180406", "100");
-        //writeSetting("20180405", "99");
-        //writeSetting("20180404", "80");
-        //writeSetting("20180403", "70");
-        //writeSetting("20180402", "53");
-        //writeSetting("20180401", "72");
-        //writeSetting("20180331", "10");
-        //writeSetting("20180330", "123");
-        //writeSetting("20180329", "57");
-        //writeSetting("20180328", "78");
+        writeSetting("20180508", "96");
+        writeSetting("20180507", "67");
+        writeSetting("20180506", "103");
+        writeSetting("20180505", "102");
+        writeSetting("20180504", "100");
+        writeSetting("20180503", "99");
+        writeSetting("20180502", "80");
+        writeSetting("20180501", "70");
+        writeSetting("20180430", "53");
+        writeSetting("20180429", "72");
+        */
     }
+
 
 
     /**
      * Delete all Shared Preferences and related values
+     * displays toast for user
      */
     private void deleteAllSharedPreferences(){
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -225,6 +187,16 @@ public class MainActivity extends Activity {
         editor.clear();
         editor.apply();
 
+        // show toast after deletion
+        displayToastMessage(getResources().getString(R.string.really_delete_all_prefs_confirm));
+
+        // show notification
+        displayNotification(getResources().getString(R.string.really_delete_all_prefs_dialog_title), getResources().getString(R.string.really_delete_all_prefs_confirm));
+
+        // Update UI
+        updateUI("0");
+
+        // log to Firebase
         logFireBaseEvent("p_deleteAllSharedPreferences");
     }
 
@@ -256,7 +228,7 @@ public class MainActivity extends Activity {
                 Log.i(String.format("Shared Preference : %s - %s", PREFS_NAME, key), settings.getString(key, "error!"));
 
                 // add to array
-                al.add(key+": "+settings.getString(key, "error!")+"\n");
+                al.add(key+":\t\t"+settings.getString(key, "error!")+"\n");
 
                 record_amount = record_amount +1; // counter
                 record_sum = record_sum + Integer.parseInt(settings.getString(key, "error!"));
@@ -266,13 +238,16 @@ public class MainActivity extends Activity {
             }
         }
 
+
+
         // calc average
-        if(record_amount != 0)
-        {
+        if(record_amount == 0) {
+            outputUsageHistory.append(getResources().getString(R.string.show_usage_history_per_day_empty_history));
+        }
+        else {
             record_avg = record_sum / record_amount;
             Log.d(TAG, "Usage History Average: "+Integer.toString(record_avg));
         }
-
 
         // sort & reverse array-data
         Collections.sort(al); // sort
@@ -280,18 +255,52 @@ public class MainActivity extends Activity {
 
         // build output string
         for (int i = 0; i < al.size(); i++) {
-            //System.out.println(al.get(i));
             outputUsageHistory.append(al.get(i));
         }
 
         // show as dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.dialog_title_show_usage_history_per_day).setMessage(outputUsageHistory.toString());
+        builder.setTitle(R.string.dialog_title_show_usage_history_per_day);
+        builder.setMessage(outputUsageHistory.toString());
+        builder.setIcon(R.drawable.app_icon);
         AlertDialog alert = builder.create();
         alert.show();
 
+        // log to Firebase
         logFireBaseEvent("p_showUsageDataPerDay");
     }
+
+
+
+    /**
+     * User wants to share the current score
+     * Generates a  text with a link to the play store which gets forwarded to an app of choice
+     */
+    private void shareTodaysScore() {
+        Log.d(TAG, "F: shareTodaysScore");
+
+        // get current date
+        String curDate = getCurrentDate();
+
+        // get current score
+        String curUsageCount;
+        curUsageCount = readSetting(curDate);
+
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+
+        // Add data to the intent, the receiving app will decide what to do with it.
+        share.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.share_todays_score_title));
+        share.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_todays_score_text, curUsageCount));
+
+        startActivity(Intent.createChooser(share, getResources().getString(R.string.share_todays_score_title)));
+
+        // log to Firebase
+        logFireBaseEvent("p_shareTodaysScore");
+    }
+
 
 
 
@@ -312,8 +321,76 @@ public class MainActivity extends Activity {
 
         startActivity(Intent.createChooser(share, "Share link"));
 
+        // log to Firebase
         logFireBaseEvent("p_recommendApp");
     }
+
+
+
+    /**
+     * User wants to export usage data
+     * Generates usage data text which gets forwarded to an app of choice
+     */
+    private void exportUsageData() {
+        Log.d(TAG, "F: exportUsageData");
+
+        StringBuilder outputUsageHistory;
+        outputUsageHistory = new StringBuilder();
+        ArrayList<String> al= new ArrayList<>(); // stores the relevant prefs for later sorting
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+        int record_amount; // counter
+
+        record_amount = 0;
+
+        // print all settings
+        for (String key : settings.getAll().keySet()) {
+            if(key.startsWith("20")) { // collect only usage-history data
+                Log.i(String.format("Shared Preference : %s - %s", PREFS_NAME, key), settings.getString(key, "error!"));
+
+                // add to array
+                al.add(key+":\t\t"+settings.getString(key, "error!")+"\n");
+
+                record_amount = record_amount +1; // counter
+            }
+            else {
+                Log.d(TAG, "Ignoring key, as it is not part of the daily usage history");
+            }
+        }
+
+        // calc average
+        if(record_amount == 0)
+        {
+            outputUsageHistory.append(getResources().getString(R.string.show_usage_history_per_day_empty_history));
+        }
+
+        // sort & reverse array-data
+        Collections.sort(al); // sort
+        Collections.reverse(al); //
+
+        // build output string
+        for (int i = 0; i < al.size(); i++) {
+            outputUsageHistory.append(al.get(i));
+        }
+
+
+        // forward information to external app
+        //
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+
+        // Add data to the intent, the receiving app will decide what to do with it.
+        share.putExtra(Intent.EXTRA_SUBJECT, R.string.usage_data_export_title);
+        share.putExtra(Intent.EXTRA_TEXT, outputUsageHistory.toString());
+
+        startActivity(Intent.createChooser(share, getResources().getString(R.string.usage_data_export_title)));
+
+        // log to Firebase
+        logFireBaseEvent("p_exportUsageData");
+    }
+
 
 
     /**
@@ -329,15 +406,17 @@ public class MainActivity extends Activity {
         PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(R.drawable.app_icon_bw);
+        builder.setIcon(R.mipmap.app_icon);
         builder.setTitle(R.string.app_name);
         builder.setView(messageView);
         builder.setMessage("\nPackage:\t\t" + info.packageName + "\nVersion:\t\t\t" + info.versionName + "\nBuild:\t\t\t\t" + info.versionCode);
         builder.create();
         builder.show();
 
+        // log to Firebase
         logFireBaseEvent("p_openAbout");
     }
+
 
 
     /**
@@ -378,6 +457,10 @@ public class MainActivity extends Activity {
                         showUsageDataPerDay();
                         return true;
 
+                    case R.id.history_export:
+                        exportUsageData();
+                        return true;
+
                     case R.id.usage_data_delete:
                         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                             @Override
@@ -394,12 +477,18 @@ public class MainActivity extends Activity {
                         };
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                        builder.setMessage(getResources().getString(R.string.question_really_delete_all_prefs))
-                                .setPositiveButton(getResources().getString(R.string.answer_yes), dialogClickListener)
-                                .setNegativeButton(getResources().getString(R.string.answer_no), dialogClickListener)
-                                .setIcon(R.drawable.app_icon_color)
-                                .show();
+                        builder.setTitle(getResources().getString(R.string.really_delete_all_prefs_dialog_title));
+                        builder.setMessage(getResources().getString(R.string.really_delete_all_prefs_dialog_text));
+                        builder.setPositiveButton(getResources().getString(R.string.really_delete_all_prefs_dialog_yes), dialogClickListener);
+                        builder.setNegativeButton(getResources().getString(R.string.really_delete_all_prefs_dialog__no), dialogClickListener);
+                        builder.setIcon(R.mipmap.app_icon);
+                        builder.show();
                         return true;
+
+                    case R.id.share_todays_score:
+                        shareTodaysScore();
+                        return true;
+
 
                     case R.id.recommend:
                         recommendApp();
@@ -412,10 +501,13 @@ public class MainActivity extends Activity {
             }
         });
 
+        // show menu popup
         popup.show();
 
+        // log to Firebase
         logFireBaseEvent("p_showPopup");
     }
+
 
 
     /**
@@ -430,6 +522,7 @@ public class MainActivity extends Activity {
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);       // for center vertical
         toast.show();
 
+        // log to Firebase
         logFireBaseEvent("p_displayToastMessage");
     }
 
@@ -441,18 +534,45 @@ public class MainActivity extends Activity {
      * @param date the date as string
      * @param usageCount the actual usage count as string
      */
-    private void writeUsagePerDayHistory(String date, String usageCount) {
+    private void writeUsagePerDayHistory(String usageCount, String date) {
         Log.v(TAG, "F: writeUsagePerDayHistory");
-
-        // debug
-        displayNotification("F: writeUsagePerDayHistory", "Method started");
-        displayNotification("F: writeUsagePerDayHistory", date);
-        displayNotification("F: writeUsagePerDayHistory", usageCount);
 
         writeSetting(date, usageCount);
 
+        // log to Firebase
         logFireBaseEvent("p_writeUsagePerDayHistory");
     }
+
+
+
+    /**
+     *
+     */
+    private void initApp(){
+        Log.d(TAG, "F: initApp");
+
+        // get current date
+        String curDate = getCurrentDate();
+
+        // get date of last sharedPref activity
+        String lastDate = readSetting("usage_current_date");
+
+        // Read ScreenOn
+        String currentScreenOnCount;
+        currentScreenOnCount = readSetting("usage_current_count");
+
+        if(lastDate.equals(curDate)){
+            updateUI(currentScreenOnCount);
+        }
+        else
+        {
+            updateUI("1");
+        }
+
+        // log to Firebase
+        logFireBaseEvent("p_initApp");
+    }
+
 
 
     /**
@@ -485,6 +605,9 @@ public class MainActivity extends Activity {
 
             // check lowscore
             //checkForNewLowscore(Integer.toString(newScreenOnCount), lastDate);
+
+            // Update todays history
+            writeUsagePerDayHistory(Integer.toString(newScreenOnCount), lastDate);
         }
         else {
             Log.d(TAG, "lastDate != curDate");
@@ -500,8 +623,10 @@ public class MainActivity extends Activity {
         // Write new count value
         writeSetting("usage_current_count", Integer.toString(newScreenOnCount));
 
+        // update the user interface
         updateUI(Integer.toString(newScreenOnCount));
 
+        // log to Firebase
         logFireBaseEvent("p_updateData");
     }
 
@@ -512,8 +637,8 @@ public class MainActivity extends Activity {
      */
     private void onNewDay(String currentScreenOnCount, String lastDate){
 
-        // debug
-        displayNotification("F: onNewDay", "Method started");
+        // Show last days usage count as notification
+        displayNotification(getResources().getString(R.string.last_days_usage_count_title), getResources().getString(R.string.last_days_usage_count_text, currentScreenOnCount));
 
         // Check if new highscore
         checkForNewHighscore(currentScreenOnCount, lastDate);
@@ -527,8 +652,10 @@ public class MainActivity extends Activity {
         // write usage per day log entry
         writeUsagePerDayHistory(currentScreenOnCount, lastDate);
 
+        // log to Firebase
         logFireBaseEvent("p_onNewDay");
     }
+
 
 
     /**
@@ -549,8 +676,9 @@ public class MainActivity extends Activity {
             writeSetting("usage_max_count", usageCount);
             writeSetting("usage_max_date", lastDate);
 
-            displayToastMessage("New highscore");
+            //displayToastMessage("New highscore");
 
+            // log to Firebase
             logFireBaseEvent("p_checkForNewHighscore");
         }
     }
@@ -581,8 +709,9 @@ public class MainActivity extends Activity {
                 writeSetting("usage_min_count", usageCount);
                 writeSetting("usage_min_date", lastDate);
 
-                displayToastMessage("New lowscore");
+                //displayToastMessage("New lowscore");
 
+                // log to Firebase
                 logFireBaseEvent("p_checkForNewLowscore");
             }
         }
@@ -602,6 +731,7 @@ public class MainActivity extends Activity {
         writeSetting("usage_yesterday_count", usageCount);
         writeSetting("usage_yesterday_date", lastDate);
 
+        // log to Firebase
         logFireBaseEvent("p_rememberYesterdayUsageCount");
     }
 
@@ -620,6 +750,7 @@ public class MainActivity extends Activity {
         String curDate = timeStampFormat.format(myDate);
         Log.d(TAG, curDate);
 
+        // log to Firebase
         logFireBaseEvent("p_getCurrentDate");
 
         return curDate;
@@ -642,6 +773,7 @@ public class MainActivity extends Activity {
 
         Log.d(TAG, "Key: "+key+", value is: "+value);
 
+        // log to Firebase
         logFireBaseEvent("p_readSetting");
 
         return value;
@@ -665,6 +797,7 @@ public class MainActivity extends Activity {
         //editor.commit();
         editor.apply();
 
+        // log to Firebase
         logFireBaseEvent("p_writeSetting");
 
         Log.d(TAG, "Key: "+key+", new value is: "+newValue);
@@ -679,9 +812,9 @@ public class MainActivity extends Activity {
      * @param message the message text
      */
     private void displayNotification(String title, String message) {
+        Log.d(TAG, "F: displayNotification");
 
-        // Prepare intent which is triggered if the
-        // notification is selected
+        // Prepare intent which is triggered if the notification is selected
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
 
@@ -690,19 +823,20 @@ public class MainActivity extends Activity {
         Notification noti = new Notification.Builder(this)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setSmallIcon(R.drawable.app_icon_color)
+                .setSmallIcon(R.mipmap.app_icon)
                 .setContentIntent(pIntent)
-                //.addAction(R.drawable.app_logo, "Call", pIntent)
-                //.addAction(R.drawable.app_logo, "More", pIntent)
-                //.addAction(R.drawable.app_logo, "And more", pIntent)
                 .build();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
         // hide the notification after its selected
         noti.flags |= Notification.FLAG_AUTO_CANCEL;
 
         Objects.requireNonNull(notificationManager).notify(0, noti);
 
+        // log to Firebase
+        logFireBaseEvent("p_displayNotification");
     }
+
 
 
     /**
@@ -731,16 +865,20 @@ public class MainActivity extends Activity {
             TextView yesterdays_count;
             yesterdays_count = findViewById(R.id.yesterdays_count);
             yesterdays_count.setText(yesterday);
+
+            // percentage diff from cur to yesterday
+            //
+            int yesterday_percent_value;
+            yesterday_percent_value =  Integer.parseInt(yesterday) * 100 /  Integer.parseInt(newValue);
+            yesterday_percent_value = yesterday_percent_value - 100;
+
+
+            TextView yesterdays_percent;
+            yesterdays_percent = findViewById(R.id.yesterdays_percent);
+            yesterdays_percent.setText(Integer.toString(yesterday_percent_value)+"%");
         }
 
 
-        // percentage diff from cur to yesterday
-        //
-        int yesterday_percent_value;
-        yesterday_percent_value =  Integer.parseInt(yesterday) * 100 /  Integer.parseInt(newValue);
-        TextView yesterdays_percent;
-        yesterdays_percent = findViewById(R.id.yesterdays_percent);
-        yesterdays_percent.setText(Integer.toString(yesterday_percent_value)+"%");
 
 
         // Historic Min value
@@ -775,6 +913,7 @@ public class MainActivity extends Activity {
             max.setText(max_value + "\n("+max_date+")");
         }
 
+        // log to Firebase
         logFireBaseEvent("p_updateUI");
     }
 }

@@ -21,9 +21,6 @@
         android:title="@string/menu_usage_data_delete" />
 
     <item
-        android:id="@+id/share_todays_score"
-        android:title="@string/menu_share_todays_score" />
-    <item
         android:id="@+id/recommend"
         android:title="@string/menu_recommend" />
 

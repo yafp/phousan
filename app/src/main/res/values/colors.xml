@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#5f6061</color>
-
+    <color name="colorAccent">#FF4081</color>
     <!-- ui -->
     <!-- default font -->
     <color name="colorGray">#a0a4a1</color>

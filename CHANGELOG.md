@@ -1,6 +1,6 @@
 # phousan Changelog
 
-## phousan 0.2.0 (2018xxyy)
+## phousan 0.2.0 (20180518)
 ### ```Added```
 * __About__ window
 * Option to delete all usage data

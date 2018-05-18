@@ -10,18 +10,21 @@
 
     <!-- UI -->
     <!-- function -->
-    <string name="function">Display-On Events</string>
+    <string name="function">Display-on events</string>
 
     <!-- today -->
-    <string name="today">today:</string>
+    <string name="today">today</string>
     <string name="today_default">0</string>
 
     <!-- yesterday -->
-    <string name="yesterday">yesterday:</string>
-    <string name="yesterday_default">not available</string>
+    <string name="yesterday">yesterday</string>
+    <string name="yesterday_default">-</string>
 
-    <!-- min / max -->
+    <!-- overall -->
+    <string name="overall">overall</string>
+    <string name="overall_n_a">-</string>
     <string name="min">min</string>
+    <string name="avg">avg</string>
     <string name="max">max</string>
 
     <!-- contentDescription for images -->
@@ -31,10 +34,9 @@
     <!-- menu -->
     <string name="menu_about">About</string>
     <string name="menu_issues">Issues</string>
-    <string name="menu_history_show">Show usage history</string>
-    <string name="menu_history_export">Export usage history</string>
-    <string name="menu_usage_data_delete">Delete usage data</string>
-    <string name="menu_share_todays_score">Share todays score</string>
+    <string name="menu_history_show">Show daily usage history</string>
+    <string name="menu_history_export">Export daily usage history</string>
+    <string name="menu_usage_data_delete">Delete all usage data</string>
     <string name="menu_recommend">Recommend</string>
 
     <!-- usage data: show per day -->
@@ -45,19 +47,16 @@
     <string name="usage_data_export_title">Phousan usage data export</string>
 
     <!-- usage data: delete all -->
-    <string name="really_delete_all_prefs_dialog_title">Delete usage data</string>
+    <string name="really_delete_all_prefs_dialog_title">Delete all usage data</string>
     <string name="really_delete_all_prefs_dialog_text">Do you really want to delete all usage data?</string>
     <string name="really_delete_all_prefs_dialog_yes">Yes</string>
     <string name="really_delete_all_prefs_dialog__no">No</string>
     <string name="really_delete_all_prefs_confirm">Deleted all usage data.</string>
 
-    <!-- share todays score -->
-    <string name="share_todays_score_title">Sharing todays Phousan score</string>
-    <string name="share_todays_score_text">According to Phousan, i activated my phone screen today %1$s times.</string>
 
     <!-- On new day: tell last days usage count -->
     <string name="last_days_usage_count_title">Yesterdays usage count</string>
-    <string name="last_days_usage_count_text">You activated your phone screen yesterday %1$s times</string>
+    <string name="last_days_usage_count_text">Phone display activations yesterday: </string>
 
     <!-- recommend -->
     <string name="recommend_text">I would like to recommend the app PHOUSAN to you. It is a simple display-on event monitor for your device.</string>

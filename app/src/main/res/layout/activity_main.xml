@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/image_settings"
+        android:id="@+id/ui_imageSettings"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="16dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/app_icon_color"
+        android:id="@+id/ui_appIconColor"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_marginEnd="16dp"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/app_name_short"
+        android:id="@+id/ui_appNameShort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/app_name_long"
+        android:id="@+id/ui_appNameLong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -65,11 +65,11 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_name_short" />
+        app:layout_constraintTop_toBottomOf="@+id/ui_appNameShort" />
 
 
     <TextView
-        android:id="@+id/current_count"
+        android:id="@+id/ui_currentCount"
         android:layout_width="0dp"
         android:layout_height="160dp"
         android:layout_marginEnd="16dp"
@@ -84,53 +84,78 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_today" />
+        app:layout_constraintTop_toBottomOf="@+id/ui_text_today" />
+
+
 
     <TextView
-        android:id="@+id/text_today"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/today"
-        android:textColor="@color/colorGray"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/function" />
-
-    <TextView
-        android:id="@+id/function"
+        android:id="@+id/ui_function"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="64dp"
         android:text="@string/function"
+        android:textSize="20sp"
         android:textColor="@color/colorGray"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_name_long" />
+        app:layout_constraintTop_toBottomOf="@+id/ui_appNameLong" />
 
     <TextView
-        android:id="@+id/text_yesterday"
+        android:id="@+id/ui_text_today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/yesterday"
+        android:text="@string/today"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
         android:textColor="@color/colorGray"
-        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ui_function" />
+
+    <TextView
+        android:id="@+id/ui_textYesterday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/yesterday"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textColor="@color/colorGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/current_count" />
+        app:layout_constraintTop_toBottomOf="@+id/ui_currentCount" />
 
     <TextView
-        android:id="@+id/yesterdays_count"
+        android:id="@+id/ui_textOverall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/overall"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:textColor="@color/colorGray"
+        app:layout_constraintBottom_toTopOf="@+id/ui_textAvg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/ui_yesterdaysCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -140,49 +165,87 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_yesterday" />
+        app:layout_constraintTop_toBottomOf="@+id/ui_textYesterday" />
 
     <TextView
-        android:id="@+id/yesterdays_percent"
+        android:id="@+id/ui_yesterdaysPercent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:textColor="@color/colorGray"
-        app:layout_constraintStart_toEndOf="@+id/yesterdays_count"
-        app:layout_constraintTop_toBottomOf="@+id/text_yesterday" />
+        app:layout_constraintStart_toEndOf="@+id/ui_yesterdaysCount"
+        app:layout_constraintTop_toBottomOf="@+id/ui_textYesterday" />
 
-    <ImageView
-        android:id="@+id/image_speedometer"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:contentDescription="@string/image_speedomter"
-        android:src="@drawable/app_icon_bw"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/ui_textMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:text="@string/min"
+        android:textAlignment="center"
+        android:textColor="@color/colorGreen"
+        app:layout_constraintBottom_toTopOf="@+id/ui_min"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/min"
+        android:id="@+id/ui_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="96dp"
-        android:text="@string/min"
+        android:text="@string/overall_n_a"
+        android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@color/colorGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/max"
+        android:id="@+id/ui_textAvg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/avg"
+        android:textAlignment="center"
+        android:textColor="@color/colorGray"
+        app:layout_constraintBottom_toTopOf="@+id/ui_avg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/ui_avg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/overall_n_a"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/colorGray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/ui_textMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="96dp"
+        android:text="@string/max"
+        android:textAlignment="center"
+        android:textColor="@color/colorRed"
+        app:layout_constraintBottom_toTopOf="@+id/ui_max"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/ui_max"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="96dp"
-        android:text="@string/max"
+        android:text="@string/overall_n_a"
+        android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@color/colorRed"
         app:layout_constraintBottom_toBottomOf="parent"

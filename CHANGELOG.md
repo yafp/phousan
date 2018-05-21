@@ -1,5 +1,15 @@
 # phousan Changelog
 
+## phousan 0.3.0 (2018xxyy)
+### ```Added```
+* Added a backupAgent for shared preferences (Issue #2)
+
+### ```Fixed```
+* Optimized UI for devices <= 5" (Issue #1)
+* Leaving app with back-button resulted in counting errors (Issue #3)
+
+
+
 ## phousan 0.2.0 (20180518)
 ### ```Added```
 * __About__ window

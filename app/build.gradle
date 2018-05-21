@@ -6,8 +6,8 @@ android {
         applicationId "de.yafp.phousan"
         minSdkVersion 21 // Android 4.0 = 14 && Android 5.0 = 21
         targetSdkVersion 27
-        versionCode 2
-        versionName "0.2.0"
+        versionCode 3
+        versionName "0.2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

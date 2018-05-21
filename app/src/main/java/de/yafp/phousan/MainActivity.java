@@ -3,6 +3,7 @@ package de.yafp.phousan;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.app.backup.BackupManager;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -104,10 +105,37 @@ public class MainActivity extends Activity {
         // init App & UI
         initApp();
 
+        // #2 - backup prefs to cloud
+        requestBackup();
+
         // log to Firebase
         logFireBaseEvent("p_appLaunch");
     }
 
+
+
+
+    public void requestBackup() {
+        Log.d(TAG, "F: requestBackup");
+        BackupManager bm = new BackupManager(this);
+        bm.dataChanged();
+
+        // log to Firebase
+        logFireBaseEvent("p_requestBackup");
+    }
+
+
+    // FIXME:
+    // tests for #3
+    // additional ideas: https://stackoverflow.com/questions/5312334/how-to-handle-back-button-in-activity
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, "F: onBackPressed");
+        moveTaskToBack(true);
+
+        // log to Firebase
+        logFireBaseEvent("p_onBackPressed");
+    }
 
 
     /**
@@ -648,10 +676,12 @@ public class MainActivity extends Activity {
      */
     private void onNewDay(String currentScreenOnCount, String lastDate){
 
-        // Show last days usage count as notification
-        String title = getResources().getString(R.string.last_days_usage_count_title);
-        String text = getResources().getString(R.string.last_days_usage_count_text);
-        displayNotification(title, text + currentScreenOnCount);
+        // Show last days usage count as notification if it is > 0
+        if(!currentScreenOnCount.equals("0")){
+            String title = getResources().getString(R.string.last_days_usage_count_title);
+            String text = getResources().getString(R.string.last_days_usage_count_text);
+            displayNotification(title, text + currentScreenOnCount);
+        }
 
         // Check if new highscore
         checkForNewHighscore(currentScreenOnCount, lastDate);

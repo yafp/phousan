@@ -25,7 +25,7 @@
         android:layout_height="160dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:alpha="0.2"
         android:contentDescription="@string/image_speedomter"
         android:src="@drawable/app_icon"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="52dp"
         android:gravity="top"
         android:includeFontPadding="false"
         android:text="@string/app_name"
@@ -180,9 +180,9 @@
         android:id="@+id/ui_textMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
+        android:layout_marginStart="36dp"
         android:text="@string/min"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textColor="@color/colorGreen"
         app:layout_constraintBottom_toTopOf="@+id/ui_min"
         app:layout_constraintStart_toStartOf="parent" />
@@ -192,11 +192,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginStart="96dp"
+        android:layout_marginStart="36dp"
         android:text="@string/overall_n_a"
-        android:textStyle="bold"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textColor="@color/colorGreen"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -209,7 +209,6 @@
         android:textColor="@color/colorGray"
         app:layout_constraintBottom_toTopOf="@+id/ui_avg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -231,9 +230,9 @@
         android:id="@+id/ui_textMax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="36dp"
         android:text="@string/max"
-        android:textAlignment="center"
+        android:textAlignment="viewEnd"
         android:textColor="@color/colorRed"
         app:layout_constraintBottom_toTopOf="@+id/ui_max"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -243,11 +242,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="36dp"
         android:text="@string/overall_n_a"
-        android:textStyle="bold"
-        android:textAlignment="center"
+        android:textAlignment="viewEnd"
         android:textColor="@color/colorRed"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

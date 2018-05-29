@@ -45,7 +45,7 @@ It is listening for [ACTION_SCREEN_ON](https://developer.android.com/reference/a
 
 ![menu](https://raw.githubusercontent.com/yafp/phousan/master/doc/Misc/ui_2_menu_en.png)
 
-![history](https://raw.githubusercontent.com/yafp/phousan/master/doc/Misc/ui_3_main_en.png)
+![history](https://raw.githubusercontent.com/yafp/phousan/master/doc/Misc/ui_3_history_en.png)
 
 
 ## Credits

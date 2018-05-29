@@ -6,9 +6,7 @@
 * [Iconlink](https://www.flaticon.com/free-icon/speedometer_610106)
 
 
-## helpful links
+## Links
+### Backup
 * Backup: https://developer.android.com/guide/topics/data/keyvaluebackup
 * Auto-Backup: https://developer.android.com/guide/topics/data/autobackup
-
-
-

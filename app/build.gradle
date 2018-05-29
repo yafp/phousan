@@ -1,31 +1,150 @@
+/**
+ * The first line in the build configuration applies the Android plugin for
+ * Gradle to this build and makes the android block available to specify
+ * Android-specific build options.
+ */
 apply plugin: 'com.android.application'
 
+/**
+ * The android block is where you configure all your Android-specific
+ * build options.
+ */
 android {
+
+    // LintOptions:
+    // http://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.LintOptions.html#com.android.build.gradle.internal.dsl.LintOptions
+    lintOptions {
+        disable 'UnusedResources'
+    }
+
+    // General rule:
+    //
+    // minSdkVersion <= targetSdkVersion <= compileSdkVersion
+
+    /**
+     * compileSdkVersion specifies the Android API level Gradle should use to
+     * compile your app. This means your app can use the API features included in
+     * this API level and lower.
+     */
     compileSdkVersion 27
+
+    /**
+     * buildToolsVersion specifies the version of the SDK build tools, command-line
+     * utilities, and compiler that Gradle should use to build your app. You need to
+     * download the build tools using the SDK Manager.
+     *
+     * If you're using Android plugin 3.0.0 or higher, this property is optional—
+     * the plugin uses a recommended version of the build tools by default.
+     */
+    buildToolsVersion "27.0.3"
+
+
+    /**
+     * The defaultConfig block encapsulates default settings and entries for all
+     * build variants, and can override some attributes in main/AndroidManifest.xml
+     * dynamically from the build system. You can configure product flavors to override
+     * these values for different versions of your app.
+     */
     defaultConfig {
+
+        /**
+         * applicationId uniquely identifies the package for publishing.
+         * However, your source code should still reference the package name
+         * defined by the package attribute in the main/AndroidManifest.xml file.
+         */
         applicationId "de.yafp.phousan"
+
+        /**
+         * Defines the minimum API level required to run the app.
+         * The minSdkVersion is one of the signals the Google Play Store uses to determine which of a user’s devices an app can be installed on.
+         */
         minSdkVersion 21 // Android 4.0 = 14 && Android 5.0 = 21
+
+        // Specifies the API level used to test the app.
         targetSdkVersion 27
+
+        /**
+         * An internal version number.
+         * This number is used only to determine whether one version is more recent than another,
+         * with higher numbers indicating more recent versions.
+         * This is not the version number shown to users; that number is set by the versionName attribute.
+         * The value must be set as an integer, such as "100".
+         * You can define it however you want, as long as each successive version has a higher number.
+         */
         versionCode 3
-        versionName "0.2.2"
+
+        /**
+         * The version name shown to users.
+         * This attribute can be set as a raw string or as a reference to a string resource.
+         * The string has no other purpose than to be displayed to users.
+         * The versionCode attribute holds the significant version number used internally.
+         */
+        versionName "0.3.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    /**
+     * The buildTypes block is where you can configure multiple build types.
+     * By default, the build system defines two build types: debug and release. The
+     * debug build type is not explicitly shown in the default build configuration,
+     * but it includes debugging tools and is signed with the debug key. The release
+     * build type applies Proguard settings and is not signed by default.
+     */
     buildTypes {
+
+        /**
+         * By default, Android Studio configures the release build type to enable code
+         * shrinking, using minifyEnabled, and specifies the Proguard settings file.
+         */
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    // task to Auto-generate javadocs while building
+    //
+    // running:  ./gradlew createJavadocs
+    // results in a javadoc folder in: app\build\docs
+    //
+    task createJavadocs  (type: Javadoc) {
+        source = project.android.sourceSets.main.java.srcDirs
+        options.linkSource true
+        classpath += project.files(project.android.getBootClasspath().join(File.pathSeparator))
+        classpath += configurations.compile
+        failOnError false
+        //destinationDir = projectDir
+        destinationDir = file("$rootDir/doc/Javadoc")
+    }
+
+    // the actual triggering of the task above
+    afterEvaluate {
+        assembleDebug.dependsOn createJavadocs
+        packageRelease.finalizedBy(createJavadocs)
+        build.finalizedBy(createJavadocs)
+    }
 }
 
+
+/**
+ * The dependencies block in the module-level build configuration file
+ * only specifies dependencies required to build the module itself.
+ *
+ * If you're using Android plugin 3.0.0 or higher, you should
+ * use the new dependency configurations, which help you improve build speeds by
+ * restricting which dependencies leak their APIs to other modules.
+ */
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:support-compat:27.1.1'
-    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:animated-vector-drawable:27.1.1'
     implementation 'com.android.support:support-media-compat:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation 'com.google.firebase:firebase-core:15.0.2'
+    implementation 'com.google.firebase:firebase-core:16.0.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

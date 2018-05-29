@@ -1,12 +1,20 @@
 # phousan Changelog
 
-## phousan 0.3.0 (2018xxyy)
+## phousan 0.3.0 (20180529)
 ### ```Added```
-* Added a backupAgent for shared preferences (Issue #2)
+* Backup: Added a backupAgent for shared preferences (Issue #2)
+* Service: Added a real background service (Issue #4)
+* Service: starts on boot and on app usage if needed
+* Menu: added start and stop entries for the new background service
+* Menu: added visit GooglePlay entry
+
+### ```Removed```
+* UI: Removed percentage-diff-caculation between today and previous usage count
 
 ### ```Fixed```
-* Optimized UI for devices <= 5" (Issue #1)
+* UI: Optimized UI for devices <= 5" (Issue #1)
 * Leaving app with back-button resulted in counting errors (Issue #3)
+* Replaced all deprecated calls
 
 
 

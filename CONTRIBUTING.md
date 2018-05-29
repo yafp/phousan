@@ -1,4 +1,4 @@
-# phousan Resources
+# phousan contributing
 
 ## How can I contribute?
 

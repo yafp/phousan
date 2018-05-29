@@ -6,6 +6,9 @@
         android:title="@string/menu_about" />
 
     <item
+        android:id="@+id/googleplay"
+        android:title="@string/menu_open_in_playstore" />
+    <item
         android:id="@+id/issues"
         android:title="@string/menu_issues" />
 
@@ -23,6 +26,12 @@
     <item
         android:id="@+id/recommend"
         android:title="@string/menu_recommend" />
+    <item
+        android:id="@+id/service_start"
+        android:title="@string/menu_service_start" />
+    <item
+        android:id="@+id/service_stop"
+        android:title="@string/menu_service_stop" />
 
 </menu>
 

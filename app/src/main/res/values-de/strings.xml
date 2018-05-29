@@ -4,12 +4,8 @@
     <string name="app_name_long">Phone Usage Analyzer</string>
     <string name="recommend_text">Ich empfehle dir die App PHOUSAN</string>
     <string name="today">heute</string>
-    <string name="today_default">0</string>
     <string name="yesterday">gestern</string>
-    <string name="yesterday_default">-</string>
     <string name="function">Bildschirm-Aktivierungen</string>
-    <string name="imageButton_settings">Öffne Einstellungen</string>
-    <string name="image_speedomter">Speedometer</string>
     <string name="min">minimal</string>
     <string name="max">maximal</string>
     <string name="menu_about">Über</string>
@@ -31,6 +27,10 @@
     <string name="last_days_usage_count_title">Gestrige Verwendungsanzahl</string>
     <string name="last_days_usage_count_text">"Bildschirm-Aktivierungen gestern: "</string>
     <string name="avg">durchschnittlich</string>
-    <string name="overall_n_a">-</string>
     <string name="overall">übergreifend</string>
+    <string name="menu_service_start">Starte Dienst</string>
+    <string name="menu_service_stop">Beende Dienst</string>
+    <string name="zero">0</string>
+    <string name="empty" />
+    <string name="menu_open_in_playstore">GooglePlay</string>
 </resources>

@@ -14,30 +14,29 @@
 
     <!-- today -->
     <string name="today">today</string>
-    <string name="today_default">0</string>
 
     <!-- yesterday -->
-    <string name="yesterday">yesterday</string>
-    <string name="yesterday_default">-</string>
+    <string name="yesterday">previous</string>
 
     <!-- overall -->
     <string name="overall">overall</string>
-    <string name="overall_n_a">-</string>
     <string name="min">min</string>
     <string name="avg">avg</string>
     <string name="max">max</string>
 
-    <!-- contentDescription for images -->
-    <string name="imageButton_settings">Open settings</string>
-    <string name="image_speedomter">Speedometer</string>
+    <string name="zero">0</string>
+    <string name="empty" />
 
     <!-- menu -->
     <string name="menu_about">About</string>
     <string name="menu_issues">Issues</string>
+    <string name="menu_open_in_playstore">GooglePlay</string>
     <string name="menu_history_show">Show daily usage history</string>
     <string name="menu_history_export">Export daily usage history</string>
     <string name="menu_usage_data_delete">Delete all usage data</string>
     <string name="menu_recommend">Recommend</string>
+    <string name="menu_service_start">Start service</string>
+    <string name="menu_service_stop">Stop service</string>
 
     <!-- usage data: show per day -->
     <string name="dialog_title_show_usage_history_per_day">Usage history per day</string>
@@ -60,5 +59,7 @@
 
     <!-- recommend -->
     <string name="recommend_text">I would like to recommend the app PHOUSAN to you. It is a simple display-on event monitor for your device.</string>
+
+
 
 </resources>

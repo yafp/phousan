@@ -31,196 +31,196 @@
 <span class="sourceLineNo">023</span>import android.view.Menu;<a name="line.23"></a>
 <span class="sourceLineNo">024</span>import android.view.MenuItem;<a name="line.24"></a>
 <span class="sourceLineNo">025</span>import android.view.View;<a name="line.25"></a>
-<span class="sourceLineNo">026</span>import android.widget.TextView;<a name="line.26"></a>
-<span class="sourceLineNo">027</span>import android.widget.Toast;<a name="line.27"></a>
-<span class="sourceLineNo">028</span><a name="line.28"></a>
-<span class="sourceLineNo">029</span>import com.google.firebase.analytics.FirebaseAnalytics;<a name="line.29"></a>
-<span class="sourceLineNo">030</span><a name="line.30"></a>
-<span class="sourceLineNo">031</span>import java.util.ArrayList;<a name="line.31"></a>
-<span class="sourceLineNo">032</span>import java.util.Collections;<a name="line.32"></a>
-<span class="sourceLineNo">033</span>import java.util.Objects;<a name="line.33"></a>
-<span class="sourceLineNo">034</span><a name="line.34"></a>
-<span class="sourceLineNo">035</span>/**<a name="line.35"></a>
-<span class="sourceLineNo">036</span> * Main class which is used to realize the app itself with its user-interface.<a name="line.36"></a>
-<span class="sourceLineNo">037</span> */<a name="line.37"></a>
-<span class="sourceLineNo">038</span>public class MainActivity extends AppCompatActivity implements View.OnClickListener{<a name="line.38"></a>
-<span class="sourceLineNo">039</span><a name="line.39"></a>
-<span class="sourceLineNo">040</span>    private static final String TAG = "phousan";<a name="line.40"></a>
-<span class="sourceLineNo">041</span>    private static final String PREFS_NAME = "phousan_settings";<a name="line.41"></a>
-<span class="sourceLineNo">042</span>    //private static Context context;<a name="line.42"></a>
-<span class="sourceLineNo">043</span><a name="line.43"></a>
-<span class="sourceLineNo">044</span>    private FirebaseAnalytics mFirebaseAnalytics;<a name="line.44"></a>
+<span class="sourceLineNo">026</span>import android.view.ViewGroup;<a name="line.26"></a>
+<span class="sourceLineNo">027</span>import android.widget.TextView;<a name="line.27"></a>
+<span class="sourceLineNo">028</span>import android.widget.Toast;<a name="line.28"></a>
+<span class="sourceLineNo">029</span><a name="line.29"></a>
+<span class="sourceLineNo">030</span>import com.google.firebase.analytics.FirebaseAnalytics;<a name="line.30"></a>
+<span class="sourceLineNo">031</span><a name="line.31"></a>
+<span class="sourceLineNo">032</span>import java.util.ArrayList;<a name="line.32"></a>
+<span class="sourceLineNo">033</span>import java.util.Collections;<a name="line.33"></a>
+<span class="sourceLineNo">034</span>import java.util.Objects;<a name="line.34"></a>
+<span class="sourceLineNo">035</span><a name="line.35"></a>
+<span class="sourceLineNo">036</span>/**<a name="line.36"></a>
+<span class="sourceLineNo">037</span> * Main class which is used to realize the app itself with its user-interface.<a name="line.37"></a>
+<span class="sourceLineNo">038</span> */<a name="line.38"></a>
+<span class="sourceLineNo">039</span>public class MainActivity extends AppCompatActivity implements View.OnClickListener{<a name="line.39"></a>
+<span class="sourceLineNo">040</span><a name="line.40"></a>
+<span class="sourceLineNo">041</span>    private static final String TAG = "phousan";<a name="line.41"></a>
+<span class="sourceLineNo">042</span>    private static final String PREFS_NAME = "phousan_settings";<a name="line.42"></a>
+<span class="sourceLineNo">043</span>    private FirebaseAnalytics mFirebaseAnalytics;<a name="line.43"></a>
+<span class="sourceLineNo">044</span>    private SharedPreferences prefs;<a name="line.44"></a>
 <span class="sourceLineNo">045</span><a name="line.45"></a>
-<span class="sourceLineNo">046</span>    private SharedPreferences prefs;<a name="line.46"></a>
-<span class="sourceLineNo">047</span><a name="line.47"></a>
-<span class="sourceLineNo">048</span>    @Override<a name="line.48"></a>
-<span class="sourceLineNo">049</span>    protected void onCreate(Bundle savedInstanceState) {<a name="line.49"></a>
-<span class="sourceLineNo">050</span>        super.onCreate(savedInstanceState);<a name="line.50"></a>
-<span class="sourceLineNo">051</span><a name="line.51"></a>
-<span class="sourceLineNo">052</span>        // Obtain the FirebaseAnalytics instance.<a name="line.52"></a>
-<span class="sourceLineNo">053</span>        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);<a name="line.53"></a>
+<span class="sourceLineNo">046</span>    @Override<a name="line.46"></a>
+<span class="sourceLineNo">047</span>    protected void onCreate(Bundle savedInstanceState) {<a name="line.47"></a>
+<span class="sourceLineNo">048</span>        super.onCreate(savedInstanceState);<a name="line.48"></a>
+<span class="sourceLineNo">049</span><a name="line.49"></a>
+<span class="sourceLineNo">050</span>        // Obtain the FirebaseAnalytics instance.<a name="line.50"></a>
+<span class="sourceLineNo">051</span>        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);<a name="line.51"></a>
+<span class="sourceLineNo">052</span><a name="line.52"></a>
+<span class="sourceLineNo">053</span>        setContentView(R.layout.activity_main);<a name="line.53"></a>
 <span class="sourceLineNo">054</span><a name="line.54"></a>
-<span class="sourceLineNo">055</span>        setContentView(R.layout.activity_main);<a name="line.55"></a>
+<span class="sourceLineNo">055</span>        prefs = getSharedPreferences(PREFS_NAME, 0);<a name="line.55"></a>
 <span class="sourceLineNo">056</span><a name="line.56"></a>
-<span class="sourceLineNo">057</span>        prefs = getSharedPreferences(PREFS_NAME, 0);<a name="line.57"></a>
+<span class="sourceLineNo">057</span>        Log.d(TAG, "onCreate - UI Process launched");<a name="line.57"></a>
 <span class="sourceLineNo">058</span><a name="line.58"></a>
-<span class="sourceLineNo">059</span>        Log.d(TAG, "onCreate - UI Process launched");<a name="line.59"></a>
-<span class="sourceLineNo">060</span><a name="line.60"></a>
-<span class="sourceLineNo">061</span>        // customize action bar<a name="line.61"></a>
-<span class="sourceLineNo">062</span>        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);<a name="line.62"></a>
-<span class="sourceLineNo">063</span>        getSupportActionBar().setIcon(R.mipmap.app_icon);<a name="line.63"></a>
-<span class="sourceLineNo">064</span>        getSupportActionBar().setTitle(" " + getResources().getString(R.string.app_name)); // Icon + Space + String<a name="line.64"></a>
-<span class="sourceLineNo">065</span>        getSupportActionBar().setSubtitle(" " + getResources().getString(R.string.app_name_long));<a name="line.65"></a>
-<span class="sourceLineNo">066</span><a name="line.66"></a>
-<span class="sourceLineNo">067</span>        // get android_id<a name="line.67"></a>
-<span class="sourceLineNo">068</span>        @SuppressLint("HardwareIds") String androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);<a name="line.68"></a>
-<span class="sourceLineNo">069</span>        Log.d(TAG, "Android ID: " + androidId);<a name="line.69"></a>
-<span class="sourceLineNo">070</span>        logFireBaseEvent("p_id_"+androidId);<a name="line.70"></a>
-<span class="sourceLineNo">071</span><a name="line.71"></a>
-<span class="sourceLineNo">072</span>        // init the ui<a name="line.72"></a>
-<span class="sourceLineNo">073</span>        initApp();<a name="line.73"></a>
-<span class="sourceLineNo">074</span><a name="line.74"></a>
-<span class="sourceLineNo">075</span>        // Check if service is running, otherwise start it<a name="line.75"></a>
-<span class="sourceLineNo">076</span>        checkService();<a name="line.76"></a>
-<span class="sourceLineNo">077</span><a name="line.77"></a>
-<span class="sourceLineNo">078</span>        // Trigger backup<a name="line.78"></a>
-<span class="sourceLineNo">079</span>        requestBackup();<a name="line.79"></a>
-<span class="sourceLineNo">080</span><a name="line.80"></a>
-<span class="sourceLineNo">081</span>        // log to Firebase<a name="line.81"></a>
-<span class="sourceLineNo">082</span>        logFireBaseEvent("p___appStarted");<a name="line.82"></a>
-<span class="sourceLineNo">083</span>    }<a name="line.83"></a>
+<span class="sourceLineNo">059</span>        // customize action bar<a name="line.59"></a>
+<span class="sourceLineNo">060</span>        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);<a name="line.60"></a>
+<span class="sourceLineNo">061</span>        getSupportActionBar().setIcon(R.mipmap.app_icon); // icon<a name="line.61"></a>
+<span class="sourceLineNo">062</span>        getSupportActionBar().setTitle(" " + getResources().getString(R.string.app_name)); // Title: icon + Space + String<a name="line.62"></a>
+<span class="sourceLineNo">063</span>        getSupportActionBar().setSubtitle(" " + getResources().getString(R.string.app_name_long)); // Subtitle: Icon + space + string<a name="line.63"></a>
+<span class="sourceLineNo">064</span><a name="line.64"></a>
+<span class="sourceLineNo">065</span>        // get android_id<a name="line.65"></a>
+<span class="sourceLineNo">066</span>        String deviceID;<a name="line.66"></a>
+<span class="sourceLineNo">067</span>        deviceID = getDeviceID();<a name="line.67"></a>
+<span class="sourceLineNo">068</span>        logFireBaseEvent("p___id_"+deviceID);<a name="line.68"></a>
+<span class="sourceLineNo">069</span><a name="line.69"></a>
+<span class="sourceLineNo">070</span>        // init the ui<a name="line.70"></a>
+<span class="sourceLineNo">071</span>        initApp();<a name="line.71"></a>
+<span class="sourceLineNo">072</span><a name="line.72"></a>
+<span class="sourceLineNo">073</span>        // Check if service is running, otherwise start it<a name="line.73"></a>
+<span class="sourceLineNo">074</span>        checkService();<a name="line.74"></a>
+<span class="sourceLineNo">075</span><a name="line.75"></a>
+<span class="sourceLineNo">076</span>        // Trigger backup<a name="line.76"></a>
+<span class="sourceLineNo">077</span>        requestBackup();<a name="line.77"></a>
+<span class="sourceLineNo">078</span><a name="line.78"></a>
+<span class="sourceLineNo">079</span>        // log to Firebase<a name="line.79"></a>
+<span class="sourceLineNo">080</span>        logFireBaseEvent("p___appStarted");<a name="line.80"></a>
+<span class="sourceLineNo">081</span>    }<a name="line.81"></a>
+<span class="sourceLineNo">082</span><a name="line.82"></a>
+<span class="sourceLineNo">083</span><a name="line.83"></a>
 <span class="sourceLineNo">084</span><a name="line.84"></a>
-<span class="sourceLineNo">085</span><a name="line.85"></a>
-<span class="sourceLineNo">086</span><a name="line.86"></a>
-<span class="sourceLineNo">087</span>    @Override<a name="line.87"></a>
-<span class="sourceLineNo">088</span>    public boolean onCreateOptionsMenu(Menu menu) {<a name="line.88"></a>
-<span class="sourceLineNo">089</span>        Log.d(TAG, "F: onCreateOptionsMenu");<a name="line.89"></a>
-<span class="sourceLineNo">090</span><a name="line.90"></a>
-<span class="sourceLineNo">091</span>        // Inflate the menu; this adds items to the action bar if it is present.<a name="line.91"></a>
-<span class="sourceLineNo">092</span>        getMenuInflater().inflate(R.menu.main_menu, menu);<a name="line.92"></a>
-<span class="sourceLineNo">093</span><a name="line.93"></a>
-<span class="sourceLineNo">094</span>        // log to Firebase<a name="line.94"></a>
-<span class="sourceLineNo">095</span>        logFireBaseEvent("p___onCreateOptionsMenu");<a name="line.95"></a>
-<span class="sourceLineNo">096</span><a name="line.96"></a>
-<span class="sourceLineNo">097</span>        return true;<a name="line.97"></a>
-<span class="sourceLineNo">098</span>    }<a name="line.98"></a>
-<span class="sourceLineNo">099</span><a name="line.99"></a>
-<span class="sourceLineNo">100</span><a name="line.100"></a>
-<span class="sourceLineNo">101</span>    @Override<a name="line.101"></a>
-<span class="sourceLineNo">102</span>    public boolean onOptionsItemSelected(MenuItem item) {<a name="line.102"></a>
-<span class="sourceLineNo">103</span>        Log.d(TAG, "F: onOptionsItemSelected");<a name="line.103"></a>
-<span class="sourceLineNo">104</span><a name="line.104"></a>
-<span class="sourceLineNo">105</span>        // log to Firebase<a name="line.105"></a>
-<span class="sourceLineNo">106</span>        logFireBaseEvent("p___onOptionsItemSelected");<a name="line.106"></a>
+<span class="sourceLineNo">085</span>    @Override<a name="line.85"></a>
+<span class="sourceLineNo">086</span>    public boolean onCreateOptionsMenu(Menu menu) {<a name="line.86"></a>
+<span class="sourceLineNo">087</span>        Log.d(TAG, "F: onCreateOptionsMenu");<a name="line.87"></a>
+<span class="sourceLineNo">088</span><a name="line.88"></a>
+<span class="sourceLineNo">089</span>        // Inflate the menu; this adds items to the action bar if it is present.<a name="line.89"></a>
+<span class="sourceLineNo">090</span>        getMenuInflater().inflate(R.menu.main_menu, menu);<a name="line.90"></a>
+<span class="sourceLineNo">091</span><a name="line.91"></a>
+<span class="sourceLineNo">092</span>        // log to Firebase<a name="line.92"></a>
+<span class="sourceLineNo">093</span>        logFireBaseEvent("p___onCreateOptionsMenu");<a name="line.93"></a>
+<span class="sourceLineNo">094</span><a name="line.94"></a>
+<span class="sourceLineNo">095</span>        return true;<a name="line.95"></a>
+<span class="sourceLineNo">096</span>    }<a name="line.96"></a>
+<span class="sourceLineNo">097</span><a name="line.97"></a>
+<span class="sourceLineNo">098</span><a name="line.98"></a>
+<span class="sourceLineNo">099</span>    @Override<a name="line.99"></a>
+<span class="sourceLineNo">100</span>    public boolean onOptionsItemSelected(MenuItem item) {<a name="line.100"></a>
+<span class="sourceLineNo">101</span>        Log.d(TAG, "F: onOptionsItemSelected");<a name="line.101"></a>
+<span class="sourceLineNo">102</span><a name="line.102"></a>
+<span class="sourceLineNo">103</span>        // log to Firebase<a name="line.103"></a>
+<span class="sourceLineNo">104</span>        logFireBaseEvent("p___onOptionsItemSelected");<a name="line.104"></a>
+<span class="sourceLineNo">105</span><a name="line.105"></a>
+<span class="sourceLineNo">106</span>        switch (item.getItemId()) {<a name="line.106"></a>
 <span class="sourceLineNo">107</span><a name="line.107"></a>
-<span class="sourceLineNo">108</span>        switch (item.getItemId()) {<a name="line.108"></a>
-<span class="sourceLineNo">109</span><a name="line.109"></a>
-<span class="sourceLineNo">110</span>            // Menu: About<a name="line.110"></a>
-<span class="sourceLineNo">111</span>            case R.id.about:<a name="line.111"></a>
-<span class="sourceLineNo">112</span>                try {<a name="line.112"></a>
-<span class="sourceLineNo">113</span>                    openAbout();<a name="line.113"></a>
-<span class="sourceLineNo">114</span>                } catch (PackageManager.NameNotFoundException e) {<a name="line.114"></a>
-<span class="sourceLineNo">115</span>                    e.printStackTrace();<a name="line.115"></a>
-<span class="sourceLineNo">116</span>                }<a name="line.116"></a>
-<span class="sourceLineNo">117</span>                break;<a name="line.117"></a>
-<span class="sourceLineNo">118</span><a name="line.118"></a>
-<span class="sourceLineNo">119</span>            // Menu: Issues<a name="line.119"></a>
-<span class="sourceLineNo">120</span>            case R.id.issues:<a name="line.120"></a>
-<span class="sourceLineNo">121</span>                // log to Firebase<a name="line.121"></a>
-<span class="sourceLineNo">122</span>                logFireBaseEvent("p___issues");<a name="line.122"></a>
-<span class="sourceLineNo">123</span><a name="line.123"></a>
-<span class="sourceLineNo">124</span>                Uri uri_issues = Uri.parse("https://github.com/yafp/phousan/issues"); // missing 'http://' will cause crashed<a name="line.124"></a>
-<span class="sourceLineNo">125</span>                Intent intent = new Intent(Intent.ACTION_VIEW, uri_issues);<a name="line.125"></a>
-<span class="sourceLineNo">126</span>                startActivity(intent);<a name="line.126"></a>
-<span class="sourceLineNo">127</span>                return true;<a name="line.127"></a>
-<span class="sourceLineNo">128</span><a name="line.128"></a>
-<span class="sourceLineNo">129</span>            // Menu: GooglePlay<a name="line.129"></a>
-<span class="sourceLineNo">130</span>            case R.id.googleplay:<a name="line.130"></a>
-<span class="sourceLineNo">131</span>                // log to Firebase<a name="line.131"></a>
-<span class="sourceLineNo">132</span>                logFireBaseEvent("p___googlePlay");<a name="line.132"></a>
-<span class="sourceLineNo">133</span><a name="line.133"></a>
-<span class="sourceLineNo">134</span>                Uri uri_googlePlay = Uri.parse("https://play.google.com/store/apps/details?id=de.yafp.phousan"); // missing 'http://' will cause crashed<a name="line.134"></a>
-<span class="sourceLineNo">135</span>                Intent intent3 = new Intent(Intent.ACTION_VIEW, uri_googlePlay);<a name="line.135"></a>
-<span class="sourceLineNo">136</span>                startActivity(intent3);<a name="line.136"></a>
-<span class="sourceLineNo">137</span>                return true;<a name="line.137"></a>
-<span class="sourceLineNo">138</span><a name="line.138"></a>
-<span class="sourceLineNo">139</span>            // Menu: show history<a name="line.139"></a>
-<span class="sourceLineNo">140</span>            case R.id.history_show:<a name="line.140"></a>
-<span class="sourceLineNo">141</span>                showUsageDataPerDay();<a name="line.141"></a>
-<span class="sourceLineNo">142</span>                return true;<a name="line.142"></a>
-<span class="sourceLineNo">143</span><a name="line.143"></a>
-<span class="sourceLineNo">144</span>            // Menu: export history<a name="line.144"></a>
-<span class="sourceLineNo">145</span>            case R.id.history_export:<a name="line.145"></a>
-<span class="sourceLineNo">146</span>                exportUsageData();<a name="line.146"></a>
-<span class="sourceLineNo">147</span>                return true;<a name="line.147"></a>
-<span class="sourceLineNo">148</span><a name="line.148"></a>
-<span class="sourceLineNo">149</span>            // Menu: delete usage data<a name="line.149"></a>
-<span class="sourceLineNo">150</span>            case R.id.usage_data_delete:<a name="line.150"></a>
-<span class="sourceLineNo">151</span>                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {<a name="line.151"></a>
-<span class="sourceLineNo">152</span>                    @Override<a name="line.152"></a>
-<span class="sourceLineNo">153</span>                    public void onClick(DialogInterface dialog, int which) {<a name="line.153"></a>
-<span class="sourceLineNo">154</span>                        switch (which){<a name="line.154"></a>
-<span class="sourceLineNo">155</span>                            case DialogInterface.BUTTON_POSITIVE:<a name="line.155"></a>
-<span class="sourceLineNo">156</span>                                deleteAllSharedPreferences();<a name="line.156"></a>
-<span class="sourceLineNo">157</span>                                break;<a name="line.157"></a>
-<span class="sourceLineNo">158</span><a name="line.158"></a>
-<span class="sourceLineNo">159</span>                            default:<a name="line.159"></a>
-<span class="sourceLineNo">160</span>                        }<a name="line.160"></a>
-<span class="sourceLineNo">161</span>                    }<a name="line.161"></a>
-<span class="sourceLineNo">162</span>                };<a name="line.162"></a>
-<span class="sourceLineNo">163</span><a name="line.163"></a>
-<span class="sourceLineNo">164</span>                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);<a name="line.164"></a>
-<span class="sourceLineNo">165</span>                builder.setTitle(getResources().getString(R.string.really_delete_all_prefs_dialog_title));<a name="line.165"></a>
-<span class="sourceLineNo">166</span>                builder.setMessage(getResources().getString(R.string.really_delete_all_prefs_dialog_text));<a name="line.166"></a>
-<span class="sourceLineNo">167</span>                builder.setPositiveButton(getResources().getString(R.string.really_delete_all_prefs_dialog_yes), dialogClickListener);<a name="line.167"></a>
-<span class="sourceLineNo">168</span>                builder.setNegativeButton(getResources().getString(R.string.really_delete_all_prefs_dialog__no), dialogClickListener);<a name="line.168"></a>
-<span class="sourceLineNo">169</span>                builder.setIcon(R.mipmap.app_icon);<a name="line.169"></a>
-<span class="sourceLineNo">170</span>                builder.show();<a name="line.170"></a>
-<span class="sourceLineNo">171</span>                return true;<a name="line.171"></a>
-<span class="sourceLineNo">172</span><a name="line.172"></a>
-<span class="sourceLineNo">173</span>            // Menu: Recommend<a name="line.173"></a>
-<span class="sourceLineNo">174</span>            case R.id.recommend:<a name="line.174"></a>
-<span class="sourceLineNo">175</span>                recommendApp();<a name="line.175"></a>
-<span class="sourceLineNo">176</span>                return true;<a name="line.176"></a>
-<span class="sourceLineNo">177</span><a name="line.177"></a>
-<span class="sourceLineNo">178</span>            // Menu: service start<a name="line.178"></a>
-<span class="sourceLineNo">179</span>            case R.id.service_start:<a name="line.179"></a>
-<span class="sourceLineNo">180</span>                startService(new Intent(this, BackgroundService.class));<a name="line.180"></a>
-<span class="sourceLineNo">181</span>                Log.d(TAG, "onClick - User wants to start the service");<a name="line.181"></a>
-<span class="sourceLineNo">182</span><a name="line.182"></a>
-<span class="sourceLineNo">183</span>                // log to Firebase<a name="line.183"></a>
-<span class="sourceLineNo">184</span>                logFireBaseEvent("p___serviceStart");<a name="line.184"></a>
+<span class="sourceLineNo">108</span>            // Menu: About<a name="line.108"></a>
+<span class="sourceLineNo">109</span>            case R.id.about:<a name="line.109"></a>
+<span class="sourceLineNo">110</span>                try {<a name="line.110"></a>
+<span class="sourceLineNo">111</span>                    openAbout();<a name="line.111"></a>
+<span class="sourceLineNo">112</span>                } catch (PackageManager.NameNotFoundException e) {<a name="line.112"></a>
+<span class="sourceLineNo">113</span>                    e.printStackTrace();<a name="line.113"></a>
+<span class="sourceLineNo">114</span>                }<a name="line.114"></a>
+<span class="sourceLineNo">115</span>                break;<a name="line.115"></a>
+<span class="sourceLineNo">116</span><a name="line.116"></a>
+<span class="sourceLineNo">117</span>            // Menu: Issues<a name="line.117"></a>
+<span class="sourceLineNo">118</span>            case R.id.issues:<a name="line.118"></a>
+<span class="sourceLineNo">119</span>                // log to Firebase<a name="line.119"></a>
+<span class="sourceLineNo">120</span>                logFireBaseEvent("p___issues");<a name="line.120"></a>
+<span class="sourceLineNo">121</span><a name="line.121"></a>
+<span class="sourceLineNo">122</span>                Uri uri_issues = Uri.parse("https://github.com/yafp/phousan/issues"); // missing 'http://' will cause crashed<a name="line.122"></a>
+<span class="sourceLineNo">123</span>                Intent intent = new Intent(Intent.ACTION_VIEW, uri_issues);<a name="line.123"></a>
+<span class="sourceLineNo">124</span>                startActivity(intent);<a name="line.124"></a>
+<span class="sourceLineNo">125</span>                return true;<a name="line.125"></a>
+<span class="sourceLineNo">126</span><a name="line.126"></a>
+<span class="sourceLineNo">127</span>            // Menu: GooglePlay<a name="line.127"></a>
+<span class="sourceLineNo">128</span>            case R.id.googleplay:<a name="line.128"></a>
+<span class="sourceLineNo">129</span>                // log to Firebase<a name="line.129"></a>
+<span class="sourceLineNo">130</span>                logFireBaseEvent("p___googlePlay");<a name="line.130"></a>
+<span class="sourceLineNo">131</span><a name="line.131"></a>
+<span class="sourceLineNo">132</span>                Uri uri_googlePlay = Uri.parse("https://play.google.com/store/apps/details?id=de.yafp.phousan"); // missing 'http://' will cause crashed<a name="line.132"></a>
+<span class="sourceLineNo">133</span>                Intent intent3 = new Intent(Intent.ACTION_VIEW, uri_googlePlay);<a name="line.133"></a>
+<span class="sourceLineNo">134</span>                startActivity(intent3);<a name="line.134"></a>
+<span class="sourceLineNo">135</span>                return true;<a name="line.135"></a>
+<span class="sourceLineNo">136</span><a name="line.136"></a>
+<span class="sourceLineNo">137</span>            // Menu: show history<a name="line.137"></a>
+<span class="sourceLineNo">138</span>            case R.id.history_show:<a name="line.138"></a>
+<span class="sourceLineNo">139</span>                showUsageDataPerDay();<a name="line.139"></a>
+<span class="sourceLineNo">140</span>                return true;<a name="line.140"></a>
+<span class="sourceLineNo">141</span><a name="line.141"></a>
+<span class="sourceLineNo">142</span>            // Menu: export history<a name="line.142"></a>
+<span class="sourceLineNo">143</span>            case R.id.history_export:<a name="line.143"></a>
+<span class="sourceLineNo">144</span>                exportUsageData();<a name="line.144"></a>
+<span class="sourceLineNo">145</span>                return true;<a name="line.145"></a>
+<span class="sourceLineNo">146</span><a name="line.146"></a>
+<span class="sourceLineNo">147</span>            // Menu: delete usage data<a name="line.147"></a>
+<span class="sourceLineNo">148</span>            case R.id.usage_data_delete:<a name="line.148"></a>
+<span class="sourceLineNo">149</span>                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {<a name="line.149"></a>
+<span class="sourceLineNo">150</span>                    @Override<a name="line.150"></a>
+<span class="sourceLineNo">151</span>                    public void onClick(DialogInterface dialog, int which) {<a name="line.151"></a>
+<span class="sourceLineNo">152</span>                        switch (which){<a name="line.152"></a>
+<span class="sourceLineNo">153</span>                            case DialogInterface.BUTTON_POSITIVE:<a name="line.153"></a>
+<span class="sourceLineNo">154</span>                                deleteAllSharedPreferences();<a name="line.154"></a>
+<span class="sourceLineNo">155</span>                                break;<a name="line.155"></a>
+<span class="sourceLineNo">156</span><a name="line.156"></a>
+<span class="sourceLineNo">157</span>                            default:<a name="line.157"></a>
+<span class="sourceLineNo">158</span>                        }<a name="line.158"></a>
+<span class="sourceLineNo">159</span>                    }<a name="line.159"></a>
+<span class="sourceLineNo">160</span>                };<a name="line.160"></a>
+<span class="sourceLineNo">161</span><a name="line.161"></a>
+<span class="sourceLineNo">162</span>                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);<a name="line.162"></a>
+<span class="sourceLineNo">163</span>                builder.setTitle(getResources().getString(R.string.really_delete_all_prefs_dialog_title));<a name="line.163"></a>
+<span class="sourceLineNo">164</span>                builder.setMessage(getResources().getString(R.string.really_delete_all_prefs_dialog_text));<a name="line.164"></a>
+<span class="sourceLineNo">165</span>                builder.setPositiveButton(getResources().getString(R.string.really_delete_all_prefs_dialog_yes), dialogClickListener);<a name="line.165"></a>
+<span class="sourceLineNo">166</span>                builder.setNegativeButton(getResources().getString(R.string.really_delete_all_prefs_dialog__no), dialogClickListener);<a name="line.166"></a>
+<span class="sourceLineNo">167</span>                builder.setIcon(R.mipmap.app_icon);<a name="line.167"></a>
+<span class="sourceLineNo">168</span>                builder.show();<a name="line.168"></a>
+<span class="sourceLineNo">169</span>                return true;<a name="line.169"></a>
+<span class="sourceLineNo">170</span><a name="line.170"></a>
+<span class="sourceLineNo">171</span>            // Menu: Recommend<a name="line.171"></a>
+<span class="sourceLineNo">172</span>            case R.id.recommend:<a name="line.172"></a>
+<span class="sourceLineNo">173</span>                recommendApp();<a name="line.173"></a>
+<span class="sourceLineNo">174</span>                return true;<a name="line.174"></a>
+<span class="sourceLineNo">175</span><a name="line.175"></a>
+<span class="sourceLineNo">176</span>            // Menu: service start<a name="line.176"></a>
+<span class="sourceLineNo">177</span>            case R.id.service_start:<a name="line.177"></a>
+<span class="sourceLineNo">178</span>                startService(new Intent(this, BackgroundService.class));<a name="line.178"></a>
+<span class="sourceLineNo">179</span>                Log.d(TAG, "onClick - User wants to start the service");<a name="line.179"></a>
+<span class="sourceLineNo">180</span><a name="line.180"></a>
+<span class="sourceLineNo">181</span>                // log to Firebase<a name="line.181"></a>
+<span class="sourceLineNo">182</span>                logFireBaseEvent("p___serviceStart");<a name="line.182"></a>
+<span class="sourceLineNo">183</span><a name="line.183"></a>
+<span class="sourceLineNo">184</span>                return true;<a name="line.184"></a>
 <span class="sourceLineNo">185</span><a name="line.185"></a>
-<span class="sourceLineNo">186</span>                return true;<a name="line.186"></a>
-<span class="sourceLineNo">187</span><a name="line.187"></a>
-<span class="sourceLineNo">188</span>            // Menu: service stop<a name="line.188"></a>
-<span class="sourceLineNo">189</span>            case R.id.service_stop:<a name="line.189"></a>
-<span class="sourceLineNo">190</span>                stopService(new Intent(this, BackgroundService.class));<a name="line.190"></a>
-<span class="sourceLineNo">191</span>                Log.d(TAG, "onClick - User wants to stop the service");<a name="line.191"></a>
-<span class="sourceLineNo">192</span><a name="line.192"></a>
-<span class="sourceLineNo">193</span>                // log to Firebase<a name="line.193"></a>
-<span class="sourceLineNo">194</span>                logFireBaseEvent("p___serviceStop");<a name="line.194"></a>
-<span class="sourceLineNo">195</span>                return true;<a name="line.195"></a>
-<span class="sourceLineNo">196</span><a name="line.196"></a>
-<span class="sourceLineNo">197</span>            default:<a name="line.197"></a>
-<span class="sourceLineNo">198</span>                break;<a name="line.198"></a>
-<span class="sourceLineNo">199</span>        }<a name="line.199"></a>
-<span class="sourceLineNo">200</span>        return true;<a name="line.200"></a>
-<span class="sourceLineNo">201</span>    }<a name="line.201"></a>
+<span class="sourceLineNo">186</span>            // Menu: service stop<a name="line.186"></a>
+<span class="sourceLineNo">187</span>            case R.id.service_stop:<a name="line.187"></a>
+<span class="sourceLineNo">188</span>                stopService(new Intent(this, BackgroundService.class));<a name="line.188"></a>
+<span class="sourceLineNo">189</span>                Log.d(TAG, "onClick - User wants to stop the service");<a name="line.189"></a>
+<span class="sourceLineNo">190</span><a name="line.190"></a>
+<span class="sourceLineNo">191</span>                // log to Firebase<a name="line.191"></a>
+<span class="sourceLineNo">192</span>                logFireBaseEvent("p___serviceStop");<a name="line.192"></a>
+<span class="sourceLineNo">193</span>                return true;<a name="line.193"></a>
+<span class="sourceLineNo">194</span><a name="line.194"></a>
+<span class="sourceLineNo">195</span>            default:<a name="line.195"></a>
+<span class="sourceLineNo">196</span>                break;<a name="line.196"></a>
+<span class="sourceLineNo">197</span>        }<a name="line.197"></a>
+<span class="sourceLineNo">198</span>        return true;<a name="line.198"></a>
+<span class="sourceLineNo">199</span>    }<a name="line.199"></a>
+<span class="sourceLineNo">200</span><a name="line.200"></a>
+<span class="sourceLineNo">201</span><a name="line.201"></a>
 <span class="sourceLineNo">202</span><a name="line.202"></a>
-<span class="sourceLineNo">203</span><a name="line.203"></a>
-<span class="sourceLineNo">204</span>    /**<a name="line.204"></a>
-<span class="sourceLineNo">205</span>     * generates a firebase log event from a given input string<a name="line.205"></a>
-<span class="sourceLineNo">206</span>     *<a name="line.206"></a>
-<span class="sourceLineNo">207</span>     * @param message the message text to be logged<a name="line.207"></a>
-<span class="sourceLineNo">208</span>     */<a name="line.208"></a>
-<span class="sourceLineNo">209</span>    private void logFireBaseEvent(String message) {<a name="line.209"></a>
-<span class="sourceLineNo">210</span>        Log.d(TAG, "F: logFireBaseEvent");<a name="line.210"></a>
-<span class="sourceLineNo">211</span><a name="line.211"></a>
-<span class="sourceLineNo">212</span>        Bundle params = new Bundle();<a name="line.212"></a>
-<span class="sourceLineNo">213</span>        params.putString(message, "1");<a name="line.213"></a>
-<span class="sourceLineNo">214</span>        mFirebaseAnalytics.logEvent(message, params);<a name="line.214"></a>
-<span class="sourceLineNo">215</span>    }<a name="line.215"></a>
+<span class="sourceLineNo">203</span>    /**<a name="line.203"></a>
+<span class="sourceLineNo">204</span>     * generates a firebase log event from a given input string<a name="line.204"></a>
+<span class="sourceLineNo">205</span>     *<a name="line.205"></a>
+<span class="sourceLineNo">206</span>     * @param message the message text to be logged<a name="line.206"></a>
+<span class="sourceLineNo">207</span>     */<a name="line.207"></a>
+<span class="sourceLineNo">208</span>    private void logFireBaseEvent(String message) {<a name="line.208"></a>
+<span class="sourceLineNo">209</span>        Log.d(TAG, "F: logFireBaseEvent");<a name="line.209"></a>
+<span class="sourceLineNo">210</span><a name="line.210"></a>
+<span class="sourceLineNo">211</span>        Bundle params = new Bundle();<a name="line.211"></a>
+<span class="sourceLineNo">212</span>        params.putString(message, "1");<a name="line.212"></a>
+<span class="sourceLineNo">213</span>        mFirebaseAnalytics.logEvent(message, params);<a name="line.213"></a>
+<span class="sourceLineNo">214</span>    }<a name="line.214"></a>
+<span class="sourceLineNo">215</span><a name="line.215"></a>
 <span class="sourceLineNo">216</span><a name="line.216"></a>
 <span class="sourceLineNo">217</span><a name="line.217"></a>
 <span class="sourceLineNo">218</span>    /**<a name="line.218"></a>
@@ -236,601 +236,619 @@
 <span class="sourceLineNo">228</span>    }<a name="line.228"></a>
 <span class="sourceLineNo">229</span><a name="line.229"></a>
 <span class="sourceLineNo">230</span><a name="line.230"></a>
-<span class="sourceLineNo">231</span>    /**<a name="line.231"></a>
-<span class="sourceLineNo">232</span>     * init the application<a name="line.232"></a>
-<span class="sourceLineNo">233</span>     */<a name="line.233"></a>
-<span class="sourceLineNo">234</span>    private void initApp(){<a name="line.234"></a>
-<span class="sourceLineNo">235</span>        Log.d(TAG, "F: initApp");<a name="line.235"></a>
-<span class="sourceLineNo">236</span><a name="line.236"></a>
-<span class="sourceLineNo">237</span>        // add background to some textviews<a name="line.237"></a>
-<span class="sourceLineNo">238</span>        //<a name="line.238"></a>
-<span class="sourceLineNo">239</span>        int colorWhite = ContextCompat.getColor(MainActivity.this, R.color.colorWhite);<a name="line.239"></a>
-<span class="sourceLineNo">240</span>        int colorGray = ContextCompat.getColor(MainActivity.this, R.color.colorGray);<a name="line.240"></a>
-<span class="sourceLineNo">241</span><a name="line.241"></a>
-<span class="sourceLineNo">242</span>        // today<a name="line.242"></a>
-<span class="sourceLineNo">243</span>        TextView ui_text_today;<a name="line.243"></a>
-<span class="sourceLineNo">244</span>        ui_text_today = findViewById(R.id.ui_currentUsageCountText);<a name="line.244"></a>
-<span class="sourceLineNo">245</span>        ui_text_today.setTextColor(colorWhite);<a name="line.245"></a>
-<span class="sourceLineNo">246</span>        ui_text_today.setBackgroundResource(R.drawable.tags_rounded_corners);<a name="line.246"></a>
-<span class="sourceLineNo">247</span><a name="line.247"></a>
-<span class="sourceLineNo">248</span>        GradientDrawable drawable_today = (GradientDrawable) ui_text_today.getBackground();<a name="line.248"></a>
-<span class="sourceLineNo">249</span>        drawable_today.setCornerRadius(8);<a name="line.249"></a>
-<span class="sourceLineNo">250</span>        drawable_today.setColor(colorGray);<a name="line.250"></a>
-<span class="sourceLineNo">251</span><a name="line.251"></a>
-<span class="sourceLineNo">252</span>        // yesterday/previous<a name="line.252"></a>
-<span class="sourceLineNo">253</span>        TextView ui_textYesterday;<a name="line.253"></a>
-<span class="sourceLineNo">254</span>        ui_textYesterday = findViewById(R.id.ui_yesterdaysUsageCountText);<a name="line.254"></a>
-<span class="sourceLineNo">255</span>        ui_textYesterday.setTextColor(colorWhite);<a name="line.255"></a>
-<span class="sourceLineNo">256</span>        ui_textYesterday.setBackgroundResource(R.drawable.tags_rounded_corners);<a name="line.256"></a>
-<span class="sourceLineNo">257</span><a name="line.257"></a>
-<span class="sourceLineNo">258</span>        GradientDrawable drawable_yesterday = (GradientDrawable) ui_textYesterday.getBackground();<a name="line.258"></a>
-<span class="sourceLineNo">259</span>        drawable_yesterday.setCornerRadius(8);<a name="line.259"></a>
-<span class="sourceLineNo">260</span>        drawable_yesterday.setColor(colorGray);<a name="line.260"></a>
-<span class="sourceLineNo">261</span><a name="line.261"></a>
-<span class="sourceLineNo">262</span>        // overall<a name="line.262"></a>
-<span class="sourceLineNo">263</span>        TextView ui_textOverall;<a name="line.263"></a>
-<span class="sourceLineNo">264</span>        ui_textOverall = findViewById(R.id.ui_overallUsageCountText);<a name="line.264"></a>
-<span class="sourceLineNo">265</span>        ui_textOverall.setTextColor(colorWhite);<a name="line.265"></a>
-<span class="sourceLineNo">266</span>        ui_textOverall.setBackgroundResource(R.drawable.tags_rounded_corners);<a name="line.266"></a>
-<span class="sourceLineNo">267</span><a name="line.267"></a>
-<span class="sourceLineNo">268</span>        GradientDrawable drawable_overall = (GradientDrawable) ui_textOverall.getBackground();<a name="line.268"></a>
-<span class="sourceLineNo">269</span>        drawable_overall.setCornerRadius(8);<a name="line.269"></a>
-<span class="sourceLineNo">270</span>        drawable_overall.setColor(colorGray);<a name="line.270"></a>
-<span class="sourceLineNo">271</span><a name="line.271"></a>
-<span class="sourceLineNo">272</span>        // log to Firebase<a name="line.272"></a>
-<span class="sourceLineNo">273</span>        logFireBaseEvent("p___initApp");<a name="line.273"></a>
-<span class="sourceLineNo">274</span>    }<a name="line.274"></a>
-<span class="sourceLineNo">275</span><a name="line.275"></a>
+<span class="sourceLineNo">231</span><a name="line.231"></a>
+<span class="sourceLineNo">232</span>    /**<a name="line.232"></a>
+<span class="sourceLineNo">233</span>     * init the application<a name="line.233"></a>
+<span class="sourceLineNo">234</span>     */<a name="line.234"></a>
+<span class="sourceLineNo">235</span>    private void initApp(){<a name="line.235"></a>
+<span class="sourceLineNo">236</span>        Log.d(TAG, "F: initApp");<a name="line.236"></a>
+<span class="sourceLineNo">237</span><a name="line.237"></a>
+<span class="sourceLineNo">238</span>        // add background to some textviews<a name="line.238"></a>
+<span class="sourceLineNo">239</span>        //<a name="line.239"></a>
+<span class="sourceLineNo">240</span>        int colorWhite = ContextCompat.getColor(MainActivity.this, R.color.colorWhite);<a name="line.240"></a>
+<span class="sourceLineNo">241</span>        int colorGray = ContextCompat.getColor(MainActivity.this, R.color.colorGray);<a name="line.241"></a>
+<span class="sourceLineNo">242</span><a name="line.242"></a>
+<span class="sourceLineNo">243</span>        // today<a name="line.243"></a>
+<span class="sourceLineNo">244</span>        TextView ui_text_today;<a name="line.244"></a>
+<span class="sourceLineNo">245</span>        ui_text_today = findViewById(R.id.ui_currentUsageCountText);<a name="line.245"></a>
+<span class="sourceLineNo">246</span>        ui_text_today.setTextColor(colorWhite);<a name="line.246"></a>
+<span class="sourceLineNo">247</span>        ui_text_today.setBackgroundResource(R.drawable.tags_rounded_corners);<a name="line.247"></a>
+<span class="sourceLineNo">248</span><a name="line.248"></a>
+<span class="sourceLineNo">249</span>        GradientDrawable drawable_today = (GradientDrawable) ui_text_today.getBackground();<a name="line.249"></a>
+<span class="sourceLineNo">250</span>        drawable_today.setCornerRadius(8);<a name="line.250"></a>
+<span class="sourceLineNo">251</span>        drawable_today.setColor(colorGray);<a name="line.251"></a>
+<span class="sourceLineNo">252</span><a name="line.252"></a>
+<span class="sourceLineNo">253</span>        // yesterday/previous<a name="line.253"></a>
+<span class="sourceLineNo">254</span>        TextView ui_textYesterday;<a name="line.254"></a>
+<span class="sourceLineNo">255</span>        ui_textYesterday = findViewById(R.id.ui_yesterdaysUsageCountText);<a name="line.255"></a>
+<span class="sourceLineNo">256</span>        ui_textYesterday.setTextColor(colorWhite);<a name="line.256"></a>
+<span class="sourceLineNo">257</span>        ui_textYesterday.setBackgroundResource(R.drawable.tags_rounded_corners);<a name="line.257"></a>
+<span class="sourceLineNo">258</span><a name="line.258"></a>
+<span class="sourceLineNo">259</span>        GradientDrawable drawable_yesterday = (GradientDrawable) ui_textYesterday.getBackground();<a name="line.259"></a>
+<span class="sourceLineNo">260</span>        drawable_yesterday.setCornerRadius(8);<a name="line.260"></a>
+<span class="sourceLineNo">261</span>        drawable_yesterday.setColor(colorGray);<a name="line.261"></a>
+<span class="sourceLineNo">262</span><a name="line.262"></a>
+<span class="sourceLineNo">263</span>        // overall<a name="line.263"></a>
+<span class="sourceLineNo">264</span>        TextView ui_textOverall;<a name="line.264"></a>
+<span class="sourceLineNo">265</span>        ui_textOverall = findViewById(R.id.ui_overallUsageCountText);<a name="line.265"></a>
+<span class="sourceLineNo">266</span>        ui_textOverall.setTextColor(colorWhite);<a name="line.266"></a>
+<span class="sourceLineNo">267</span>        ui_textOverall.setBackgroundResource(R.drawable.tags_rounded_corners);<a name="line.267"></a>
+<span class="sourceLineNo">268</span><a name="line.268"></a>
+<span class="sourceLineNo">269</span>        GradientDrawable drawable_overall = (GradientDrawable) ui_textOverall.getBackground();<a name="line.269"></a>
+<span class="sourceLineNo">270</span>        drawable_overall.setCornerRadius(8);<a name="line.270"></a>
+<span class="sourceLineNo">271</span>        drawable_overall.setColor(colorGray);<a name="line.271"></a>
+<span class="sourceLineNo">272</span><a name="line.272"></a>
+<span class="sourceLineNo">273</span>        // log to Firebase<a name="line.273"></a>
+<span class="sourceLineNo">274</span>        logFireBaseEvent("p___initApp");<a name="line.274"></a>
+<span class="sourceLineNo">275</span>    }<a name="line.275"></a>
 <span class="sourceLineNo">276</span><a name="line.276"></a>
 <span class="sourceLineNo">277</span><a name="line.277"></a>
-<span class="sourceLineNo">278</span>    /**<a name="line.278"></a>
-<span class="sourceLineNo">279</span>     * User opens app about dialog<a name="line.279"></a>
-<span class="sourceLineNo">280</span>     */<a name="line.280"></a>
-<span class="sourceLineNo">281</span>    private void openAbout() throws PackageManager.NameNotFoundException {<a name="line.281"></a>
-<span class="sourceLineNo">282</span>        Log.d(TAG, "F: openAbout");<a name="line.282"></a>
-<span class="sourceLineNo">283</span><a name="line.283"></a>
-<span class="sourceLineNo">284</span>        View messageView = getLayoutInflater().inflate(R.layout.about, null, false);<a name="line.284"></a>
-<span class="sourceLineNo">285</span><a name="line.285"></a>
-<span class="sourceLineNo">286</span>        // Get package informations<a name="line.286"></a>
-<span class="sourceLineNo">287</span>        PackageManager manager = this.getPackageManager();<a name="line.287"></a>
-<span class="sourceLineNo">288</span>        PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);<a name="line.288"></a>
+<span class="sourceLineNo">278</span><a name="line.278"></a>
+<span class="sourceLineNo">279</span>    /**<a name="line.279"></a>
+<span class="sourceLineNo">280</span>     * User opens app about dialog<a name="line.280"></a>
+<span class="sourceLineNo">281</span>     */<a name="line.281"></a>
+<span class="sourceLineNo">282</span>    private void openAbout() throws PackageManager.NameNotFoundException {<a name="line.282"></a>
+<span class="sourceLineNo">283</span>        Log.d(TAG, "F: openAbout");<a name="line.283"></a>
+<span class="sourceLineNo">284</span><a name="line.284"></a>
+<span class="sourceLineNo">285</span>        final ViewGroup nullParent = null;<a name="line.285"></a>
+<span class="sourceLineNo">286</span><a name="line.286"></a>
+<span class="sourceLineNo">287</span>        //View messageView = getLayoutInflater().inflate(R.layout.about, null, false);<a name="line.287"></a>
+<span class="sourceLineNo">288</span>        View messageView = getLayoutInflater().inflate(R.layout.about, nullParent, false);<a name="line.288"></a>
 <span class="sourceLineNo">289</span><a name="line.289"></a>
-<span class="sourceLineNo">290</span>        // create dialog<a name="line.290"></a>
-<span class="sourceLineNo">291</span>        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);<a name="line.291"></a>
-<span class="sourceLineNo">292</span>        builder.setIcon(R.mipmap.app_icon);<a name="line.292"></a>
-<span class="sourceLineNo">293</span>        builder.setTitle(R.string.app_name);<a name="line.293"></a>
-<span class="sourceLineNo">294</span>        builder.setView(messageView);<a name="line.294"></a>
-<span class="sourceLineNo">295</span>        builder.setMessage("\nPackage:\t\t" + info.packageName + "\nVersion:\t\t\t" + info.versionName + "\nBuild:\t\t\t\t" + info.versionCode);<a name="line.295"></a>
-<span class="sourceLineNo">296</span>        builder.create();<a name="line.296"></a>
-<span class="sourceLineNo">297</span>        builder.show();<a name="line.297"></a>
-<span class="sourceLineNo">298</span><a name="line.298"></a>
-<span class="sourceLineNo">299</span>        // log to Firebase<a name="line.299"></a>
-<span class="sourceLineNo">300</span>        logFireBaseEvent("p___openAbout");<a name="line.300"></a>
-<span class="sourceLineNo">301</span>    }<a name="line.301"></a>
+<span class="sourceLineNo">290</span>        // Get package informations<a name="line.290"></a>
+<span class="sourceLineNo">291</span>        PackageManager manager = this.getPackageManager();<a name="line.291"></a>
+<span class="sourceLineNo">292</span>        PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);<a name="line.292"></a>
+<span class="sourceLineNo">293</span><a name="line.293"></a>
+<span class="sourceLineNo">294</span>        // create dialog<a name="line.294"></a>
+<span class="sourceLineNo">295</span>        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);<a name="line.295"></a>
+<span class="sourceLineNo">296</span>        builder.setIcon(R.mipmap.app_icon);<a name="line.296"></a>
+<span class="sourceLineNo">297</span>        builder.setTitle(R.string.app_name);<a name="line.297"></a>
+<span class="sourceLineNo">298</span>        builder.setView(messageView);<a name="line.298"></a>
+<span class="sourceLineNo">299</span>        builder.setMessage("\nPackage:\t\t" + info.packageName + "\nVersion:\t\t\t" + info.versionName + "\nBuild:\t\t\t\t" + info.versionCode);<a name="line.299"></a>
+<span class="sourceLineNo">300</span>        builder.create();<a name="line.300"></a>
+<span class="sourceLineNo">301</span>        builder.show();<a name="line.301"></a>
 <span class="sourceLineNo">302</span><a name="line.302"></a>
-<span class="sourceLineNo">303</span><a name="line.303"></a>
-<span class="sourceLineNo">304</span>    /**<a name="line.304"></a>
-<span class="sourceLineNo">305</span>     * User wants to export usage data<a name="line.305"></a>
-<span class="sourceLineNo">306</span>     * Generates usage data text which gets forwarded to an app of choice<a name="line.306"></a>
-<span class="sourceLineNo">307</span>     */<a name="line.307"></a>
-<span class="sourceLineNo">308</span>    private void exportUsageData() {<a name="line.308"></a>
-<span class="sourceLineNo">309</span>        Log.d(TAG, "F: exportUsageData");<a name="line.309"></a>
-<span class="sourceLineNo">310</span><a name="line.310"></a>
-<span class="sourceLineNo">311</span>        StringBuilder outputUsageHistory;<a name="line.311"></a>
-<span class="sourceLineNo">312</span>        outputUsageHistory = new StringBuilder();<a name="line.312"></a>
-<span class="sourceLineNo">313</span>        ArrayList&lt;String&gt; al= new ArrayList&lt;&gt;(); // stores the relevant prefs for later sorting<a name="line.313"></a>
-<span class="sourceLineNo">314</span><a name="line.314"></a>
-<span class="sourceLineNo">315</span>        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);<a name="line.315"></a>
-<span class="sourceLineNo">316</span><a name="line.316"></a>
-<span class="sourceLineNo">317</span>        int record_amount; // counter<a name="line.317"></a>
-<span class="sourceLineNo">318</span><a name="line.318"></a>
-<span class="sourceLineNo">319</span>        record_amount = 0;<a name="line.319"></a>
-<span class="sourceLineNo">320</span><a name="line.320"></a>
-<span class="sourceLineNo">321</span>        // fetch all usage-data preference strings<a name="line.321"></a>
-<span class="sourceLineNo">322</span>        for (String key : settings.getAll().keySet()) {<a name="line.322"></a>
-<span class="sourceLineNo">323</span>            if(key.startsWith("20")) { // collect only usage-history data<a name="line.323"></a>
-<span class="sourceLineNo">324</span>                Log.i(String.format("Shared Preference : %s - %s", PREFS_NAME, key), settings.getString(key, "error!"));<a name="line.324"></a>
+<span class="sourceLineNo">303</span>        // log to Firebase<a name="line.303"></a>
+<span class="sourceLineNo">304</span>        logFireBaseEvent("p___openAbout");<a name="line.304"></a>
+<span class="sourceLineNo">305</span>    }<a name="line.305"></a>
+<span class="sourceLineNo">306</span><a name="line.306"></a>
+<span class="sourceLineNo">307</span><a name="line.307"></a>
+<span class="sourceLineNo">308</span><a name="line.308"></a>
+<span class="sourceLineNo">309</span>    /**<a name="line.309"></a>
+<span class="sourceLineNo">310</span>     * User wants to export usage data<a name="line.310"></a>
+<span class="sourceLineNo">311</span>     * Generates usage data text which gets forwarded to an app of choice<a name="line.311"></a>
+<span class="sourceLineNo">312</span>     */<a name="line.312"></a>
+<span class="sourceLineNo">313</span>    private void exportUsageData() {<a name="line.313"></a>
+<span class="sourceLineNo">314</span>        Log.d(TAG, "F: exportUsageData");<a name="line.314"></a>
+<span class="sourceLineNo">315</span><a name="line.315"></a>
+<span class="sourceLineNo">316</span>        StringBuilder outputUsageHistory;<a name="line.316"></a>
+<span class="sourceLineNo">317</span>        outputUsageHistory = new StringBuilder();<a name="line.317"></a>
+<span class="sourceLineNo">318</span>        ArrayList&lt;String&gt; al= new ArrayList&lt;&gt;(); // stores the relevant prefs for later sorting<a name="line.318"></a>
+<span class="sourceLineNo">319</span><a name="line.319"></a>
+<span class="sourceLineNo">320</span>        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);<a name="line.320"></a>
+<span class="sourceLineNo">321</span><a name="line.321"></a>
+<span class="sourceLineNo">322</span>        int record_amount; // counter<a name="line.322"></a>
+<span class="sourceLineNo">323</span><a name="line.323"></a>
+<span class="sourceLineNo">324</span>        record_amount = 0;<a name="line.324"></a>
 <span class="sourceLineNo">325</span><a name="line.325"></a>
-<span class="sourceLineNo">326</span>                // add to array<a name="line.326"></a>
-<span class="sourceLineNo">327</span>                al.add(key+";"+settings.getString(key, "error!")+";\n");<a name="line.327"></a>
-<span class="sourceLineNo">328</span><a name="line.328"></a>
-<span class="sourceLineNo">329</span>                record_amount = record_amount +1; // counter<a name="line.329"></a>
-<span class="sourceLineNo">330</span>            }<a name="line.330"></a>
-<span class="sourceLineNo">331</span>            else {<a name="line.331"></a>
-<span class="sourceLineNo">332</span>                Log.d(TAG, "Ignoring key, as it is not part of the daily usage history");<a name="line.332"></a>
-<span class="sourceLineNo">333</span>            }<a name="line.333"></a>
-<span class="sourceLineNo">334</span>        }<a name="line.334"></a>
-<span class="sourceLineNo">335</span><a name="line.335"></a>
-<span class="sourceLineNo">336</span>        // calc average<a name="line.336"></a>
-<span class="sourceLineNo">337</span>        if(record_amount == 0)<a name="line.337"></a>
-<span class="sourceLineNo">338</span>        {<a name="line.338"></a>
-<span class="sourceLineNo">339</span>            outputUsageHistory.append(getResources().getString(R.string.show_usage_history_per_day_empty_history));<a name="line.339"></a>
-<span class="sourceLineNo">340</span>        }<a name="line.340"></a>
-<span class="sourceLineNo">341</span><a name="line.341"></a>
-<span class="sourceLineNo">342</span>        // sort &amp; reverse array-data<a name="line.342"></a>
-<span class="sourceLineNo">343</span>        Collections.sort(al); // sort<a name="line.343"></a>
-<span class="sourceLineNo">344</span>        Collections.reverse(al); //<a name="line.344"></a>
-<span class="sourceLineNo">345</span><a name="line.345"></a>
-<span class="sourceLineNo">346</span>        // build output string<a name="line.346"></a>
-<span class="sourceLineNo">347</span>        for (int i = 0; i &lt; al.size(); i++) {<a name="line.347"></a>
-<span class="sourceLineNo">348</span>            outputUsageHistory.append(al.get(i));<a name="line.348"></a>
-<span class="sourceLineNo">349</span>        }<a name="line.349"></a>
+<span class="sourceLineNo">326</span>        // fetch all usage-data preference strings<a name="line.326"></a>
+<span class="sourceLineNo">327</span>        for (String key : settings.getAll().keySet()) {<a name="line.327"></a>
+<span class="sourceLineNo">328</span>            if(key.startsWith("20")) { // collect only usage-history data<a name="line.328"></a>
+<span class="sourceLineNo">329</span>                Log.i(String.format("Shared Preference : %s - %s", PREFS_NAME, key), settings.getString(key, "error!"));<a name="line.329"></a>
+<span class="sourceLineNo">330</span><a name="line.330"></a>
+<span class="sourceLineNo">331</span>                // add to array<a name="line.331"></a>
+<span class="sourceLineNo">332</span>                al.add(key+";"+settings.getString(key, "error!")+";\n");<a name="line.332"></a>
+<span class="sourceLineNo">333</span><a name="line.333"></a>
+<span class="sourceLineNo">334</span>                record_amount = record_amount +1; // counter<a name="line.334"></a>
+<span class="sourceLineNo">335</span>            }<a name="line.335"></a>
+<span class="sourceLineNo">336</span>            else {<a name="line.336"></a>
+<span class="sourceLineNo">337</span>                Log.d(TAG, "Ignoring key, as it is not part of the daily usage history");<a name="line.337"></a>
+<span class="sourceLineNo">338</span>            }<a name="line.338"></a>
+<span class="sourceLineNo">339</span>        }<a name="line.339"></a>
+<span class="sourceLineNo">340</span><a name="line.340"></a>
+<span class="sourceLineNo">341</span>        // calc average<a name="line.341"></a>
+<span class="sourceLineNo">342</span>        if(record_amount == 0)<a name="line.342"></a>
+<span class="sourceLineNo">343</span>        {<a name="line.343"></a>
+<span class="sourceLineNo">344</span>            outputUsageHistory.append(getResources().getString(R.string.show_usage_history_per_day_empty_history));<a name="line.344"></a>
+<span class="sourceLineNo">345</span>        }<a name="line.345"></a>
+<span class="sourceLineNo">346</span><a name="line.346"></a>
+<span class="sourceLineNo">347</span>        // sort &amp; reverse array-data<a name="line.347"></a>
+<span class="sourceLineNo">348</span>        Collections.sort(al); // sort<a name="line.348"></a>
+<span class="sourceLineNo">349</span>        Collections.reverse(al); //<a name="line.349"></a>
 <span class="sourceLineNo">350</span><a name="line.350"></a>
-<span class="sourceLineNo">351</span>        // forward information to external app<a name="line.351"></a>
-<span class="sourceLineNo">352</span>        //<a name="line.352"></a>
-<span class="sourceLineNo">353</span>        Intent share = new Intent(Intent.ACTION_SEND);<a name="line.353"></a>
-<span class="sourceLineNo">354</span>        share.setType("text/plain");<a name="line.354"></a>
-<span class="sourceLineNo">355</span>        share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);<a name="line.355"></a>
-<span class="sourceLineNo">356</span><a name="line.356"></a>
-<span class="sourceLineNo">357</span>        // Add data to the intent, the receiving app will decide what to do with it.<a name="line.357"></a>
-<span class="sourceLineNo">358</span>        share.putExtra(Intent.EXTRA_SUBJECT, R.string.usage_data_export_title);<a name="line.358"></a>
-<span class="sourceLineNo">359</span>        share.putExtra(Intent.EXTRA_TEXT, outputUsageHistory.toString());<a name="line.359"></a>
-<span class="sourceLineNo">360</span><a name="line.360"></a>
-<span class="sourceLineNo">361</span>        startActivity(Intent.createChooser(share, getResources().getString(R.string.usage_data_export_title)));<a name="line.361"></a>
-<span class="sourceLineNo">362</span><a name="line.362"></a>
-<span class="sourceLineNo">363</span>        // log to Firebase<a name="line.363"></a>
-<span class="sourceLineNo">364</span>        logFireBaseEvent("p___exportUsageData");<a name="line.364"></a>
-<span class="sourceLineNo">365</span>    }<a name="line.365"></a>
-<span class="sourceLineNo">366</span><a name="line.366"></a>
+<span class="sourceLineNo">351</span>        // build output string<a name="line.351"></a>
+<span class="sourceLineNo">352</span>        for (int i = 0; i &lt; al.size(); i++) {<a name="line.352"></a>
+<span class="sourceLineNo">353</span>            outputUsageHistory.append(al.get(i));<a name="line.353"></a>
+<span class="sourceLineNo">354</span>        }<a name="line.354"></a>
+<span class="sourceLineNo">355</span><a name="line.355"></a>
+<span class="sourceLineNo">356</span>        // forward information to external app<a name="line.356"></a>
+<span class="sourceLineNo">357</span>        //<a name="line.357"></a>
+<span class="sourceLineNo">358</span>        Intent share = new Intent(Intent.ACTION_SEND);<a name="line.358"></a>
+<span class="sourceLineNo">359</span>        share.setType("text/plain");<a name="line.359"></a>
+<span class="sourceLineNo">360</span>        share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);<a name="line.360"></a>
+<span class="sourceLineNo">361</span><a name="line.361"></a>
+<span class="sourceLineNo">362</span>        // Add data to the intent, the receiving app will decide what to do with it.<a name="line.362"></a>
+<span class="sourceLineNo">363</span>        share.putExtra(Intent.EXTRA_SUBJECT, R.string.usage_data_export_title);<a name="line.363"></a>
+<span class="sourceLineNo">364</span>        share.putExtra(Intent.EXTRA_TEXT, outputUsageHistory.toString());<a name="line.364"></a>
+<span class="sourceLineNo">365</span><a name="line.365"></a>
+<span class="sourceLineNo">366</span>        startActivity(Intent.createChooser(share, getResources().getString(R.string.usage_data_export_title)));<a name="line.366"></a>
 <span class="sourceLineNo">367</span><a name="line.367"></a>
-<span class="sourceLineNo">368</span><a name="line.368"></a>
-<span class="sourceLineNo">369</span>    /**<a name="line.369"></a>
-<span class="sourceLineNo">370</span>     * Delete all Shared Preferences and related values<a name="line.370"></a>
-<span class="sourceLineNo">371</span>     * displays toast for user<a name="line.371"></a>
-<span class="sourceLineNo">372</span>     */<a name="line.372"></a>
-<span class="sourceLineNo">373</span>    private void deleteAllSharedPreferences(){<a name="line.373"></a>
-<span class="sourceLineNo">374</span>        Log.d(TAG, "F: deleteAllSharedPreferences");<a name="line.374"></a>
-<span class="sourceLineNo">375</span><a name="line.375"></a>
-<span class="sourceLineNo">376</span>        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);<a name="line.376"></a>
-<span class="sourceLineNo">377</span><a name="line.377"></a>
-<span class="sourceLineNo">378</span>        SharedPreferences.Editor editor = settings.edit();<a name="line.378"></a>
-<span class="sourceLineNo">379</span>        editor.clear();<a name="line.379"></a>
-<span class="sourceLineNo">380</span>        editor.apply();<a name="line.380"></a>
-<span class="sourceLineNo">381</span><a name="line.381"></a>
-<span class="sourceLineNo">382</span>        // show toast after deletion<a name="line.382"></a>
-<span class="sourceLineNo">383</span>        displayToastMessage(getResources().getString(R.string.really_delete_all_prefs_confirm));<a name="line.383"></a>
-<span class="sourceLineNo">384</span><a name="line.384"></a>
-<span class="sourceLineNo">385</span>        // show notification<a name="line.385"></a>
-<span class="sourceLineNo">386</span>        displayNotification(getResources().getString(R.string.really_delete_all_prefs_dialog_title), getResources().getString(R.string.really_delete_all_prefs_confirm));<a name="line.386"></a>
-<span class="sourceLineNo">387</span><a name="line.387"></a>
-<span class="sourceLineNo">388</span>        resetUI();<a name="line.388"></a>
+<span class="sourceLineNo">368</span>        // log to Firebase<a name="line.368"></a>
+<span class="sourceLineNo">369</span>        logFireBaseEvent("p___exportUsageData");<a name="line.369"></a>
+<span class="sourceLineNo">370</span>    }<a name="line.370"></a>
+<span class="sourceLineNo">371</span><a name="line.371"></a>
+<span class="sourceLineNo">372</span><a name="line.372"></a>
+<span class="sourceLineNo">373</span><a name="line.373"></a>
+<span class="sourceLineNo">374</span>    /**<a name="line.374"></a>
+<span class="sourceLineNo">375</span>     * Delete all Shared Preferences and related values<a name="line.375"></a>
+<span class="sourceLineNo">376</span>     * displays toast for user<a name="line.376"></a>
+<span class="sourceLineNo">377</span>     */<a name="line.377"></a>
+<span class="sourceLineNo">378</span>    private void deleteAllSharedPreferences(){<a name="line.378"></a>
+<span class="sourceLineNo">379</span>        Log.d(TAG, "F: deleteAllSharedPreferences");<a name="line.379"></a>
+<span class="sourceLineNo">380</span><a name="line.380"></a>
+<span class="sourceLineNo">381</span>        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);<a name="line.381"></a>
+<span class="sourceLineNo">382</span><a name="line.382"></a>
+<span class="sourceLineNo">383</span>        SharedPreferences.Editor editor = settings.edit();<a name="line.383"></a>
+<span class="sourceLineNo">384</span>        editor.clear();<a name="line.384"></a>
+<span class="sourceLineNo">385</span>        editor.apply();<a name="line.385"></a>
+<span class="sourceLineNo">386</span><a name="line.386"></a>
+<span class="sourceLineNo">387</span>        // show toast after deletion<a name="line.387"></a>
+<span class="sourceLineNo">388</span>        displayToastMessage(getResources().getString(R.string.really_delete_all_prefs_confirm));<a name="line.388"></a>
 <span class="sourceLineNo">389</span><a name="line.389"></a>
-<span class="sourceLineNo">390</span>        // log to Firebase<a name="line.390"></a>
-<span class="sourceLineNo">391</span>        logFireBaseEvent("p___deleteAllSharedPreferences");<a name="line.391"></a>
-<span class="sourceLineNo">392</span>    }<a name="line.392"></a>
-<span class="sourceLineNo">393</span><a name="line.393"></a>
+<span class="sourceLineNo">390</span>        // show notification<a name="line.390"></a>
+<span class="sourceLineNo">391</span>        displayNotification(getResources().getString(R.string.really_delete_all_prefs_dialog_title), getResources().getString(R.string.really_delete_all_prefs_confirm));<a name="line.391"></a>
+<span class="sourceLineNo">392</span><a name="line.392"></a>
+<span class="sourceLineNo">393</span>        resetUI();<a name="line.393"></a>
 <span class="sourceLineNo">394</span><a name="line.394"></a>
-<span class="sourceLineNo">395</span>    /**<a name="line.395"></a>
-<span class="sourceLineNo">396</span>     * User wants to recommend tihs app to others<a name="line.396"></a>
-<span class="sourceLineNo">397</span>     * Generates a recommend text with a link to the play store which gets forwarded to an app of choice<a name="line.397"></a>
-<span class="sourceLineNo">398</span>     */<a name="line.398"></a>
-<span class="sourceLineNo">399</span>    private void recommendApp() {<a name="line.399"></a>
-<span class="sourceLineNo">400</span>        Log.d(TAG, "F: recommendApp");<a name="line.400"></a>
-<span class="sourceLineNo">401</span><a name="line.401"></a>
-<span class="sourceLineNo">402</span>        Intent share = new Intent(Intent.ACTION_SEND);<a name="line.402"></a>
-<span class="sourceLineNo">403</span>        share.setType("text/plain");<a name="line.403"></a>
-<span class="sourceLineNo">404</span>        share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);<a name="line.404"></a>
-<span class="sourceLineNo">405</span><a name="line.405"></a>
-<span class="sourceLineNo">406</span>        // Add data to the intent, the receiving app will decide what to do with it.<a name="line.406"></a>
-<span class="sourceLineNo">407</span>        share.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.recommend_text));<a name="line.407"></a>
-<span class="sourceLineNo">408</span>        share.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=de.yafp.phousan");<a name="line.408"></a>
-<span class="sourceLineNo">409</span><a name="line.409"></a>
-<span class="sourceLineNo">410</span>        startActivity(Intent.createChooser(share, "Share link"));<a name="line.410"></a>
-<span class="sourceLineNo">411</span><a name="line.411"></a>
-<span class="sourceLineNo">412</span>        // log to Firebase<a name="line.412"></a>
-<span class="sourceLineNo">413</span>        logFireBaseEvent("p___recommendApp");<a name="line.413"></a>
-<span class="sourceLineNo">414</span>    }<a name="line.414"></a>
-<span class="sourceLineNo">415</span><a name="line.415"></a>
+<span class="sourceLineNo">395</span>        // log to Firebase<a name="line.395"></a>
+<span class="sourceLineNo">396</span>        logFireBaseEvent("p___deleteAllSharedPreferences");<a name="line.396"></a>
+<span class="sourceLineNo">397</span>    }<a name="line.397"></a>
+<span class="sourceLineNo">398</span><a name="line.398"></a>
+<span class="sourceLineNo">399</span><a name="line.399"></a>
+<span class="sourceLineNo">400</span>    /**<a name="line.400"></a>
+<span class="sourceLineNo">401</span>     * User wants to recommend tihs app to others<a name="line.401"></a>
+<span class="sourceLineNo">402</span>     * Generates a recommend text with a link to the play store which gets forwarded to an app of choice<a name="line.402"></a>
+<span class="sourceLineNo">403</span>     */<a name="line.403"></a>
+<span class="sourceLineNo">404</span>    private void recommendApp() {<a name="line.404"></a>
+<span class="sourceLineNo">405</span>        Log.d(TAG, "F: recommendApp");<a name="line.405"></a>
+<span class="sourceLineNo">406</span><a name="line.406"></a>
+<span class="sourceLineNo">407</span>        Intent share = new Intent(Intent.ACTION_SEND);<a name="line.407"></a>
+<span class="sourceLineNo">408</span>        share.setType("text/plain");<a name="line.408"></a>
+<span class="sourceLineNo">409</span>        share.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);<a name="line.409"></a>
+<span class="sourceLineNo">410</span><a name="line.410"></a>
+<span class="sourceLineNo">411</span>        // Add data to the intent, the receiving app will decide what to do with it.<a name="line.411"></a>
+<span class="sourceLineNo">412</span>        share.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.recommend_text));<a name="line.412"></a>
+<span class="sourceLineNo">413</span>        share.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=de.yafp.phousan");<a name="line.413"></a>
+<span class="sourceLineNo">414</span><a name="line.414"></a>
+<span class="sourceLineNo">415</span>        startActivity(Intent.createChooser(share, "Share link"));<a name="line.415"></a>
 <span class="sourceLineNo">416</span><a name="line.416"></a>
-<span class="sourceLineNo">417</span><a name="line.417"></a>
-<span class="sourceLineNo">418</span>    /**<a name="line.418"></a>
-<span class="sourceLineNo">419</span>     * Displays a given string as a toast message to the user<a name="line.419"></a>
-<span class="sourceLineNo">420</span>     *<a name="line.420"></a>
-<span class="sourceLineNo">421</span>     * @param message the message to be displayed<a name="line.421"></a>
-<span class="sourceLineNo">422</span>     */<a name="line.422"></a>
-<span class="sourceLineNo">423</span>    private void displayToastMessage(String message) {<a name="line.423"></a>
-<span class="sourceLineNo">424</span>        Log.v(TAG, "F: displayToastMessage");<a name="line.424"></a>
-<span class="sourceLineNo">425</span><a name="line.425"></a>
-<span class="sourceLineNo">426</span>        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);<a name="line.426"></a>
-<span class="sourceLineNo">427</span>        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);       // for center vertical<a name="line.427"></a>
-<span class="sourceLineNo">428</span>        toast.show();<a name="line.428"></a>
-<span class="sourceLineNo">429</span><a name="line.429"></a>
-<span class="sourceLineNo">430</span>        // log to Firebase<a name="line.430"></a>
-<span class="sourceLineNo">431</span>        logFireBaseEvent("p___displayToastMessage");<a name="line.431"></a>
-<span class="sourceLineNo">432</span>    }<a name="line.432"></a>
-<span class="sourceLineNo">433</span><a name="line.433"></a>
+<span class="sourceLineNo">417</span>        // log to Firebase<a name="line.417"></a>
+<span class="sourceLineNo">418</span>        logFireBaseEvent("p___recommendApp");<a name="line.418"></a>
+<span class="sourceLineNo">419</span>    }<a name="line.419"></a>
+<span class="sourceLineNo">420</span><a name="line.420"></a>
+<span class="sourceLineNo">421</span><a name="line.421"></a>
+<span class="sourceLineNo">422</span><a name="line.422"></a>
+<span class="sourceLineNo">423</span>    /**<a name="line.423"></a>
+<span class="sourceLineNo">424</span>     * Displays a given message as a toast<a name="line.424"></a>
+<span class="sourceLineNo">425</span>     *<a name="line.425"></a>
+<span class="sourceLineNo">426</span>     * @param message the message to be displayed<a name="line.426"></a>
+<span class="sourceLineNo">427</span>     */<a name="line.427"></a>
+<span class="sourceLineNo">428</span>    private void displayToastMessage(String message) {<a name="line.428"></a>
+<span class="sourceLineNo">429</span>        Log.v(TAG, "F: displayToastMessage");<a name="line.429"></a>
+<span class="sourceLineNo">430</span><a name="line.430"></a>
+<span class="sourceLineNo">431</span>        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);<a name="line.431"></a>
+<span class="sourceLineNo">432</span>        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);       // for center vertical<a name="line.432"></a>
+<span class="sourceLineNo">433</span>        toast.show();<a name="line.433"></a>
 <span class="sourceLineNo">434</span><a name="line.434"></a>
-<span class="sourceLineNo">435</span><a name="line.435"></a>
-<span class="sourceLineNo">436</span>    /**<a name="line.436"></a>
-<span class="sourceLineNo">437</span>     * display a notification<a name="line.437"></a>
-<span class="sourceLineNo">438</span>     *<a name="line.438"></a>
-<span class="sourceLineNo">439</span>     * @param title the title of the notification<a name="line.439"></a>
-<span class="sourceLineNo">440</span>     * @param message the message text<a name="line.440"></a>
-<span class="sourceLineNo">441</span>     */<a name="line.441"></a>
-<span class="sourceLineNo">442</span>    private void displayNotification(String title, String message) {<a name="line.442"></a>
-<span class="sourceLineNo">443</span>        Log.d(TAG, "F: displayNotification");<a name="line.443"></a>
-<span class="sourceLineNo">444</span><a name="line.444"></a>
-<span class="sourceLineNo">445</span>        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "M_CH_ID");<a name="line.445"></a>
-<span class="sourceLineNo">446</span><a name="line.446"></a>
-<span class="sourceLineNo">447</span>        notificationBuilder.setAutoCancel(true)<a name="line.447"></a>
-<span class="sourceLineNo">448</span>                .setDefaults(Notification.DEFAULT_ALL)<a name="line.448"></a>
-<span class="sourceLineNo">449</span>                .setWhen(System.currentTimeMillis())<a name="line.449"></a>
-<span class="sourceLineNo">450</span>                .setSmallIcon(R.mipmap.notification_icon)<a name="line.450"></a>
-<span class="sourceLineNo">451</span>                //.setTicker("")<a name="line.451"></a>
-<span class="sourceLineNo">452</span>                //.setPriority(Notification.PRIORITY_MAX) // this is deprecated in API 26 but you can still use for below 26. check below update for 26 API<a name="line.452"></a>
-<span class="sourceLineNo">453</span>                .setContentTitle(title)<a name="line.453"></a>
-<span class="sourceLineNo">454</span>                .setContentText(message);<a name="line.454"></a>
-<span class="sourceLineNo">455</span><a name="line.455"></a>
-<span class="sourceLineNo">456</span>        NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);<a name="line.456"></a>
-<span class="sourceLineNo">457</span>        assert notificationManager != null;<a name="line.457"></a>
-<span class="sourceLineNo">458</span>        notificationManager.notify(1, notificationBuilder.build());<a name="line.458"></a>
-<span class="sourceLineNo">459</span><a name="line.459"></a>
-<span class="sourceLineNo">460</span>        // log to Firebase<a name="line.460"></a>
-<span class="sourceLineNo">461</span>        logFireBaseEvent("p___displayNotification");<a name="line.461"></a>
-<span class="sourceLineNo">462</span>    }<a name="line.462"></a>
-<span class="sourceLineNo">463</span><a name="line.463"></a>
-<span class="sourceLineNo">464</span><a name="line.464"></a>
-<span class="sourceLineNo">465</span>    /**<a name="line.465"></a>
-<span class="sourceLineNo">466</span>     * resets the UI after having executed delete all Usage Data<a name="line.466"></a>
-<span class="sourceLineNo">467</span>     */<a name="line.467"></a>
-<span class="sourceLineNo">468</span>    private void resetUI(){<a name="line.468"></a>
-<span class="sourceLineNo">469</span>        Log.d(TAG, "F: resetUI");<a name="line.469"></a>
-<span class="sourceLineNo">470</span><a name="line.470"></a>
-<span class="sourceLineNo">471</span><a name="line.471"></a>
-<span class="sourceLineNo">472</span>        // reset current count<a name="line.472"></a>
-<span class="sourceLineNo">473</span>        TextView cur;<a name="line.473"></a>
-<span class="sourceLineNo">474</span>        cur = findViewById(R.id.ui_currentUsageCount);<a name="line.474"></a>
-<span class="sourceLineNo">475</span>        cur.setText(R.string.zero);<a name="line.475"></a>
-<span class="sourceLineNo">476</span><a name="line.476"></a>
-<span class="sourceLineNo">477</span>        // reset previous/yesterdays count<a name="line.477"></a>
-<span class="sourceLineNo">478</span>        TextView previous;<a name="line.478"></a>
-<span class="sourceLineNo">479</span>        previous = findViewById(R.id.ui_yesterdaysUsageCount);<a name="line.479"></a>
-<span class="sourceLineNo">480</span>        previous.setText(R.string.zero);<a name="line.480"></a>
-<span class="sourceLineNo">481</span><a name="line.481"></a>
-<span class="sourceLineNo">482</span>        // update min value in ui to default text<a name="line.482"></a>
-<span class="sourceLineNo">483</span>        TextView min;<a name="line.483"></a>
-<span class="sourceLineNo">484</span>        min = findViewById(R.id.ui_overall_lowscore_count);<a name="line.484"></a>
-<span class="sourceLineNo">485</span>        min.setText(R.string.zero);<a name="line.485"></a>
-<span class="sourceLineNo">486</span><a name="line.486"></a>
-<span class="sourceLineNo">487</span>        // update min value date<a name="line.487"></a>
-<span class="sourceLineNo">488</span>        TextView min_date;<a name="line.488"></a>
-<span class="sourceLineNo">489</span>        min_date = findViewById(R.id.ui_overall_lowscore_date);<a name="line.489"></a>
-<span class="sourceLineNo">490</span>        min_date.setText(R.string.empty);<a name="line.490"></a>
-<span class="sourceLineNo">491</span><a name="line.491"></a>
-<span class="sourceLineNo">492</span>        // update average value in ui to default text<a name="line.492"></a>
-<span class="sourceLineNo">493</span>        TextView avg;<a name="line.493"></a>
-<span class="sourceLineNo">494</span>        avg = findViewById(R.id.ui_overall_average_count);<a name="line.494"></a>
-<span class="sourceLineNo">495</span>        avg.setText(R.string.zero);<a name="line.495"></a>
-<span class="sourceLineNo">496</span><a name="line.496"></a>
-<span class="sourceLineNo">497</span>        // update max value in ui to default text<a name="line.497"></a>
-<span class="sourceLineNo">498</span>        TextView max;<a name="line.498"></a>
-<span class="sourceLineNo">499</span>        max = findViewById(R.id.ui_overall_highscore_count);<a name="line.499"></a>
-<span class="sourceLineNo">500</span>        max.setText(R.string.zero);<a name="line.500"></a>
-<span class="sourceLineNo">501</span><a name="line.501"></a>
-<span class="sourceLineNo">502</span>        // update min value date<a name="line.502"></a>
-<span class="sourceLineNo">503</span>        TextView max_date;<a name="line.503"></a>
-<span class="sourceLineNo">504</span>        max_date = findViewById(R.id.ui_overall_highscore_date);<a name="line.504"></a>
-<span class="sourceLineNo">505</span>        max_date.setText(R.string.empty);<a name="line.505"></a>
-<span class="sourceLineNo">506</span><a name="line.506"></a>
-<span class="sourceLineNo">507</span>        // log to Firebase<a name="line.507"></a>
-<span class="sourceLineNo">508</span>        logFireBaseEvent("p___resetUI");<a name="line.508"></a>
-<span class="sourceLineNo">509</span>    }<a name="line.509"></a>
-<span class="sourceLineNo">510</span><a name="line.510"></a>
-<span class="sourceLineNo">511</span><a name="line.511"></a>
+<span class="sourceLineNo">435</span>        // log to Firebase<a name="line.435"></a>
+<span class="sourceLineNo">436</span>        logFireBaseEvent("p___displayToastMessage");<a name="line.436"></a>
+<span class="sourceLineNo">437</span>    }<a name="line.437"></a>
+<span class="sourceLineNo">438</span><a name="line.438"></a>
+<span class="sourceLineNo">439</span><a name="line.439"></a>
+<span class="sourceLineNo">440</span><a name="line.440"></a>
+<span class="sourceLineNo">441</span>    /**<a name="line.441"></a>
+<span class="sourceLineNo">442</span>     * display a given title &amp; message as notification<a name="line.442"></a>
+<span class="sourceLineNo">443</span>     *<a name="line.443"></a>
+<span class="sourceLineNo">444</span>     * @param title the title of the notification<a name="line.444"></a>
+<span class="sourceLineNo">445</span>     * @param message the message text<a name="line.445"></a>
+<span class="sourceLineNo">446</span>     */<a name="line.446"></a>
+<span class="sourceLineNo">447</span>    private void displayNotification(String title, String message) {<a name="line.447"></a>
+<span class="sourceLineNo">448</span>        Log.d(TAG, "F: displayNotification");<a name="line.448"></a>
+<span class="sourceLineNo">449</span><a name="line.449"></a>
+<span class="sourceLineNo">450</span>        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "M_CH_ID");<a name="line.450"></a>
+<span class="sourceLineNo">451</span><a name="line.451"></a>
+<span class="sourceLineNo">452</span>        notificationBuilder.setAutoCancel(true)<a name="line.452"></a>
+<span class="sourceLineNo">453</span>                .setDefaults(Notification.DEFAULT_ALL)<a name="line.453"></a>
+<span class="sourceLineNo">454</span>                .setWhen(System.currentTimeMillis())<a name="line.454"></a>
+<span class="sourceLineNo">455</span>                .setSmallIcon(R.mipmap.notification_icon)<a name="line.455"></a>
+<span class="sourceLineNo">456</span>                .setContentTitle(title)<a name="line.456"></a>
+<span class="sourceLineNo">457</span>                .setContentText(message);<a name="line.457"></a>
+<span class="sourceLineNo">458</span><a name="line.458"></a>
+<span class="sourceLineNo">459</span>        NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);<a name="line.459"></a>
+<span class="sourceLineNo">460</span>        assert notificationManager != null;<a name="line.460"></a>
+<span class="sourceLineNo">461</span>        notificationManager.notify(1, notificationBuilder.build());<a name="line.461"></a>
+<span class="sourceLineNo">462</span><a name="line.462"></a>
+<span class="sourceLineNo">463</span>        // log to Firebase<a name="line.463"></a>
+<span class="sourceLineNo">464</span>        logFireBaseEvent("p___displayNotification");<a name="line.464"></a>
+<span class="sourceLineNo">465</span>    }<a name="line.465"></a>
+<span class="sourceLineNo">466</span><a name="line.466"></a>
+<span class="sourceLineNo">467</span><a name="line.467"></a>
+<span class="sourceLineNo">468</span>    /**<a name="line.468"></a>
+<span class="sourceLineNo">469</span>     * resets the UI after having executed delete all Usage Data<a name="line.469"></a>
+<span class="sourceLineNo">470</span>     */<a name="line.470"></a>
+<span class="sourceLineNo">471</span>    private void resetUI(){<a name="line.471"></a>
+<span class="sourceLineNo">472</span>        Log.d(TAG, "F: resetUI");<a name="line.472"></a>
+<span class="sourceLineNo">473</span><a name="line.473"></a>
+<span class="sourceLineNo">474</span>        // reset current count<a name="line.474"></a>
+<span class="sourceLineNo">475</span>        TextView cur;<a name="line.475"></a>
+<span class="sourceLineNo">476</span>        cur = findViewById(R.id.ui_currentUsageCount);<a name="line.476"></a>
+<span class="sourceLineNo">477</span>        cur.setText(R.string.zero);<a name="line.477"></a>
+<span class="sourceLineNo">478</span><a name="line.478"></a>
+<span class="sourceLineNo">479</span>        // reset previous/yesterdays count<a name="line.479"></a>
+<span class="sourceLineNo">480</span>        TextView previous;<a name="line.480"></a>
+<span class="sourceLineNo">481</span>        previous = findViewById(R.id.ui_yesterdaysUsageCount);<a name="line.481"></a>
+<span class="sourceLineNo">482</span>        previous.setText(R.string.zero);<a name="line.482"></a>
+<span class="sourceLineNo">483</span><a name="line.483"></a>
+<span class="sourceLineNo">484</span>        // update min value in ui to default text<a name="line.484"></a>
+<span class="sourceLineNo">485</span>        TextView min;<a name="line.485"></a>
+<span class="sourceLineNo">486</span>        min = findViewById(R.id.ui_overall_lowscore_count);<a name="line.486"></a>
+<span class="sourceLineNo">487</span>        min.setText(R.string.zero);<a name="line.487"></a>
+<span class="sourceLineNo">488</span><a name="line.488"></a>
+<span class="sourceLineNo">489</span>        // update min value date<a name="line.489"></a>
+<span class="sourceLineNo">490</span>        TextView min_date;<a name="line.490"></a>
+<span class="sourceLineNo">491</span>        min_date = findViewById(R.id.ui_overall_lowscore_date);<a name="line.491"></a>
+<span class="sourceLineNo">492</span>        min_date.setText(R.string.empty);<a name="line.492"></a>
+<span class="sourceLineNo">493</span><a name="line.493"></a>
+<span class="sourceLineNo">494</span>        // update average value in ui to default text<a name="line.494"></a>
+<span class="sourceLineNo">495</span>        TextView avg;<a name="line.495"></a>
+<span class="sourceLineNo">496</span>        avg = findViewById(R.id.ui_overall_average_count);<a name="line.496"></a>
+<span class="sourceLineNo">497</span>        avg.setText(R.string.zero);<a name="line.497"></a>
+<span class="sourceLineNo">498</span><a name="line.498"></a>
+<span class="sourceLineNo">499</span>        // update max value in ui to default text<a name="line.499"></a>
+<span class="sourceLineNo">500</span>        TextView max;<a name="line.500"></a>
+<span class="sourceLineNo">501</span>        max = findViewById(R.id.ui_overall_highscore_count);<a name="line.501"></a>
+<span class="sourceLineNo">502</span>        max.setText(R.string.zero);<a name="line.502"></a>
+<span class="sourceLineNo">503</span><a name="line.503"></a>
+<span class="sourceLineNo">504</span>        // update min value date<a name="line.504"></a>
+<span class="sourceLineNo">505</span>        TextView max_date;<a name="line.505"></a>
+<span class="sourceLineNo">506</span>        max_date = findViewById(R.id.ui_overall_highscore_date);<a name="line.506"></a>
+<span class="sourceLineNo">507</span>        max_date.setText(R.string.empty);<a name="line.507"></a>
+<span class="sourceLineNo">508</span><a name="line.508"></a>
+<span class="sourceLineNo">509</span>        // log to Firebase<a name="line.509"></a>
+<span class="sourceLineNo">510</span>        logFireBaseEvent("p___resetUI");<a name="line.510"></a>
+<span class="sourceLineNo">511</span>    }<a name="line.511"></a>
 <span class="sourceLineNo">512</span><a name="line.512"></a>
-<span class="sourceLineNo">513</span>    /**<a name="line.513"></a>
-<span class="sourceLineNo">514</span>     * checks if the service is running, otherwise restarts it<a name="line.514"></a>
-<span class="sourceLineNo">515</span>     * triggers UI update<a name="line.515"></a>
-<span class="sourceLineNo">516</span>     */<a name="line.516"></a>
-<span class="sourceLineNo">517</span>    private void checkService(){<a name="line.517"></a>
-<span class="sourceLineNo">518</span>        Log.d(TAG, "F: checkService");<a name="line.518"></a>
-<span class="sourceLineNo">519</span><a name="line.519"></a>
-<span class="sourceLineNo">520</span>        // Check if service is running, otherwise start it<a name="line.520"></a>
-<span class="sourceLineNo">521</span>        if(BackgroundService.isRegistered){<a name="line.521"></a>
-<span class="sourceLineNo">522</span>            // service is running<a name="line.522"></a>
-<span class="sourceLineNo">523</span>            Log.d(TAG, "Service is running");<a name="line.523"></a>
-<span class="sourceLineNo">524</span>        }<a name="line.524"></a>
-<span class="sourceLineNo">525</span>        else {<a name="line.525"></a>
-<span class="sourceLineNo">526</span>            // service is not yet running<a name="line.526"></a>
-<span class="sourceLineNo">527</span>            Log.d(TAG, "Service is NOT running");<a name="line.527"></a>
-<span class="sourceLineNo">528</span><a name="line.528"></a>
-<span class="sourceLineNo">529</span>            // Start the service<a name="line.529"></a>
-<span class="sourceLineNo">530</span>            startService(new Intent(this, BackgroundService.class));<a name="line.530"></a>
-<span class="sourceLineNo">531</span>        }<a name="line.531"></a>
-<span class="sourceLineNo">532</span><a name="line.532"></a>
-<span class="sourceLineNo">533</span>        updateUI();<a name="line.533"></a>
+<span class="sourceLineNo">513</span><a name="line.513"></a>
+<span class="sourceLineNo">514</span><a name="line.514"></a>
+<span class="sourceLineNo">515</span>    /**<a name="line.515"></a>
+<span class="sourceLineNo">516</span>     * checks if the service is running, otherwise restarts it<a name="line.516"></a>
+<span class="sourceLineNo">517</span>     * triggers UI update<a name="line.517"></a>
+<span class="sourceLineNo">518</span>     */<a name="line.518"></a>
+<span class="sourceLineNo">519</span>    private void checkService(){<a name="line.519"></a>
+<span class="sourceLineNo">520</span>        Log.d(TAG, "F: checkService");<a name="line.520"></a>
+<span class="sourceLineNo">521</span><a name="line.521"></a>
+<span class="sourceLineNo">522</span>        // Check if service is running, otherwise start it<a name="line.522"></a>
+<span class="sourceLineNo">523</span>        if(BackgroundService.isRegistered){<a name="line.523"></a>
+<span class="sourceLineNo">524</span>            // service is running<a name="line.524"></a>
+<span class="sourceLineNo">525</span>            Log.d(TAG, "Service is running");<a name="line.525"></a>
+<span class="sourceLineNo">526</span>        }<a name="line.526"></a>
+<span class="sourceLineNo">527</span>        else {<a name="line.527"></a>
+<span class="sourceLineNo">528</span>            // service is not yet running<a name="line.528"></a>
+<span class="sourceLineNo">529</span>            Log.d(TAG, "Service is NOT running");<a name="line.529"></a>
+<span class="sourceLineNo">530</span><a name="line.530"></a>
+<span class="sourceLineNo">531</span>            // Start the service<a name="line.531"></a>
+<span class="sourceLineNo">532</span>            startService(new Intent(this, BackgroundService.class));<a name="line.532"></a>
+<span class="sourceLineNo">533</span>        }<a name="line.533"></a>
 <span class="sourceLineNo">534</span><a name="line.534"></a>
-<span class="sourceLineNo">535</span>        // log to Firebase<a name="line.535"></a>
-<span class="sourceLineNo">536</span>        logFireBaseEvent("p___checkService");<a name="line.536"></a>
-<span class="sourceLineNo">537</span>    }<a name="line.537"></a>
-<span class="sourceLineNo">538</span><a name="line.538"></a>
-<span class="sourceLineNo">539</span><a name="line.539"></a>
+<span class="sourceLineNo">535</span>        updateUI();<a name="line.535"></a>
+<span class="sourceLineNo">536</span><a name="line.536"></a>
+<span class="sourceLineNo">537</span>        // log to Firebase<a name="line.537"></a>
+<span class="sourceLineNo">538</span>        logFireBaseEvent("p___checkService");<a name="line.538"></a>
+<span class="sourceLineNo">539</span>    }<a name="line.539"></a>
 <span class="sourceLineNo">540</span><a name="line.540"></a>
 <span class="sourceLineNo">541</span><a name="line.541"></a>
-<span class="sourceLineNo">542</span>    /**<a name="line.542"></a>
-<span class="sourceLineNo">543</span>     * prevent closing the app on back button press<a name="line.543"></a>
-<span class="sourceLineNo">544</span>     */<a name="line.544"></a>
-<span class="sourceLineNo">545</span>    @Override<a name="line.545"></a>
-<span class="sourceLineNo">546</span>    public void onBackPressed() {<a name="line.546"></a>
-<span class="sourceLineNo">547</span>        Log.d(TAG, "F: onBackPressed");<a name="line.547"></a>
-<span class="sourceLineNo">548</span>        moveTaskToBack(true);<a name="line.548"></a>
-<span class="sourceLineNo">549</span><a name="line.549"></a>
-<span class="sourceLineNo">550</span>        // log to Firebase<a name="line.550"></a>
-<span class="sourceLineNo">551</span>        logFireBaseEvent("p___onBackPressed");<a name="line.551"></a>
-<span class="sourceLineNo">552</span>    }<a name="line.552"></a>
-<span class="sourceLineNo">553</span><a name="line.553"></a>
-<span class="sourceLineNo">554</span><a name="line.554"></a>
+<span class="sourceLineNo">542</span><a name="line.542"></a>
+<span class="sourceLineNo">543</span><a name="line.543"></a>
+<span class="sourceLineNo">544</span>    /**<a name="line.544"></a>
+<span class="sourceLineNo">545</span>     * prevent closing the app on back button press<a name="line.545"></a>
+<span class="sourceLineNo">546</span>     */<a name="line.546"></a>
+<span class="sourceLineNo">547</span>    @Override<a name="line.547"></a>
+<span class="sourceLineNo">548</span>    public void onBackPressed() {<a name="line.548"></a>
+<span class="sourceLineNo">549</span>        Log.d(TAG, "F: onBackPressed");<a name="line.549"></a>
+<span class="sourceLineNo">550</span>        moveTaskToBack(true);<a name="line.550"></a>
+<span class="sourceLineNo">551</span><a name="line.551"></a>
+<span class="sourceLineNo">552</span>        // log to Firebase<a name="line.552"></a>
+<span class="sourceLineNo">553</span>        logFireBaseEvent("p___onBackPressed");<a name="line.553"></a>
+<span class="sourceLineNo">554</span>    }<a name="line.554"></a>
 <span class="sourceLineNo">555</span><a name="line.555"></a>
-<span class="sourceLineNo">556</span>    /**<a name="line.556"></a>
-<span class="sourceLineNo">557</span>     * on click handling<a name="line.557"></a>
-<span class="sourceLineNo">558</span>     */<a name="line.558"></a>
-<span class="sourceLineNo">559</span>    @Override<a name="line.559"></a>
-<span class="sourceLineNo">560</span>    public void onClick(View view) {<a name="line.560"></a>
-<span class="sourceLineNo">561</span>        Log.d(TAG, "F: onClick");<a name="line.561"></a>
-<span class="sourceLineNo">562</span>        /*<a name="line.562"></a>
-<span class="sourceLineNo">563</span>        if (view == buttonStart) {<a name="line.563"></a>
-<span class="sourceLineNo">564</span>            //starting service<a name="line.564"></a>
-<span class="sourceLineNo">565</span>            startService(new Intent(this, BackgroundService.class));<a name="line.565"></a>
-<span class="sourceLineNo">566</span>            Log.d(TAG, "onClick - User wants to start the service");<a name="line.566"></a>
-<span class="sourceLineNo">567</span><a name="line.567"></a>
-<span class="sourceLineNo">568</span>        } else if (view == buttonStop) {<a name="line.568"></a>
-<span class="sourceLineNo">569</span>            //stopping service<a name="line.569"></a>
-<span class="sourceLineNo">570</span>            stopService(new Intent(this, BackgroundService.class));<a name="line.570"></a>
-<span class="sourceLineNo">571</span>            Log.d(TAG, "onClick - User wants to stop the service");<a name="line.571"></a>
-<span class="sourceLineNo">572</span>        }<a name="line.572"></a>
-<span class="sourceLineNo">573</span>        */<a name="line.573"></a>
-<span class="sourceLineNo">574</span><a name="line.574"></a>
-<span class="sourceLineNo">575</span>        // log to Firebase<a name="line.575"></a>
-<span class="sourceLineNo">576</span>        logFireBaseEvent("p___onClick");<a name="line.576"></a>
-<span class="sourceLineNo">577</span>    }<a name="line.577"></a>
-<span class="sourceLineNo">578</span><a name="line.578"></a>
+<span class="sourceLineNo">556</span><a name="line.556"></a>
+<span class="sourceLineNo">557</span><a name="line.557"></a>
+<span class="sourceLineNo">558</span>    /**<a name="line.558"></a>
+<span class="sourceLineNo">559</span>     * on click handling<a name="line.559"></a>
+<span class="sourceLineNo">560</span>     */<a name="line.560"></a>
+<span class="sourceLineNo">561</span>    @Override<a name="line.561"></a>
+<span class="sourceLineNo">562</span>    public void onClick(View view) {<a name="line.562"></a>
+<span class="sourceLineNo">563</span>        Log.d(TAG, "F: onClick");<a name="line.563"></a>
+<span class="sourceLineNo">564</span><a name="line.564"></a>
+<span class="sourceLineNo">565</span>        // log to Firebase<a name="line.565"></a>
+<span class="sourceLineNo">566</span>        logFireBaseEvent("p___onClick");<a name="line.566"></a>
+<span class="sourceLineNo">567</span>    }<a name="line.567"></a>
+<span class="sourceLineNo">568</span><a name="line.568"></a>
+<span class="sourceLineNo">569</span><a name="line.569"></a>
+<span class="sourceLineNo">570</span>    /**<a name="line.570"></a>
+<span class="sourceLineNo">571</span>     * on resume of the activity<a name="line.571"></a>
+<span class="sourceLineNo">572</span>     */<a name="line.572"></a>
+<span class="sourceLineNo">573</span>    @Override<a name="line.573"></a>
+<span class="sourceLineNo">574</span>    protected void onResume() {<a name="line.574"></a>
+<span class="sourceLineNo">575</span>        super.onResume();<a name="line.575"></a>
+<span class="sourceLineNo">576</span>        Log.d(TAG, "F: onResume");<a name="line.576"></a>
+<span class="sourceLineNo">577</span><a name="line.577"></a>
+<span class="sourceLineNo">578</span>        checkService();<a name="line.578"></a>
 <span class="sourceLineNo">579</span><a name="line.579"></a>
-<span class="sourceLineNo">580</span>    /**<a name="line.580"></a>
-<span class="sourceLineNo">581</span>     * on resume of the activity<a name="line.581"></a>
-<span class="sourceLineNo">582</span>     */<a name="line.582"></a>
-<span class="sourceLineNo">583</span>    @Override<a name="line.583"></a>
-<span class="sourceLineNo">584</span>    protected void onResume() {<a name="line.584"></a>
-<span class="sourceLineNo">585</span>        super.onResume();<a name="line.585"></a>
-<span class="sourceLineNo">586</span>        Log.d(TAG, "F: onResume");<a name="line.586"></a>
-<span class="sourceLineNo">587</span><a name="line.587"></a>
-<span class="sourceLineNo">588</span>        checkService();<a name="line.588"></a>
-<span class="sourceLineNo">589</span><a name="line.589"></a>
-<span class="sourceLineNo">590</span>        // log to Firebase<a name="line.590"></a>
-<span class="sourceLineNo">591</span>        logFireBaseEvent("p___onResume");<a name="line.591"></a>
-<span class="sourceLineNo">592</span>    }<a name="line.592"></a>
+<span class="sourceLineNo">580</span>        // log to Firebase<a name="line.580"></a>
+<span class="sourceLineNo">581</span>        logFireBaseEvent("p___onResume");<a name="line.581"></a>
+<span class="sourceLineNo">582</span>    }<a name="line.582"></a>
+<span class="sourceLineNo">583</span><a name="line.583"></a>
+<span class="sourceLineNo">584</span><a name="line.584"></a>
+<span class="sourceLineNo">585</span><a name="line.585"></a>
+<span class="sourceLineNo">586</span>    /**<a name="line.586"></a>
+<span class="sourceLineNo">587</span>     * on pause of the activity<a name="line.587"></a>
+<span class="sourceLineNo">588</span>     */<a name="line.588"></a>
+<span class="sourceLineNo">589</span>    @Override<a name="line.589"></a>
+<span class="sourceLineNo">590</span>    protected void onPause() {<a name="line.590"></a>
+<span class="sourceLineNo">591</span>        super.onPause();<a name="line.591"></a>
+<span class="sourceLineNo">592</span>        Log.d(TAG, "F: onPause");<a name="line.592"></a>
 <span class="sourceLineNo">593</span><a name="line.593"></a>
-<span class="sourceLineNo">594</span><a name="line.594"></a>
+<span class="sourceLineNo">594</span>        checkService();<a name="line.594"></a>
 <span class="sourceLineNo">595</span><a name="line.595"></a>
-<span class="sourceLineNo">596</span>    /**<a name="line.596"></a>
-<span class="sourceLineNo">597</span>     * on pause of the activity<a name="line.597"></a>
-<span class="sourceLineNo">598</span>     */<a name="line.598"></a>
-<span class="sourceLineNo">599</span>    @Override<a name="line.599"></a>
-<span class="sourceLineNo">600</span>    protected void onPause() {<a name="line.600"></a>
-<span class="sourceLineNo">601</span>        super.onPause();<a name="line.601"></a>
-<span class="sourceLineNo">602</span>        Log.d(TAG, "F: onPause");<a name="line.602"></a>
-<span class="sourceLineNo">603</span><a name="line.603"></a>
-<span class="sourceLineNo">604</span>        checkService();<a name="line.604"></a>
-<span class="sourceLineNo">605</span><a name="line.605"></a>
-<span class="sourceLineNo">606</span>        // log to Firebase<a name="line.606"></a>
-<span class="sourceLineNo">607</span>        logFireBaseEvent("p___onPause");<a name="line.607"></a>
-<span class="sourceLineNo">608</span>    }<a name="line.608"></a>
-<span class="sourceLineNo">609</span><a name="line.609"></a>
-<span class="sourceLineNo">610</span><a name="line.610"></a>
-<span class="sourceLineNo">611</span><a name="line.611"></a>
-<span class="sourceLineNo">612</span>    /**<a name="line.612"></a>
-<span class="sourceLineNo">613</span>     * Opens a popup dialog which shows all use per day data<a name="line.613"></a>
-<span class="sourceLineNo">614</span>     * data is fetched via SharedPreferences<a name="line.614"></a>
-<span class="sourceLineNo">615</span>     */<a name="line.615"></a>
-<span class="sourceLineNo">616</span>    private void showUsageDataPerDay() {<a name="line.616"></a>
-<span class="sourceLineNo">617</span>        Log.d(TAG, "F: showUsageDataPerDay");<a name="line.617"></a>
-<span class="sourceLineNo">618</span><a name="line.618"></a>
-<span class="sourceLineNo">619</span>        StringBuilder outputUsageHistory;<a name="line.619"></a>
-<span class="sourceLineNo">620</span>        outputUsageHistory = new StringBuilder();<a name="line.620"></a>
-<span class="sourceLineNo">621</span>        ArrayList&lt;String&gt; al= new ArrayList&lt;&gt;(); // stores the relevant prefs for later sorting<a name="line.621"></a>
-<span class="sourceLineNo">622</span><a name="line.622"></a>
-<span class="sourceLineNo">623</span>        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);<a name="line.623"></a>
-<span class="sourceLineNo">624</span><a name="line.624"></a>
-<span class="sourceLineNo">625</span>        // print all settings<a name="line.625"></a>
-<span class="sourceLineNo">626</span>        for (String key : settings.getAll().keySet()) {<a name="line.626"></a>
-<span class="sourceLineNo">627</span>            if(key.startsWith("20")) { // collect only usage-history data<a name="line.627"></a>
-<span class="sourceLineNo">628</span>                Log.i(String.format("Shared Preference : %s - %s", PREFS_NAME, key), settings.getString(key, "error!"));<a name="line.628"></a>
-<span class="sourceLineNo">629</span><a name="line.629"></a>
-<span class="sourceLineNo">630</span>                // add to array<a name="line.630"></a>
-<span class="sourceLineNo">631</span>                al.add(key+":\t\t"+settings.getString(key, "error!")+"\n");<a name="line.631"></a>
-<span class="sourceLineNo">632</span>            }<a name="line.632"></a>
-<span class="sourceLineNo">633</span>            else {<a name="line.633"></a>
-<span class="sourceLineNo">634</span>                Log.d(TAG, "Ignoring key, as it is not part of the daily usage history");<a name="line.634"></a>
-<span class="sourceLineNo">635</span>            }<a name="line.635"></a>
-<span class="sourceLineNo">636</span>        }<a name="line.636"></a>
-<span class="sourceLineNo">637</span><a name="line.637"></a>
-<span class="sourceLineNo">638</span>        // sort &amp; reverse array-data<a name="line.638"></a>
-<span class="sourceLineNo">639</span>        Collections.sort(al); // sort<a name="line.639"></a>
-<span class="sourceLineNo">640</span>        Collections.reverse(al); //<a name="line.640"></a>
-<span class="sourceLineNo">641</span><a name="line.641"></a>
-<span class="sourceLineNo">642</span>        // build output string<a name="line.642"></a>
-<span class="sourceLineNo">643</span>        for (int i = 0; i &lt; al.size(); i++) {<a name="line.643"></a>
-<span class="sourceLineNo">644</span>            outputUsageHistory.append(al.get(i));<a name="line.644"></a>
-<span class="sourceLineNo">645</span>        }<a name="line.645"></a>
-<span class="sourceLineNo">646</span><a name="line.646"></a>
-<span class="sourceLineNo">647</span>        // show as dialog<a name="line.647"></a>
-<span class="sourceLineNo">648</span>        AlertDialog.Builder builder = new AlertDialog.Builder(this);<a name="line.648"></a>
-<span class="sourceLineNo">649</span>        builder.setTitle(R.string.dialog_title_show_usage_history_per_day);<a name="line.649"></a>
-<span class="sourceLineNo">650</span>        builder.setMessage(outputUsageHistory.toString());<a name="line.650"></a>
-<span class="sourceLineNo">651</span>        builder.setIcon(R.drawable.app_icon);<a name="line.651"></a>
-<span class="sourceLineNo">652</span>        AlertDialog alert = builder.create();<a name="line.652"></a>
-<span class="sourceLineNo">653</span>        alert.show();<a name="line.653"></a>
-<span class="sourceLineNo">654</span><a name="line.654"></a>
-<span class="sourceLineNo">655</span>        // log to Firebase<a name="line.655"></a>
-<span class="sourceLineNo">656</span>        logFireBaseEvent("p___showUsageDataPerDay");<a name="line.656"></a>
-<span class="sourceLineNo">657</span>    }<a name="line.657"></a>
-<span class="sourceLineNo">658</span><a name="line.658"></a>
-<span class="sourceLineNo">659</span><a name="line.659"></a>
+<span class="sourceLineNo">596</span>        // log to Firebase<a name="line.596"></a>
+<span class="sourceLineNo">597</span>        logFireBaseEvent("p___onPause");<a name="line.597"></a>
+<span class="sourceLineNo">598</span>    }<a name="line.598"></a>
+<span class="sourceLineNo">599</span><a name="line.599"></a>
+<span class="sourceLineNo">600</span><a name="line.600"></a>
+<span class="sourceLineNo">601</span><a name="line.601"></a>
+<span class="sourceLineNo">602</span>    /**<a name="line.602"></a>
+<span class="sourceLineNo">603</span>     * Opens a popup dialog which shows all use per day data<a name="line.603"></a>
+<span class="sourceLineNo">604</span>     * data is fetched via SharedPreferences<a name="line.604"></a>
+<span class="sourceLineNo">605</span>     */<a name="line.605"></a>
+<span class="sourceLineNo">606</span>    private void showUsageDataPerDay() {<a name="line.606"></a>
+<span class="sourceLineNo">607</span>        Log.d(TAG, "F: showUsageDataPerDay");<a name="line.607"></a>
+<span class="sourceLineNo">608</span><a name="line.608"></a>
+<span class="sourceLineNo">609</span>        StringBuilder outputUsageHistory;<a name="line.609"></a>
+<span class="sourceLineNo">610</span>        outputUsageHistory = new StringBuilder();<a name="line.610"></a>
+<span class="sourceLineNo">611</span>        ArrayList&lt;String&gt; al= new ArrayList&lt;&gt;(); // stores the relevant prefs for later sorting<a name="line.611"></a>
+<span class="sourceLineNo">612</span><a name="line.612"></a>
+<span class="sourceLineNo">613</span>        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);<a name="line.613"></a>
+<span class="sourceLineNo">614</span><a name="line.614"></a>
+<span class="sourceLineNo">615</span>        // print all settings<a name="line.615"></a>
+<span class="sourceLineNo">616</span>        for (String key : settings.getAll().keySet()) {<a name="line.616"></a>
+<span class="sourceLineNo">617</span>            if(key.startsWith("20")) { // collect only usage-history data<a name="line.617"></a>
+<span class="sourceLineNo">618</span>                Log.i(String.format("Shared Preference : %s - %s", PREFS_NAME, key), settings.getString(key, "error!"));<a name="line.618"></a>
+<span class="sourceLineNo">619</span><a name="line.619"></a>
+<span class="sourceLineNo">620</span>                // add to array<a name="line.620"></a>
+<span class="sourceLineNo">621</span>                al.add(key+":\t\t"+settings.getString(key, "error!")+"\n");<a name="line.621"></a>
+<span class="sourceLineNo">622</span>            }<a name="line.622"></a>
+<span class="sourceLineNo">623</span>            else {<a name="line.623"></a>
+<span class="sourceLineNo">624</span>                Log.d(TAG, "Ignoring key, as it is not part of the daily usage history");<a name="line.624"></a>
+<span class="sourceLineNo">625</span>            }<a name="line.625"></a>
+<span class="sourceLineNo">626</span>        }<a name="line.626"></a>
+<span class="sourceLineNo">627</span><a name="line.627"></a>
+<span class="sourceLineNo">628</span>        // sort &amp; reverse array-data<a name="line.628"></a>
+<span class="sourceLineNo">629</span>        Collections.sort(al); // sort<a name="line.629"></a>
+<span class="sourceLineNo">630</span>        Collections.reverse(al); //<a name="line.630"></a>
+<span class="sourceLineNo">631</span><a name="line.631"></a>
+<span class="sourceLineNo">632</span>        // build output string<a name="line.632"></a>
+<span class="sourceLineNo">633</span>        for (int i = 0; i &lt; al.size(); i++) {<a name="line.633"></a>
+<span class="sourceLineNo">634</span>            outputUsageHistory.append(al.get(i));<a name="line.634"></a>
+<span class="sourceLineNo">635</span>        }<a name="line.635"></a>
+<span class="sourceLineNo">636</span><a name="line.636"></a>
+<span class="sourceLineNo">637</span>        // show as dialog<a name="line.637"></a>
+<span class="sourceLineNo">638</span>        AlertDialog.Builder builder = new AlertDialog.Builder(this);<a name="line.638"></a>
+<span class="sourceLineNo">639</span>        builder.setTitle(R.string.dialog_title_show_usage_history_per_day);<a name="line.639"></a>
+<span class="sourceLineNo">640</span>        builder.setMessage(outputUsageHistory.toString());<a name="line.640"></a>
+<span class="sourceLineNo">641</span>        builder.setIcon(R.mipmap.app_icon);<a name="line.641"></a>
+<span class="sourceLineNo">642</span>        AlertDialog alert = builder.create();<a name="line.642"></a>
+<span class="sourceLineNo">643</span>        alert.show();<a name="line.643"></a>
+<span class="sourceLineNo">644</span><a name="line.644"></a>
+<span class="sourceLineNo">645</span>        // log to Firebase<a name="line.645"></a>
+<span class="sourceLineNo">646</span>        logFireBaseEvent("p___showUsageDataPerDay");<a name="line.646"></a>
+<span class="sourceLineNo">647</span>    }<a name="line.647"></a>
+<span class="sourceLineNo">648</span><a name="line.648"></a>
+<span class="sourceLineNo">649</span><a name="line.649"></a>
+<span class="sourceLineNo">650</span><a name="line.650"></a>
+<span class="sourceLineNo">651</span>    /**<a name="line.651"></a>
+<span class="sourceLineNo">652</span>     * fetches all usage data per day,<a name="line.652"></a>
+<span class="sourceLineNo">653</span>     * calculates the average value<a name="line.653"></a>
+<span class="sourceLineNo">654</span>     * and returns that value as a string<a name="line.654"></a>
+<span class="sourceLineNo">655</span>     *<a name="line.655"></a>
+<span class="sourceLineNo">656</span>     * @return the average usage count per day (overall)<a name="line.656"></a>
+<span class="sourceLineNo">657</span>     */<a name="line.657"></a>
+<span class="sourceLineNo">658</span>    private String getUsageDataAverage(){<a name="line.658"></a>
+<span class="sourceLineNo">659</span>        Log.d(TAG, "F: getUsageDataAverage");<a name="line.659"></a>
 <span class="sourceLineNo">660</span><a name="line.660"></a>
-<span class="sourceLineNo">661</span>    /**<a name="line.661"></a>
-<span class="sourceLineNo">662</span>     * fetches all usage data per day,<a name="line.662"></a>
-<span class="sourceLineNo">663</span>     * calculates the average value<a name="line.663"></a>
-<span class="sourceLineNo">664</span>     * and returns that value as a string<a name="line.664"></a>
-<span class="sourceLineNo">665</span>     *<a name="line.665"></a>
-<span class="sourceLineNo">666</span>     * @return the average usage count per day (overall)<a name="line.666"></a>
-<span class="sourceLineNo">667</span>     */<a name="line.667"></a>
-<span class="sourceLineNo">668</span>    private String getUsageDataAverage(){<a name="line.668"></a>
-<span class="sourceLineNo">669</span>        Log.d(TAG, "F: getUsageDataAverage");<a name="line.669"></a>
-<span class="sourceLineNo">670</span><a name="line.670"></a>
-<span class="sourceLineNo">671</span>        String averageUsageDataPerDay;<a name="line.671"></a>
-<span class="sourceLineNo">672</span><a name="line.672"></a>
-<span class="sourceLineNo">673</span>        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);<a name="line.673"></a>
-<span class="sourceLineNo">674</span><a name="line.674"></a>
-<span class="sourceLineNo">675</span>        int record_amount; // counter<a name="line.675"></a>
-<span class="sourceLineNo">676</span>        int record_sum; // usage sum<a name="line.676"></a>
-<span class="sourceLineNo">677</span>        int record_avg; // calculated usage average<a name="line.677"></a>
-<span class="sourceLineNo">678</span><a name="line.678"></a>
-<span class="sourceLineNo">679</span>        record_amount = 0;<a name="line.679"></a>
-<span class="sourceLineNo">680</span>        record_sum = 0;<a name="line.680"></a>
-<span class="sourceLineNo">681</span><a name="line.681"></a>
-<span class="sourceLineNo">682</span>        // print all settings<a name="line.682"></a>
-<span class="sourceLineNo">683</span>        for (String key : settings.getAll().keySet()) {<a name="line.683"></a>
-<span class="sourceLineNo">684</span>            if(key.startsWith("20")) { // collect only usage-history data<a name="line.684"></a>
-<span class="sourceLineNo">685</span>                Log.i(String.format("Shared Preference : %s - %s", PREFS_NAME, key), settings.getString(key, "error!"));<a name="line.685"></a>
-<span class="sourceLineNo">686</span><a name="line.686"></a>
-<span class="sourceLineNo">687</span>                record_amount = record_amount +1; // counter<a name="line.687"></a>
-<span class="sourceLineNo">688</span>                record_sum = record_sum + Integer.parseInt(settings.getString(key, "error!"));<a name="line.688"></a>
-<span class="sourceLineNo">689</span>            }<a name="line.689"></a>
-<span class="sourceLineNo">690</span>            else {<a name="line.690"></a>
-<span class="sourceLineNo">691</span>                Log.d(TAG, "Ignoring key, as it is not part of the daily usage history");<a name="line.691"></a>
-<span class="sourceLineNo">692</span>            }<a name="line.692"></a>
+<span class="sourceLineNo">661</span>        String averageUsageDataPerDay;<a name="line.661"></a>
+<span class="sourceLineNo">662</span><a name="line.662"></a>
+<span class="sourceLineNo">663</span>        SharedPreferences settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);<a name="line.663"></a>
+<span class="sourceLineNo">664</span><a name="line.664"></a>
+<span class="sourceLineNo">665</span>        int record_amount; // counter<a name="line.665"></a>
+<span class="sourceLineNo">666</span>        int record_sum; // usage sum<a name="line.666"></a>
+<span class="sourceLineNo">667</span>        int record_avg; // calculated usage average<a name="line.667"></a>
+<span class="sourceLineNo">668</span><a name="line.668"></a>
+<span class="sourceLineNo">669</span>        record_amount = 0;<a name="line.669"></a>
+<span class="sourceLineNo">670</span>        record_sum = 0;<a name="line.670"></a>
+<span class="sourceLineNo">671</span><a name="line.671"></a>
+<span class="sourceLineNo">672</span>        // print all settings<a name="line.672"></a>
+<span class="sourceLineNo">673</span>        for (String key : settings.getAll().keySet()) {<a name="line.673"></a>
+<span class="sourceLineNo">674</span>            if(key.startsWith("20")) { // collect only usage-history data<a name="line.674"></a>
+<span class="sourceLineNo">675</span>                Log.i(String.format("Shared Preference : %s - %s", PREFS_NAME, key), settings.getString(key, "error!"));<a name="line.675"></a>
+<span class="sourceLineNo">676</span><a name="line.676"></a>
+<span class="sourceLineNo">677</span>                record_amount = record_amount +1; // counter<a name="line.677"></a>
+<span class="sourceLineNo">678</span>                record_sum = record_sum + Integer.parseInt(settings.getString(key, "error!"));<a name="line.678"></a>
+<span class="sourceLineNo">679</span>            }<a name="line.679"></a>
+<span class="sourceLineNo">680</span>            else {<a name="line.680"></a>
+<span class="sourceLineNo">681</span>                Log.d(TAG, "Ignoring key, as it is not part of the daily usage history");<a name="line.681"></a>
+<span class="sourceLineNo">682</span>            }<a name="line.682"></a>
+<span class="sourceLineNo">683</span>        }<a name="line.683"></a>
+<span class="sourceLineNo">684</span><a name="line.684"></a>
+<span class="sourceLineNo">685</span>        // calc average<a name="line.685"></a>
+<span class="sourceLineNo">686</span>        if(record_amount == 0) {<a name="line.686"></a>
+<span class="sourceLineNo">687</span>            averageUsageDataPerDay = "0";<a name="line.687"></a>
+<span class="sourceLineNo">688</span>        }<a name="line.688"></a>
+<span class="sourceLineNo">689</span>        else {<a name="line.689"></a>
+<span class="sourceLineNo">690</span>            record_avg = record_sum / record_amount;<a name="line.690"></a>
+<span class="sourceLineNo">691</span>            averageUsageDataPerDay = Integer.toString(record_avg);<a name="line.691"></a>
+<span class="sourceLineNo">692</span>            Log.d(TAG, "Usage History Average: "+Integer.toString(record_avg));<a name="line.692"></a>
 <span class="sourceLineNo">693</span>        }<a name="line.693"></a>
 <span class="sourceLineNo">694</span><a name="line.694"></a>
-<span class="sourceLineNo">695</span>        // calc average<a name="line.695"></a>
-<span class="sourceLineNo">696</span>        if(record_amount == 0) {<a name="line.696"></a>
-<span class="sourceLineNo">697</span>            //averageUsageDataPerDay = getResources().getString(R.string.overall_n_a);<a name="line.697"></a>
-<span class="sourceLineNo">698</span>            averageUsageDataPerDay = "0";<a name="line.698"></a>
-<span class="sourceLineNo">699</span>        }<a name="line.699"></a>
-<span class="sourceLineNo">700</span>        else {<a name="line.700"></a>
-<span class="sourceLineNo">701</span>            record_avg = record_sum / record_amount;<a name="line.701"></a>
-<span class="sourceLineNo">702</span>            averageUsageDataPerDay = Integer.toString(record_avg);<a name="line.702"></a>
-<span class="sourceLineNo">703</span>            Log.d(TAG, "Usage History Average: "+Integer.toString(record_avg));<a name="line.703"></a>
-<span class="sourceLineNo">704</span>        }<a name="line.704"></a>
-<span class="sourceLineNo">705</span><a name="line.705"></a>
-<span class="sourceLineNo">706</span>        // log to Firebase<a name="line.706"></a>
-<span class="sourceLineNo">707</span>        logFireBaseEvent("p___getUsageDataAverage");<a name="line.707"></a>
+<span class="sourceLineNo">695</span>        // log to Firebase<a name="line.695"></a>
+<span class="sourceLineNo">696</span>        logFireBaseEvent("p___getUsageDataAverage");<a name="line.696"></a>
+<span class="sourceLineNo">697</span><a name="line.697"></a>
+<span class="sourceLineNo">698</span>        return averageUsageDataPerDay;<a name="line.698"></a>
+<span class="sourceLineNo">699</span>    }<a name="line.699"></a>
+<span class="sourceLineNo">700</span><a name="line.700"></a>
+<span class="sourceLineNo">701</span><a name="line.701"></a>
+<span class="sourceLineNo">702</span><a name="line.702"></a>
+<span class="sourceLineNo">703</span>    /**<a name="line.703"></a>
+<span class="sourceLineNo">704</span>     * fetches and returns the device id as string<a name="line.704"></a>
+<span class="sourceLineNo">705</span>     */<a name="line.705"></a>
+<span class="sourceLineNo">706</span>    private String getDeviceID(){<a name="line.706"></a>
+<span class="sourceLineNo">707</span>        Log.d(TAG, "F: getDeviceID");<a name="line.707"></a>
 <span class="sourceLineNo">708</span><a name="line.708"></a>
-<span class="sourceLineNo">709</span>        return averageUsageDataPerDay;<a name="line.709"></a>
-<span class="sourceLineNo">710</span>    }<a name="line.710"></a>
-<span class="sourceLineNo">711</span><a name="line.711"></a>
+<span class="sourceLineNo">709</span>        // get android_id<a name="line.709"></a>
+<span class="sourceLineNo">710</span>        @SuppressLint("HardwareIds") String androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);<a name="line.710"></a>
+<span class="sourceLineNo">711</span>        Log.d(TAG, "Android ID: " + androidId);<a name="line.711"></a>
 <span class="sourceLineNo">712</span><a name="line.712"></a>
-<span class="sourceLineNo">713</span><a name="line.713"></a>
-<span class="sourceLineNo">714</span>    /**<a name="line.714"></a>
-<span class="sourceLineNo">715</span>     * Update the User Interface (UI) with all SharedPreference values<a name="line.715"></a>
-<span class="sourceLineNo">716</span>     */<a name="line.716"></a>
-<span class="sourceLineNo">717</span>    private void updateUI(){<a name="line.717"></a>
-<span class="sourceLineNo">718</span>        Log.d(TAG, "F: updateUI");<a name="line.718"></a>
+<span class="sourceLineNo">713</span>        // log to Firebase<a name="line.713"></a>
+<span class="sourceLineNo">714</span>        logFireBaseEvent("p___getDeviceID");<a name="line.714"></a>
+<span class="sourceLineNo">715</span><a name="line.715"></a>
+<span class="sourceLineNo">716</span>        return androidId;<a name="line.716"></a>
+<span class="sourceLineNo">717</span>    }<a name="line.717"></a>
+<span class="sourceLineNo">718</span><a name="line.718"></a>
 <span class="sourceLineNo">719</span><a name="line.719"></a>
-<span class="sourceLineNo">720</span>        // -----------------------------------------------------------------------------------------<a name="line.720"></a>
-<span class="sourceLineNo">721</span>        // get current count<a name="line.721"></a>
-<span class="sourceLineNo">722</span>        // -----------------------------------------------------------------------------------------<a name="line.722"></a>
-<span class="sourceLineNo">723</span>        String currentUsageCount;<a name="line.723"></a>
-<span class="sourceLineNo">724</span>        currentUsageCount = readPreferences("usage_today_count");<a name="line.724"></a>
-<span class="sourceLineNo">725</span><a name="line.725"></a>
-<span class="sourceLineNo">726</span>        // update UI<a name="line.726"></a>
-<span class="sourceLineNo">727</span>        TextView ui_currentUsageCount;<a name="line.727"></a>
-<span class="sourceLineNo">728</span>        ui_currentUsageCount = findViewById(R.id.ui_currentUsageCount);<a name="line.728"></a>
-<span class="sourceLineNo">729</span>        ui_currentUsageCount.setText(currentUsageCount);<a name="line.729"></a>
-<span class="sourceLineNo">730</span><a name="line.730"></a>
-<span class="sourceLineNo">731</span><a name="line.731"></a>
-<span class="sourceLineNo">732</span>        // -----------------------------------------------------------------------------------------<a name="line.732"></a>
-<span class="sourceLineNo">733</span>        // get yesterdays count<a name="line.733"></a>
-<span class="sourceLineNo">734</span>        // -----------------------------------------------------------------------------------------<a name="line.734"></a>
-<span class="sourceLineNo">735</span>        String yesterdaysUsageCount;<a name="line.735"></a>
-<span class="sourceLineNo">736</span>        yesterdaysUsageCount = readPreferences("usage_yesterday_count");<a name="line.736"></a>
-<span class="sourceLineNo">737</span><a name="line.737"></a>
-<span class="sourceLineNo">738</span>        // update UI<a name="line.738"></a>
-<span class="sourceLineNo">739</span>        TextView ui_yesterdaysUsageCount;<a name="line.739"></a>
-<span class="sourceLineNo">740</span>        ui_yesterdaysUsageCount = findViewById(R.id.ui_yesterdaysUsageCount);<a name="line.740"></a>
-<span class="sourceLineNo">741</span>        ui_yesterdaysUsageCount.setText(yesterdaysUsageCount);<a name="line.741"></a>
-<span class="sourceLineNo">742</span><a name="line.742"></a>
-<span class="sourceLineNo">743</span><a name="line.743"></a>
-<span class="sourceLineNo">744</span>        // -----------------------------------------------------------------------------------------<a name="line.744"></a>
-<span class="sourceLineNo">745</span>        // get lowscore value<a name="line.745"></a>
-<span class="sourceLineNo">746</span>        // -----------------------------------------------------------------------------------------<a name="line.746"></a>
-<span class="sourceLineNo">747</span>        String usageOverallMinCount;<a name="line.747"></a>
-<span class="sourceLineNo">748</span>        usageOverallMinCount = readPreferences("usage_overall_min_count");<a name="line.748"></a>
-<span class="sourceLineNo">749</span><a name="line.749"></a>
-<span class="sourceLineNo">750</span>        // update UI<a name="line.750"></a>
-<span class="sourceLineNo">751</span>        TextView ui_overall_lowscore_count;<a name="line.751"></a>
-<span class="sourceLineNo">752</span>        ui_overall_lowscore_count = findViewById(R.id.ui_overall_lowscore_count);<a name="line.752"></a>
-<span class="sourceLineNo">753</span>        ui_overall_lowscore_count.setText(usageOverallMinCount);<a name="line.753"></a>
-<span class="sourceLineNo">754</span><a name="line.754"></a>
-<span class="sourceLineNo">755</span><a name="line.755"></a>
-<span class="sourceLineNo">756</span>        // -----------------------------------------------------------------------------------------<a name="line.756"></a>
-<span class="sourceLineNo">757</span>        // get lowscore date<a name="line.757"></a>
-<span class="sourceLineNo">758</span>        // -----------------------------------------------------------------------------------------<a name="line.758"></a>
-<span class="sourceLineNo">759</span>        String usageOverallMinDate;<a name="line.759"></a>
-<span class="sourceLineNo">760</span>        usageOverallMinDate = readPreferences("usage_overall_min_date");<a name="line.760"></a>
-<span class="sourceLineNo">761</span><a name="line.761"></a>
-<span class="sourceLineNo">762</span>        // update UI<a name="line.762"></a>
-<span class="sourceLineNo">763</span>        TextView ui_overall_lowscore_date;<a name="line.763"></a>
-<span class="sourceLineNo">764</span>        ui_overall_lowscore_date = findViewById(R.id.ui_overall_lowscore_date);<a name="line.764"></a>
-<span class="sourceLineNo">765</span>        ui_overall_lowscore_date.setText(usageOverallMinDate);<a name="line.765"></a>
+<span class="sourceLineNo">720</span><a name="line.720"></a>
+<span class="sourceLineNo">721</span>    /**<a name="line.721"></a>
+<span class="sourceLineNo">722</span>     * Update the User Interface (UI) with all SharedPreference values<a name="line.722"></a>
+<span class="sourceLineNo">723</span>     */<a name="line.723"></a>
+<span class="sourceLineNo">724</span>    private void updateUI(){<a name="line.724"></a>
+<span class="sourceLineNo">725</span>        Log.d(TAG, "F: updateUI");<a name="line.725"></a>
+<span class="sourceLineNo">726</span><a name="line.726"></a>
+<span class="sourceLineNo">727</span>        String deviceID = getDeviceID();<a name="line.727"></a>
+<span class="sourceLineNo">728</span><a name="line.728"></a>
+<span class="sourceLineNo">729</span>        // -----------------------------------------------------------------------------------------<a name="line.729"></a>
+<span class="sourceLineNo">730</span>        // get current count<a name="line.730"></a>
+<span class="sourceLineNo">731</span>        // -----------------------------------------------------------------------------------------<a name="line.731"></a>
+<span class="sourceLineNo">732</span>        String currentUsageCount;<a name="line.732"></a>
+<span class="sourceLineNo">733</span>        currentUsageCount = readPreferences("usage_today_count");<a name="line.733"></a>
+<span class="sourceLineNo">734</span><a name="line.734"></a>
+<span class="sourceLineNo">735</span>        // update UI<a name="line.735"></a>
+<span class="sourceLineNo">736</span>        TextView ui_currentUsageCount;<a name="line.736"></a>
+<span class="sourceLineNo">737</span>        ui_currentUsageCount = findViewById(R.id.ui_currentUsageCount);<a name="line.737"></a>
+<span class="sourceLineNo">738</span>        ui_currentUsageCount.setText(currentUsageCount);<a name="line.738"></a>
+<span class="sourceLineNo">739</span><a name="line.739"></a>
+<span class="sourceLineNo">740</span><a name="line.740"></a>
+<span class="sourceLineNo">741</span>        // -----------------------------------------------------------------------------------------<a name="line.741"></a>
+<span class="sourceLineNo">742</span>        // get yesterdays count<a name="line.742"></a>
+<span class="sourceLineNo">743</span>        // -----------------------------------------------------------------------------------------<a name="line.743"></a>
+<span class="sourceLineNo">744</span>        String yesterdaysUsageCount;<a name="line.744"></a>
+<span class="sourceLineNo">745</span>        yesterdaysUsageCount = readPreferences("usage_yesterday_count");<a name="line.745"></a>
+<span class="sourceLineNo">746</span><a name="line.746"></a>
+<span class="sourceLineNo">747</span>        // update UI<a name="line.747"></a>
+<span class="sourceLineNo">748</span>        TextView ui_yesterdaysUsageCount;<a name="line.748"></a>
+<span class="sourceLineNo">749</span>        ui_yesterdaysUsageCount = findViewById(R.id.ui_yesterdaysUsageCount);<a name="line.749"></a>
+<span class="sourceLineNo">750</span>        ui_yesterdaysUsageCount.setText(yesterdaysUsageCount);<a name="line.750"></a>
+<span class="sourceLineNo">751</span><a name="line.751"></a>
+<span class="sourceLineNo">752</span><a name="line.752"></a>
+<span class="sourceLineNo">753</span>        // -----------------------------------------------------------------------------------------<a name="line.753"></a>
+<span class="sourceLineNo">754</span>        // get lowscore count<a name="line.754"></a>
+<span class="sourceLineNo">755</span>        // -----------------------------------------------------------------------------------------<a name="line.755"></a>
+<span class="sourceLineNo">756</span>        String usageOverallMinCount;<a name="line.756"></a>
+<span class="sourceLineNo">757</span>        usageOverallMinCount = readPreferences("usage_overall_min_count");<a name="line.757"></a>
+<span class="sourceLineNo">758</span><a name="line.758"></a>
+<span class="sourceLineNo">759</span>        // update UI<a name="line.759"></a>
+<span class="sourceLineNo">760</span>        TextView ui_overall_lowscore_count;<a name="line.760"></a>
+<span class="sourceLineNo">761</span>        ui_overall_lowscore_count = findViewById(R.id.ui_overall_lowscore_count);<a name="line.761"></a>
+<span class="sourceLineNo">762</span>        ui_overall_lowscore_count.setText(usageOverallMinCount);<a name="line.762"></a>
+<span class="sourceLineNo">763</span><a name="line.763"></a>
+<span class="sourceLineNo">764</span>        // log to Firebase<a name="line.764"></a>
+<span class="sourceLineNo">765</span>        logFireBaseEvent("p___DeviceID_"+deviceID+"_CurrentLowScore_"+usageOverallMinCount);<a name="line.765"></a>
 <span class="sourceLineNo">766</span><a name="line.766"></a>
 <span class="sourceLineNo">767</span><a name="line.767"></a>
 <span class="sourceLineNo">768</span>        // -----------------------------------------------------------------------------------------<a name="line.768"></a>
-<span class="sourceLineNo">769</span>        // get highscore count<a name="line.769"></a>
+<span class="sourceLineNo">769</span>        // get lowscore date<a name="line.769"></a>
 <span class="sourceLineNo">770</span>        // -----------------------------------------------------------------------------------------<a name="line.770"></a>
-<span class="sourceLineNo">771</span>        String usageOverallMaxCount;<a name="line.771"></a>
-<span class="sourceLineNo">772</span>        usageOverallMaxCount = readPreferences("usage_overall_max_count");<a name="line.772"></a>
+<span class="sourceLineNo">771</span>        String usageOverallMinDate;<a name="line.771"></a>
+<span class="sourceLineNo">772</span>        usageOverallMinDate = readPreferences("usage_overall_min_date");<a name="line.772"></a>
 <span class="sourceLineNo">773</span><a name="line.773"></a>
 <span class="sourceLineNo">774</span>        // update UI<a name="line.774"></a>
-<span class="sourceLineNo">775</span>        TextView ui_overall_highscore_count;<a name="line.775"></a>
-<span class="sourceLineNo">776</span>        ui_overall_highscore_count = findViewById(R.id.ui_overall_highscore_count);<a name="line.776"></a>
-<span class="sourceLineNo">777</span>        ui_overall_highscore_count.setText(usageOverallMaxCount);<a name="line.777"></a>
+<span class="sourceLineNo">775</span>        TextView ui_overall_lowscore_date;<a name="line.775"></a>
+<span class="sourceLineNo">776</span>        ui_overall_lowscore_date = findViewById(R.id.ui_overall_lowscore_date);<a name="line.776"></a>
+<span class="sourceLineNo">777</span>        ui_overall_lowscore_date.setText(usageOverallMinDate);<a name="line.777"></a>
 <span class="sourceLineNo">778</span><a name="line.778"></a>
 <span class="sourceLineNo">779</span><a name="line.779"></a>
 <span class="sourceLineNo">780</span>        // -----------------------------------------------------------------------------------------<a name="line.780"></a>
-<span class="sourceLineNo">781</span>        // get highscore date<a name="line.781"></a>
+<span class="sourceLineNo">781</span>        // get highscore count<a name="line.781"></a>
 <span class="sourceLineNo">782</span>        // -----------------------------------------------------------------------------------------<a name="line.782"></a>
-<span class="sourceLineNo">783</span>        String usageOverallMaxDate;<a name="line.783"></a>
-<span class="sourceLineNo">784</span>        usageOverallMaxDate = readPreferences("usage_overall_max_date");<a name="line.784"></a>
+<span class="sourceLineNo">783</span>        String usageOverallMaxCount;<a name="line.783"></a>
+<span class="sourceLineNo">784</span>        usageOverallMaxCount = readPreferences("usage_overall_max_count");<a name="line.784"></a>
 <span class="sourceLineNo">785</span><a name="line.785"></a>
 <span class="sourceLineNo">786</span>        // update UI<a name="line.786"></a>
-<span class="sourceLineNo">787</span>        TextView ui_overall_highscore_date;<a name="line.787"></a>
-<span class="sourceLineNo">788</span>        ui_overall_highscore_date = findViewById(R.id.ui_overall_highscore_date);<a name="line.788"></a>
-<span class="sourceLineNo">789</span>        ui_overall_highscore_date.setText(usageOverallMaxDate);<a name="line.789"></a>
+<span class="sourceLineNo">787</span>        TextView ui_overall_highscore_count;<a name="line.787"></a>
+<span class="sourceLineNo">788</span>        ui_overall_highscore_count = findViewById(R.id.ui_overall_highscore_count);<a name="line.788"></a>
+<span class="sourceLineNo">789</span>        ui_overall_highscore_count.setText(usageOverallMaxCount);<a name="line.789"></a>
 <span class="sourceLineNo">790</span><a name="line.790"></a>
-<span class="sourceLineNo">791</span><a name="line.791"></a>
-<span class="sourceLineNo">792</span>        // -----------------------------------------------------------------------------------------<a name="line.792"></a>
-<span class="sourceLineNo">793</span>        // Average Usage per day<a name="line.793"></a>
-<span class="sourceLineNo">794</span>        // -----------------------------------------------------------------------------------------<a name="line.794"></a>
-<span class="sourceLineNo">795</span>        String averageUsageDataPerDay;<a name="line.795"></a>
-<span class="sourceLineNo">796</span>        averageUsageDataPerDay = getUsageDataAverage();<a name="line.796"></a>
-<span class="sourceLineNo">797</span><a name="line.797"></a>
-<span class="sourceLineNo">798</span>        // update ui<a name="line.798"></a>
-<span class="sourceLineNo">799</span>        TextView ui_overall_average_count;<a name="line.799"></a>
-<span class="sourceLineNo">800</span>        ui_overall_average_count = findViewById(R.id.ui_overall_average_count);<a name="line.800"></a>
-<span class="sourceLineNo">801</span>        ui_overall_average_count.setText(averageUsageDataPerDay);<a name="line.801"></a>
-<span class="sourceLineNo">802</span><a name="line.802"></a>
-<span class="sourceLineNo">803</span>        // log to Firebase<a name="line.803"></a>
-<span class="sourceLineNo">804</span>        logFireBaseEvent("p___updateUI");<a name="line.804"></a>
-<span class="sourceLineNo">805</span>    }<a name="line.805"></a>
+<span class="sourceLineNo">791</span>        // log to Firebase<a name="line.791"></a>
+<span class="sourceLineNo">792</span>        logFireBaseEvent("p___DeviceID_"+deviceID+"_CurrentHighscore_"+usageOverallMaxCount);<a name="line.792"></a>
+<span class="sourceLineNo">793</span><a name="line.793"></a>
+<span class="sourceLineNo">794</span><a name="line.794"></a>
+<span class="sourceLineNo">795</span>        // -----------------------------------------------------------------------------------------<a name="line.795"></a>
+<span class="sourceLineNo">796</span>        // get highscore date<a name="line.796"></a>
+<span class="sourceLineNo">797</span>        // -----------------------------------------------------------------------------------------<a name="line.797"></a>
+<span class="sourceLineNo">798</span>        String usageOverallMaxDate;<a name="line.798"></a>
+<span class="sourceLineNo">799</span>        usageOverallMaxDate = readPreferences("usage_overall_max_date");<a name="line.799"></a>
+<span class="sourceLineNo">800</span><a name="line.800"></a>
+<span class="sourceLineNo">801</span>        // update UI<a name="line.801"></a>
+<span class="sourceLineNo">802</span>        TextView ui_overall_highscore_date;<a name="line.802"></a>
+<span class="sourceLineNo">803</span>        ui_overall_highscore_date = findViewById(R.id.ui_overall_highscore_date);<a name="line.803"></a>
+<span class="sourceLineNo">804</span>        ui_overall_highscore_date.setText(usageOverallMaxDate);<a name="line.804"></a>
+<span class="sourceLineNo">805</span><a name="line.805"></a>
 <span class="sourceLineNo">806</span><a name="line.806"></a>
-<span class="sourceLineNo">807</span><a name="line.807"></a>
-<span class="sourceLineNo">808</span>    /**<a name="line.808"></a>
-<span class="sourceLineNo">809</span>     * Read single setting from SharedPreferences<a name="line.809"></a>
-<span class="sourceLineNo">810</span>     *<a name="line.810"></a>
-<span class="sourceLineNo">811</span>     * @param key name of the shared preference<a name="line.811"></a>
-<span class="sourceLineNo">812</span>     * @return contains the related value as string<a name="line.812"></a>
-<span class="sourceLineNo">813</span>     */<a name="line.813"></a>
-<span class="sourceLineNo">814</span>    private String readPreferences(String key){<a name="line.814"></a>
-<span class="sourceLineNo">815</span>        Log.d(TAG, "F: readPreferences");<a name="line.815"></a>
-<span class="sourceLineNo">816</span><a name="line.816"></a>
-<span class="sourceLineNo">817</span>        String value = prefs.getString(key, "0");<a name="line.817"></a>
-<span class="sourceLineNo">818</span>        Log.d(TAG, "Key: "+key+", value is: "+value);<a name="line.818"></a>
-<span class="sourceLineNo">819</span><a name="line.819"></a>
-<span class="sourceLineNo">820</span>        // log to Firebase<a name="line.820"></a>
-<span class="sourceLineNo">821</span>        logFireBaseEvent("p___readPreferences");<a name="line.821"></a>
-<span class="sourceLineNo">822</span><a name="line.822"></a>
-<span class="sourceLineNo">823</span>        return value;<a name="line.823"></a>
-<span class="sourceLineNo">824</span>    }<a name="line.824"></a>
-<span class="sourceLineNo">825</span>}<a name="line.825"></a>
+<span class="sourceLineNo">807</span>        // -----------------------------------------------------------------------------------------<a name="line.807"></a>
+<span class="sourceLineNo">808</span>        // Average Usage per day<a name="line.808"></a>
+<span class="sourceLineNo">809</span>        // -----------------------------------------------------------------------------------------<a name="line.809"></a>
+<span class="sourceLineNo">810</span>        String averageUsageDataPerDay;<a name="line.810"></a>
+<span class="sourceLineNo">811</span>        averageUsageDataPerDay = getUsageDataAverage();<a name="line.811"></a>
+<span class="sourceLineNo">812</span><a name="line.812"></a>
+<span class="sourceLineNo">813</span>        // update ui<a name="line.813"></a>
+<span class="sourceLineNo">814</span>        TextView ui_overall_average_count;<a name="line.814"></a>
+<span class="sourceLineNo">815</span>        ui_overall_average_count = findViewById(R.id.ui_overall_average_count);<a name="line.815"></a>
+<span class="sourceLineNo">816</span>        ui_overall_average_count.setText(averageUsageDataPerDay);<a name="line.816"></a>
+<span class="sourceLineNo">817</span><a name="line.817"></a>
+<span class="sourceLineNo">818</span>        // log to Firebase<a name="line.818"></a>
+<span class="sourceLineNo">819</span>        logFireBaseEvent("p___DeviceID_"+deviceID+"_CurrentAverage_"+averageUsageDataPerDay);<a name="line.819"></a>
+<span class="sourceLineNo">820</span><a name="line.820"></a>
+<span class="sourceLineNo">821</span>        // log to Firebase<a name="line.821"></a>
+<span class="sourceLineNo">822</span>        logFireBaseEvent("p___updateUI");<a name="line.822"></a>
+<span class="sourceLineNo">823</span>    }<a name="line.823"></a>
+<span class="sourceLineNo">824</span><a name="line.824"></a>
+<span class="sourceLineNo">825</span><a name="line.825"></a>
+<span class="sourceLineNo">826</span>    /**<a name="line.826"></a>
+<span class="sourceLineNo">827</span>     * Read single setting from SharedPreferences<a name="line.827"></a>
+<span class="sourceLineNo">828</span>     *<a name="line.828"></a>
+<span class="sourceLineNo">829</span>     * @param key name of the shared preference<a name="line.829"></a>
+<span class="sourceLineNo">830</span>     * @return contains the related value as string<a name="line.830"></a>
+<span class="sourceLineNo">831</span>     */<a name="line.831"></a>
+<span class="sourceLineNo">832</span>    private String readPreferences(String key){<a name="line.832"></a>
+<span class="sourceLineNo">833</span>        Log.d(TAG, "F: readPreferences");<a name="line.833"></a>
+<span class="sourceLineNo">834</span><a name="line.834"></a>
+<span class="sourceLineNo">835</span>        String value = prefs.getString(key, "0");<a name="line.835"></a>
+<span class="sourceLineNo">836</span>        Log.d(TAG, "Key: "+key+", value is: "+value);<a name="line.836"></a>
+<span class="sourceLineNo">837</span><a name="line.837"></a>
+<span class="sourceLineNo">838</span>        // log to Firebase<a name="line.838"></a>
+<span class="sourceLineNo">839</span>        logFireBaseEvent("p___readPreferences");<a name="line.839"></a>
+<span class="sourceLineNo">840</span><a name="line.840"></a>
+<span class="sourceLineNo">841</span>        return value;<a name="line.841"></a>
+<span class="sourceLineNo">842</span>    }<a name="line.842"></a>
+<span class="sourceLineNo">843</span>}<a name="line.843"></a>
 
 
 

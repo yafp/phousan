@@ -23,6 +23,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,10 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "phousan";
     private static final String PREFS_NAME = "phousan_settings";
-    //private static Context context;
-
     private FirebaseAnalytics mFirebaseAnalytics;
-
     private SharedPreferences prefs;
 
     @Override
@@ -60,14 +58,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // customize action bar
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.app_icon);
-        getSupportActionBar().setTitle(" " + getResources().getString(R.string.app_name)); // Icon + Space + String
-        getSupportActionBar().setSubtitle(" " + getResources().getString(R.string.app_name_long));
+        getSupportActionBar().setIcon(R.mipmap.app_icon); // icon
+        getSupportActionBar().setTitle(" " + getResources().getString(R.string.app_name)); // Title: icon + Space + String
+        getSupportActionBar().setSubtitle(" " + getResources().getString(R.string.app_name_long)); // Subtitle: Icon + space + string
 
         // get android_id
-        @SuppressLint("HardwareIds") String androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-        Log.d(TAG, "Android ID: " + androidId);
-        logFireBaseEvent("p_id_"+androidId);
+        String deviceID;
+        deviceID = getDeviceID();
+        logFireBaseEvent("p___id_"+deviceID);
 
         // init the ui
         initApp();
@@ -201,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
     /**
      * generates a firebase log event from a given input string
      *
@@ -215,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
     /**
      *
      */
@@ -226,6 +226,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // log to Firebase
         logFireBaseEvent("p___requestBackup");
     }
+
 
 
     /**
@@ -281,7 +282,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void openAbout() throws PackageManager.NameNotFoundException {
         Log.d(TAG, "F: openAbout");
 
-        View messageView = getLayoutInflater().inflate(R.layout.about, null, false);
+        final ViewGroup nullParent = null;
+
+        //View messageView = getLayoutInflater().inflate(R.layout.about, null, false);
+        View messageView = getLayoutInflater().inflate(R.layout.about, nullParent, false);
 
         // Get package informations
         PackageManager manager = this.getPackageManager();
@@ -299,6 +303,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // log to Firebase
         logFireBaseEvent("p___openAbout");
     }
+
 
 
     /**
@@ -416,7 +421,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     /**
-     * Displays a given string as a toast message to the user
+     * Displays a given message as a toast
      *
      * @param message the message to be displayed
      */
@@ -434,7 +439,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     /**
-     * display a notification
+     * display a given title & message as notification
      *
      * @param title the title of the notification
      * @param message the message text
@@ -448,8 +453,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.mipmap.notification_icon)
-                //.setTicker("")
-                //.setPriority(Notification.PRIORITY_MAX) // this is deprecated in API 26 but you can still use for below 26. check below update for 26 API
                 .setContentTitle(title)
                 .setContentText(message);
 
@@ -467,7 +470,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void resetUI(){
         Log.d(TAG, "F: resetUI");
-
 
         // reset current count
         TextView cur;
@@ -559,18 +561,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         Log.d(TAG, "F: onClick");
-        /*
-        if (view == buttonStart) {
-            //starting service
-            startService(new Intent(this, BackgroundService.class));
-            Log.d(TAG, "onClick - User wants to start the service");
-
-        } else if (view == buttonStop) {
-            //stopping service
-            stopService(new Intent(this, BackgroundService.class));
-            Log.d(TAG, "onClick - User wants to stop the service");
-        }
-        */
 
         // log to Firebase
         logFireBaseEvent("p___onClick");
@@ -648,7 +638,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.dialog_title_show_usage_history_per_day);
         builder.setMessage(outputUsageHistory.toString());
-        builder.setIcon(R.drawable.app_icon);
+        builder.setIcon(R.mipmap.app_icon);
         AlertDialog alert = builder.create();
         alert.show();
 
@@ -694,7 +684,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // calc average
         if(record_amount == 0) {
-            //averageUsageDataPerDay = getResources().getString(R.string.overall_n_a);
             averageUsageDataPerDay = "0";
         }
         else {
@@ -712,10 +701,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     /**
+     * fetches and returns the device id as string
+     */
+    private String getDeviceID(){
+        Log.d(TAG, "F: getDeviceID");
+
+        // get android_id
+        @SuppressLint("HardwareIds") String androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        Log.d(TAG, "Android ID: " + androidId);
+
+        // log to Firebase
+        logFireBaseEvent("p___getDeviceID");
+
+        return androidId;
+    }
+
+
+
+    /**
      * Update the User Interface (UI) with all SharedPreference values
      */
     private void updateUI(){
         Log.d(TAG, "F: updateUI");
+
+        String deviceID = getDeviceID();
 
         // -----------------------------------------------------------------------------------------
         // get current count
@@ -742,7 +751,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         // -----------------------------------------------------------------------------------------
-        // get lowscore value
+        // get lowscore count
         // -----------------------------------------------------------------------------------------
         String usageOverallMinCount;
         usageOverallMinCount = readPreferences("usage_overall_min_count");
@@ -751,6 +760,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView ui_overall_lowscore_count;
         ui_overall_lowscore_count = findViewById(R.id.ui_overall_lowscore_count);
         ui_overall_lowscore_count.setText(usageOverallMinCount);
+
+        // log to Firebase
+        logFireBaseEvent("p___DeviceID_"+deviceID+"_CurrentLowScore_"+usageOverallMinCount);
 
 
         // -----------------------------------------------------------------------------------------
@@ -776,6 +788,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ui_overall_highscore_count = findViewById(R.id.ui_overall_highscore_count);
         ui_overall_highscore_count.setText(usageOverallMaxCount);
 
+        // log to Firebase
+        logFireBaseEvent("p___DeviceID_"+deviceID+"_CurrentHighscore_"+usageOverallMaxCount);
+
 
         // -----------------------------------------------------------------------------------------
         // get highscore date
@@ -799,6 +814,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView ui_overall_average_count;
         ui_overall_average_count = findViewById(R.id.ui_overall_average_count);
         ui_overall_average_count.setText(averageUsageDataPerDay);
+
+        // log to Firebase
+        logFireBaseEvent("p___DeviceID_"+deviceID+"_CurrentAverage_"+averageUsageDataPerDay);
 
         // log to Firebase
         logFireBaseEvent("p___updateUI");

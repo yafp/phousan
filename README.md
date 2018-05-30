@@ -7,6 +7,7 @@ A display-on event monitor for Android
 
 
 ## About
+
 Phousan is a simple phone usage analyzer. It counts each display-on event and stores your usage history on a daily basis.
 
 Get aware how addicted you are.
@@ -27,12 +28,18 @@ It is listening for [ACTION_SCREEN_ON](https://developer.android.com/reference/a
 ## Features
 - counts display-on events per day
 
-### additional
-- compares today with yesterdays usage count
+##### additional
+- store max usage count (with date)
+- store min usage count (with date)
+- calculate average usage count
 - write usage per day history
 - export usage per day history
 - delete all data (app reset)
 - recommend app function
+
+
+## Requirements
+- Android 5.0 or higher
 
 
 ## Translations
@@ -41,11 +48,12 @@ It is listening for [ACTION_SCREEN_ON](https://developer.android.com/reference/a
 
 
 ## User-Interface
-![main](https://raw.githubusercontent.com/yafp/phousan/master/doc/Misc/ui_1_main_en.png)
 
-![menu](https://raw.githubusercontent.com/yafp/phousan/master/doc/Misc/ui_2_menu_en.png)
+<img src="https://raw.githubusercontent.com/yafp/phousan/master/doc/Misc/ui_1_main_en.png" width="300">
 
-![history](https://raw.githubusercontent.com/yafp/phousan/master/doc/Misc/ui_3_history_en.png)
+<img src="https://raw.githubusercontent.com/yafp/phousan/master/doc/Misc/ui_2_menu_en.png" width="300">
+
+<img src="https://raw.githubusercontent.com/yafp/phousan/master/doc/Misc/ui_3_history_en.png" width="300">
 
 
 ## Credits

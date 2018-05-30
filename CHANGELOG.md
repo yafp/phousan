@@ -1,5 +1,14 @@
 # phousan Changelog
 
+## phousan 0.4.0 (2018xxyy)
+### ```Added```
+* Added some firebase events to updateUI
+
+### ```Fixed```
+* Fixed translation error in german strings.
+
+
+
 ## phousan 0.3.0 (20180529)
 ### ```Added```
 * Backup: Added a backupAgent for shared preferences (Issue #2)

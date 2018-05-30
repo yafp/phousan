@@ -1,5 +1,6 @@
 package de.yafp.phousan;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -233,7 +234,7 @@ public class Receiver extends BroadcastReceiver {
     private String getCurrentDate(){
         Log.d(TAG, "F: getCurrentDate");
 
-        SimpleDateFormat timeStampFormat = new SimpleDateFormat("yyyyMMdd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat timeStampFormat = new SimpleDateFormat("yyyyMMdd");
         Date myDate = new Date();
         String curDate = timeStampFormat.format(myDate);
         Log.d(TAG, curDate);
